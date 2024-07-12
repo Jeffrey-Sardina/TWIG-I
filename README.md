@@ -47,6 +47,8 @@ Each file must be a tab-separated values file where each row represents a triple
 
 Note: I **highly** recommend that you use the `jobs/train-eval.sh` and `jobs/from-checkpoint.sh` for your training / finetuning as these files abstract away much of the complexitty that you do not need to deal with directly. They also take care of automatic logging and the such.
 
+Finaly, TWIG-I supports training on multiple KGs at the same time. I have, in my experiments, yet to see a case where this leads to increased perfomance, but have also done very little testing of it. That should work out of the box (regardless of whatever other changes you do or do not make), so if you do wish to try it, go ahead!
+
 ## Extending TWIG-I
 We're all researchers, right? So you are probably here thinking: "This is super cool (well, I hope you are thinking that at least!). I have a super awesome idea that uses TWIG-I how do I implement it?"
 

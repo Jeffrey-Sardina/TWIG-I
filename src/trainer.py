@@ -16,6 +16,7 @@ Constant Definitions
 ====================
 '''
 device = "cuda"
+checkpoint_dir = 'checkpoints/'
 
 '''
 ================
@@ -365,7 +366,7 @@ def test(
 
     return results
 
-def save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir):
+def save_checkpoint(epoch_num, model, model_name_prefix):
     '''
     save_checkpoint() saves a TWIG-I checkpoint.
 
@@ -373,7 +374,6 @@ def save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir):
         - epoch_num (int): the current epoch
         - model (torch.nn.Module): the PyTorch NN Model object containing TWIG's neural architecture.
         - model_name_prefix (str): prefix to the name of saved checkpoints.
-        - checkpoint_dir (str): directiory in which to store checkpoints.
     
     The values it returns are:
         - None
@@ -400,7 +400,6 @@ def run_training(
         loss_fn,
         verbose,
         model_name_prefix,
-        checkpoint_dir,
         checkpoint_every_n,
         valid_every_n,
         early_stopper
@@ -419,13 +418,12 @@ def run_training(
         - negative_samplers (dict str -> Simple_Negative_Sampler): a dict that maps a dataset name to the negative sampler associated with that dataset.
         - verbose (bool): whether to output loss values occaisonally at certain batch numbers.
         - model_name_prefix (str): prefix to the name of saved checkpoints.
-        - checkpoint_dir (str): directiory in which to store checkpoints.
         - checkpoint_every_n (int): the number of epochs after which TWIG-I should save a checkpoint. Note that a checkpoint will also be saved whenever validation is run.
         - valid_every_n (int): the number of epochs after which validation should be run on the validation dataset to track training. Currently also reports performance on the training dataset to give a measure of how everfir the model may be.
         - early_stopper (Early_Stopper): an Early_Stopper object that TWIG-I should use to determine if it should stop training early, or None if not early stopping is wanted.
         
     The values it returns are:
-        - No values are returned.
+        - results (dict str -> str -> float): the results output from train_and_eval(). The first key is the dataset name, and the second key is the name of the metric. The value contained is a float value of the specified metric on the specified dataset. An example of accessing its data could thus be results['UMLS']['mrr'], which will return the MRR value TWIG acheived on the UMLS dataset.
     '''
     model.to(device)
     print(model)
@@ -479,7 +477,7 @@ def run_training(
 
     # Testing
     # we do it for each DL since we want to do each dataset testing separately for now
-    test(
+    results = test(
         dataloaders=testing_dataloaders,
         model=model,
         loss_fn=loss_fn,
@@ -489,3 +487,4 @@ def run_training(
         purpose='Testing (cite this)'
     )
     print("Done Testing!")
+    return results

@@ -42,7 +42,7 @@ def load_nn(version, n_local):
     The values it returns are:
         - model (torch.nn.Module): the PyTorch NN Model object containing TWIG's neural architecture.
     '''
-    print('loading NN')self, start_epoch, patience, mode, precision
+    print('loading NN')
     valid_versions = ('base', 'linear')
     if version == "base":
         model = TWIGI_Base(
@@ -207,7 +207,7 @@ def load_negative_samplers(
                 n_bins=30,
                 mode="near-negative",
                 dataset_name=dataset_name,
-                simple_negative_sampler=self, start_epoch, patience, mode, precisionsimple_sampler
+                simple_negative_sampler=simple_sampler
             )
         else:
             assert False, f'Unknown negative sampler type requested: {sampler_type}. Only "simple" and "vecgtor" are supported currently.'
@@ -273,7 +273,6 @@ def train_and_eval(
         loss_function,
         verbose,
         model_name_prefix,
-        checkpoint_dir,
         checkpoint_every_n,
         valid_every_n,
         early_stopper
@@ -294,16 +293,15 @@ def train_and_eval(
         - loss_function (func): the loss function object that should be used during training.
         - verbose (bool): whether or not all information should be output. If True, TWIG will be run in verbose mode, whhich means more information will be printed.
         - model_name_prefix (str): the prefix to prepend to the model name when saving checkpoints (currently unused, as checkpoints are not saved)
-        - checkpoint_dir (str): the directory in which to save checkpoints (currently unused, as checkpoints are not saved)
         - checkpoint_every_n (int): the interval of epochs after which a checkpoint should be saved during training.
         - valid_every_n (int): the interval of epochs after which TWIG-I should be evaluated on its validation dataset.
         - early_stopper (Early_Stopper): an Early_Stopper object that TWIG-I should use to determine if it should stop training early, or None if not early stopping is wanted.
 
     The values it returns are:
-        - No values are returned.
+        - results (dict str -> str -> float): the results output from train_and_eval(). The first key is the dataset name, and the second key is the name of the metric. The value contained is a float value of the specified metric on the specified dataset. An example of accessing its data could thus be results['UMLS']['mrr'], which will return the MRR value TWIG acheived on the UMLS dataset.
     '''
     print("running training and eval")
-    run_training(
+    results = run_training(
         model=model,
         training_dataloaders=training_dataloaders,
         testing_dataloaders=testing_dataloaders,
@@ -315,12 +313,12 @@ def train_and_eval(
         loss_fn=loss_function,
         verbose=verbose,
         model_name_prefix=model_name_prefix,
-        checkpoint_dir=checkpoint_dir,
         checkpoint_every_n=checkpoint_every_n,
         valid_every_n=valid_every_n,
         early_stopper=early_stopper
     )
     print("done with training and eval")
+    return results
 
 def main(
         version,
@@ -347,7 +345,7 @@ def main(
     - preexisting_model: (torch.nn.Module) a previously saved TWIG-I model (such as a checkpoint).
     
     The values it returns are:
-        - None (results will be printed)
+        - results (dict str -> str -> float): the results output from train_and_eval(). The first key is the dataset name, and the second key is the name of the metric. The value contained is a float value of the specified metric on the specified dataset. An example of accessing its data could thus be results['UMLS']['mrr'], which will return the MRR value TWIG acheived on the UMLS dataset.
     '''
     # save hyperparameter settings
     model_name_prefix = 'chkpt-ID_' + str(int(random.random() * 10**16))
@@ -442,7 +440,7 @@ def main(
     )
 
     # finally, we call the training and evaluation loops
-    train_and_eval(
+    results = train_and_eval(
         model=model,
         training_dataloaders=dataloaders['train'],
         testing_dataloaders=data_to_test_on,
@@ -454,11 +452,11 @@ def main(
         loss_function=loss_function,
         verbose=True,
         model_name_prefix=model_name_prefix,
-        checkpoint_dir=checkpoint_dir,
         checkpoint_every_n=5,
         valid_every_n=valid_every_n,
         early_stopper=early_stopper
     )
+    return results
 
 if __name__ == '__main__':
     '''

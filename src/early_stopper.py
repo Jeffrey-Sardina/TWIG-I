@@ -47,7 +47,7 @@ class Early_Stopper:
             return should_stop
         
         prev_epoch, prev_mrr_int = self.validation_results[-1]
-        valid_mrr_int = int(round((valid_mrr * 10  ** self.precision), 0)
+        valid_mrr_int = int(round((valid_mrr * 10  ** self.precision), 0))
         self.validation_results.append((epoch_num, valid_mrr_int))
 
         if self.mode == "on-falter":

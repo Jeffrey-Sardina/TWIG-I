@@ -7,7 +7,7 @@ import json
 def load_and_run_from_chkpt(
         torch_checkpont_path,
         model_config_path,
-        model_config_override_path
+        model_config_override
     ):
     '''
     load_and_run_from_chkpt() loads a checkpoint, TWIG-I hyperparameters / settings, and overrides to thsoe settings, and uses them to run more training for TWIG-I as they specify. This function really only does the actuial laod -- all training is done by handing this off to `run_exp.py` to avoid code duplication.
@@ -15,7 +15,7 @@ def load_and_run_from_chkpt(
     For a list of all arguments accepted and what they mena, please see the documentation below `if __name__ == '__main__'`.
 
     The values it returns are:
-        - No values are returned.
+        - results (dict str -> str -> float): the results output from train_and_eval(). The first key is the dataset name, and the second key is the name of the metric. The value contained is a float value of the specified metric on the specified dataset. An example of accessing its data could thus be results['UMLS']['mrr'], which will return the MRR value TWIG acheived on the UMLS dataset.
     '''
     # load original config
     with open(model_config_path, 'rb') as cache:
@@ -24,8 +24,9 @@ def load_and_run_from_chkpt(
 
     # NOTE: you may want to override datasets to test on new datasets in the
     # few- or zero- shot setting
-    with open(model_config_override_path) as inp:
-        model_config_override = json.load(inp)
+    if type(model_config_override) is str:
+        with open(model_config_override_path) as inp:
+            model_config_override = json.load(inp)
     for key in model_config_override:
         print(f'overriding original values for {key}. Was {model_config[key]}, now is {model_config_override[key]}')
         model_config[key] = model_config_override[key]
@@ -41,7 +42,7 @@ def load_and_run_from_chkpt(
 
     # run checkpointed model with new config
     print(f'the full config being used is: {model_config}')
-    main(
+    results = main(
         version=model_config['version'],
         dataset_names=model_config['dataset_names'],
         epochs=model_config['epochs'],
@@ -58,6 +59,7 @@ def load_and_run_from_chkpt(
         hyp_validation_mode=model_config['hyp_validation_mode'],
         preexisting_model=model
     )
+    return results
 
 if __name__ == '__main__':
     '''

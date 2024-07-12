@@ -119,7 +119,7 @@ class Structure_Loader():
         self.metadata = metadata
         self.ents_to_triples = ents_to_triples
         self.fts_blacklist = fts_blacklist
-        if "None" in self.fts_blacklist:
+        if not self.fts_blacklist or "None" in self.fts_blacklist or len(self.fts_blacklist) == 0:
             self.fts_blacklist = False
         self.neighbour_nodes, self.neighbour_preds = self.build_neighbour_cache()
 

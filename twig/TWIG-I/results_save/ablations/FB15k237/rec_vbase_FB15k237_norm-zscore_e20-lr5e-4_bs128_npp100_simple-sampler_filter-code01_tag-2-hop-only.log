@@ -1,0 +1,297 @@
+Arguments received: ['run_exp.py', 'base', 'FB15k237', '20', '5e-4', 'zscore', '128', '128', '100', '0', '1', 'simple', '1', 's_deg o_deg p_freq s_p_cofreq o_p_cofreq s_o_cofreq', '1']
+loading dataset
+FB15k237
+X_p: torch.Size([272115, 17])
+n_local: 16
+X_p: torch.Size([20438, 17])
+n_local: 16
+X_p: torch.Size([17526, 17])
+n_local: 16
+Using a total of 16 features
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+init negative sampler with args
+	use_2_hop_fts: True
+	fts_blacklist: {'o_p_cofreq', 'o_deg', 's_p_cofreq', 's_deg', 's_o_cofreq', 'p_freq'}
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+Creating a new model from scratch
+loading NN
+done loading NN
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=16, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 2126 loss: 0.09960583597421646
+batch 500 / 2126 loss: 0.044155705720186234
+batch 1000 / 2126 loss: 0.037792518734931946
+batch 1500 / 2126 loss: 0.04406581446528435
+batch 2000 / 2126 loss: 0.04922524094581604
+Epoch 2 -- batch 0 / 2126 loss: 0.06238744407892227
+batch 500 / 2126 loss: 0.041868217289447784
+batch 1000 / 2126 loss: 0.033120594918727875
+batch 1500 / 2126 loss: 0.041634079068899155
+batch 2000 / 2126 loss: 0.04528691992163658
+Epoch 3 -- batch 0 / 2126 loss: 0.05116931349039078
+batch 500 / 2126 loss: 0.04072777181863785
+batch 1000 / 2126 loss: 0.031451430171728134
+batch 1500 / 2126 loss: 0.04045935720205307
+batch 2000 / 2126 loss: 0.04475861415266991
+Epoch 4 -- batch 0 / 2126 loss: 0.04860270768404007
+batch 500 / 2126 loss: 0.04117271304130554
+batch 1000 / 2126 loss: 0.0313929058611393
+batch 1500 / 2126 loss: 0.03823145478963852
+batch 2000 / 2126 loss: 0.04419460892677307
+Epoch 5 -- batch 0 / 2126 loss: 0.04447314143180847
+batch 500 / 2126 loss: 0.039479825645685196
+batch 1000 / 2126 loss: 0.027618583291769028
+batch 1500 / 2126 loss: 0.03733892738819122
+batch 2000 / 2126 loss: 0.043775349855422974
+Saving checkpoint at epoch 5; prefix = chkpt-ID_4757603522926388
+Epoch 6 -- batch 0 / 2126 loss: 0.04226295277476311
+batch 500 / 2126 loss: 0.04029244929552078
+batch 1000 / 2126 loss: 0.027988720685243607
+batch 1500 / 2126 loss: 0.03407745063304901
+batch 2000 / 2126 loss: 0.04403504356741905
+Epoch 7 -- batch 0 / 2126 loss: 0.04226616024971008
+batch 500 / 2126 loss: 0.040256284177303314
+batch 1000 / 2126 loss: 0.028827771544456482
+batch 1500 / 2126 loss: 0.034336868673563004
+batch 2000 / 2126 loss: 0.042895250022411346
+Epoch 8 -- batch 0 / 2126 loss: 0.04191070795059204
+batch 500 / 2126 loss: 0.0411459244787693
+batch 1000 / 2126 loss: 0.02698459103703499
+batch 1500 / 2126 loss: 0.03117387369275093
+batch 2000 / 2126 loss: 0.04289902746677399
+Epoch 9 -- batch 0 / 2126 loss: 0.04103294759988785
+batch 500 / 2126 loss: 0.042948782444000244
+batch 1000 / 2126 loss: 0.027108721435070038
+batch 1500 / 2126 loss: 0.03240854665637016
+batch 2000 / 2126 loss: 0.042867012321949005
+Epoch 10 -- batch 0 / 2126 loss: 0.043985240161418915
+batch 500 / 2126 loss: 0.0436302088201046
+batch 1000 / 2126 loss: 0.027883388102054596
+batch 1500 / 2126 loss: 0.02954372763633728
+batch 2000 / 2126 loss: 0.04253875091671944
+Saving checkpoint at epoch 10; prefix = chkpt-ID_4757603522926388
+Epoch 11 -- batch 0 / 2126 loss: 0.04304339364171028
+batch 500 / 2126 loss: 0.04564940929412842
+batch 1000 / 2126 loss: 0.027011185884475708
+batch 1500 / 2126 loss: 0.02808127924799919
+batch 2000 / 2126 loss: 0.04245860502123833
+Epoch 12 -- batch 0 / 2126 loss: 0.042007241398096085
+batch 500 / 2126 loss: 0.044774673879146576
+batch 1000 / 2126 loss: 0.027530528604984283
+batch 1500 / 2126 loss: 0.029165606945753098
+batch 2000 / 2126 loss: 0.04178537428379059
+Epoch 13 -- batch 0 / 2126 loss: 0.04323093593120575
+batch 500 / 2126 loss: 0.044721633195877075
+batch 1000 / 2126 loss: 0.026814591139554977
+batch 1500 / 2126 loss: 0.02897338755428791
+batch 2000 / 2126 loss: 0.0415373258292675
+Epoch 14 -- batch 0 / 2126 loss: 0.04071512073278427
+batch 500 / 2126 loss: 0.046343445777893066
+batch 1000 / 2126 loss: 0.026181142777204514
+batch 1500 / 2126 loss: 0.029921986162662506
+batch 2000 / 2126 loss: 0.040482424199581146
+Epoch 15 -- batch 0 / 2126 loss: 0.04146897420287132
+batch 500 / 2126 loss: 0.04677315428853035
+batch 1000 / 2126 loss: 0.025348801165819168
+batch 1500 / 2126 loss: 0.029258187860250473
+batch 2000 / 2126 loss: 0.04086117446422577
+Saving checkpoint at epoch 15; prefix = chkpt-ID_4757603522926388
+Epoch 16 -- batch 0 / 2126 loss: 0.039672285318374634
+batch 500 / 2126 loss: 0.04768168181180954
+batch 1000 / 2126 loss: 0.0281346645206213
+batch 1500 / 2126 loss: 0.028926782310009003
+batch 2000 / 2126 loss: 0.0379038080573082
+Epoch 17 -- batch 0 / 2126 loss: 0.041206616908311844
+batch 500 / 2126 loss: 0.05031168460845947
+batch 1000 / 2126 loss: 0.027133846655488014
+batch 1500 / 2126 loss: 0.029393449425697327
+batch 2000 / 2126 loss: 0.03979562595486641
+Epoch 18 -- batch 0 / 2126 loss: 0.041890449821949005
+batch 500 / 2126 loss: 0.048910778015851974
+batch 1000 / 2126 loss: 0.026931915432214737
+batch 1500 / 2126 loss: 0.029672345146536827
+batch 2000 / 2126 loss: 0.03981655091047287
+Epoch 19 -- batch 0 / 2126 loss: 0.04444560408592224
+batch 500 / 2126 loss: 0.049558356404304504
+batch 1000 / 2126 loss: 0.027728185057640076
+batch 1500 / 2126 loss: 0.02980981208384037
+batch 2000 / 2126 loss: 0.0379621721804142
+Epoch 20 -- batch 0 / 2126 loss: 0.04277251660823822
+batch 500 / 2126 loss: 0.04980430006980896
+batch 1000 / 2126 loss: 0.026921002194285393
+batch 1500 / 2126 loss: 0.029041867703199387
+batch 2000 / 2126 loss: 0.03819724917411804
+Saving checkpoint at epoch 20; prefix = chkpt-ID_4757603522926388
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset FB15k237
+Testing (cite this): batch 0 / 137
+batch 0 / 137 loss: 0.11728544533252716
+Testing (cite this): batch 1 / 137
+Testing (cite this): batch 2 / 137
+Testing (cite this): batch 3 / 137
+Testing (cite this): batch 4 / 137
+Testing (cite this): batch 5 / 137
+Testing (cite this): batch 6 / 137
+Testing (cite this): batch 7 / 137
+Testing (cite this): batch 8 / 137
+Testing (cite this): batch 9 / 137
+Testing (cite this): batch 10 / 137
+Testing (cite this): batch 11 / 137
+Testing (cite this): batch 12 / 137
+Testing (cite this): batch 13 / 137
+Testing (cite this): batch 14 / 137
+Testing (cite this): batch 15 / 137
+Testing (cite this): batch 16 / 137
+Testing (cite this): batch 17 / 137
+Testing (cite this): batch 18 / 137
+Testing (cite this): batch 19 / 137
+Testing (cite this): batch 20 / 137
+Testing (cite this): batch 21 / 137
+Testing (cite this): batch 22 / 137
+Testing (cite this): batch 23 / 137
+Testing (cite this): batch 24 / 137
+Testing (cite this): batch 25 / 137
+Testing (cite this): batch 26 / 137
+Testing (cite this): batch 27 / 137
+Testing (cite this): batch 28 / 137
+Testing (cite this): batch 29 / 137
+Testing (cite this): batch 30 / 137
+Testing (cite this): batch 31 / 137
+Testing (cite this): batch 32 / 137
+Testing (cite this): batch 33 / 137
+Testing (cite this): batch 34 / 137
+Testing (cite this): batch 35 / 137
+Testing (cite this): batch 36 / 137
+Testing (cite this): batch 37 / 137
+Testing (cite this): batch 38 / 137
+Testing (cite this): batch 39 / 137
+Testing (cite this): batch 40 / 137
+Testing (cite this): batch 41 / 137
+Testing (cite this): batch 42 / 137
+Testing (cite this): batch 43 / 137
+Testing (cite this): batch 44 / 137
+Testing (cite this): batch 45 / 137
+Testing (cite this): batch 46 / 137
+Testing (cite this): batch 47 / 137
+Testing (cite this): batch 48 / 137
+Testing (cite this): batch 49 / 137
+Testing (cite this): batch 50 / 137
+Testing (cite this): batch 51 / 137
+Testing (cite this): batch 52 / 137
+Testing (cite this): batch 53 / 137
+Testing (cite this): batch 54 / 137
+Testing (cite this): batch 55 / 137
+Testing (cite this): batch 56 / 137
+Testing (cite this): batch 57 / 137
+Testing (cite this): batch 58 / 137
+Testing (cite this): batch 59 / 137
+Testing (cite this): batch 60 / 137
+Testing (cite this): batch 61 / 137
+Testing (cite this): batch 62 / 137
+Testing (cite this): batch 63 / 137
+Testing (cite this): batch 64 / 137
+Testing (cite this): batch 65 / 137
+Testing (cite this): batch 66 / 137
+Testing (cite this): batch 67 / 137
+Testing (cite this): batch 68 / 137
+Testing (cite this): batch 69 / 137
+Testing (cite this): batch 70 / 137
+Testing (cite this): batch 71 / 137
+Testing (cite this): batch 72 / 137
+Testing (cite this): batch 73 / 137
+Testing (cite this): batch 74 / 137
+Testing (cite this): batch 75 / 137
+Testing (cite this): batch 76 / 137
+Testing (cite this): batch 77 / 137
+Testing (cite this): batch 78 / 137
+Testing (cite this): batch 79 / 137
+Testing (cite this): batch 80 / 137
+Testing (cite this): batch 81 / 137
+Testing (cite this): batch 82 / 137
+Testing (cite this): batch 83 / 137
+Testing (cite this): batch 84 / 137
+Testing (cite this): batch 85 / 137
+Testing (cite this): batch 86 / 137
+Testing (cite this): batch 87 / 137
+Testing (cite this): batch 88 / 137
+Testing (cite this): batch 89 / 137
+Testing (cite this): batch 90 / 137
+Testing (cite this): batch 91 / 137
+Testing (cite this): batch 92 / 137
+Testing (cite this): batch 93 / 137
+Testing (cite this): batch 94 / 137
+Testing (cite this): batch 95 / 137
+Testing (cite this): batch 96 / 137
+Testing (cite this): batch 97 / 137
+Testing (cite this): batch 98 / 137
+Testing (cite this): batch 99 / 137
+Testing (cite this): batch 100 / 137
+Testing (cite this): batch 101 / 137
+Testing (cite this): batch 102 / 137
+Testing (cite this): batch 103 / 137
+Testing (cite this): batch 104 / 137
+Testing (cite this): batch 105 / 137
+Testing (cite this): batch 106 / 137
+Testing (cite this): batch 107 / 137
+Testing (cite this): batch 108 / 137
+Testing (cite this): batch 109 / 137
+Testing (cite this): batch 110 / 137
+Testing (cite this): batch 111 / 137
+Testing (cite this): batch 112 / 137
+Testing (cite this): batch 113 / 137
+Testing (cite this): batch 114 / 137
+Testing (cite this): batch 115 / 137
+Testing (cite this): batch 116 / 137
+Testing (cite this): batch 117 / 137
+Testing (cite this): batch 118 / 137
+Testing (cite this): batch 119 / 137
+Testing (cite this): batch 120 / 137
+Testing (cite this): batch 121 / 137
+Testing (cite this): batch 122 / 137
+Testing (cite this): batch 123 / 137
+Testing (cite this): batch 124 / 137
+Testing (cite this): batch 125 / 137
+Testing (cite this): batch 126 / 137
+Testing (cite this): batch 127 / 137
+Testing (cite this): batch 128 / 137
+Testing (cite this): batch 129 / 137
+Testing (cite this): batch 130 / 137
+Testing (cite this): batch 131 / 137
+Testing (cite this): batch 132 / 137
+Testing (cite this): batch 133 / 137
+Testing (cite this): batch 134 / 137
+Testing (cite this): batch 135 / 137
+Testing (cite this): batch 136 / 137
+total number of ranks, torch.Size([35052])
+====== Ranks ======
+ranks size: torch.Size([35052])
+test_loss: 20.063768818974495
+mr: 7993.56201171875
+mrr: 0.008496271446347237
+h1: 0.007274905685335398
+h3: 0.008045190013945103
+h5: 0.008587242104113102
+h10: 0.00964281614869833
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 9913 seconds on 

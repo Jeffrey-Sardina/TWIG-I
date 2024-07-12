@@ -1,0 +1,72 @@
+loading model settings from cache: checkpoints/chkpt-ID_2302135203951868.pkl
+overriding original values for epochs. Was 100, now is 10
+overriding original values for dataset_names. Was ['FB15k237'], now is ['DBpedia50']
+overriding original values for batch_size. Was 128, now is 256
+overriding original values for lr. Was 0.0005, now is 0.005
+overriding original values for npp. Was 100, now is 30
+overriding original values for hyp_validation_mode. Was False, now is 1
+It will be trained for 10 more epochs now.
+If you are loading a modle that was itself loaded from checkpoint, the number of epochs listed as already completed above will be incorrect
+until I get around to fxing this, you will have to recursively go through logs to find the total number of epochs run
+loadng TWIG-I model from disk at: checkpoints/chkpt-ID_2302135203951868_e100.pt
+the full config being used is: {'version': 0, 'dataset_names': ['DBpedia50'], 'epochs': 10, 'lr': 0.005, 'normalisation': 'zscore', 'batch_size': 256, 'batch_size_test': 64, 'npp': 30, 'sampler_type': 'simple', 'use_train_filter': False, 'use_valid_and_test_filters': True, 'hyp_validation_mode': 1}
+Using provided pre-existing model
+loading dataset
+DBpedia50
+X_p: torch.Size([32203, 23])
+X_p: torch.Size([2095, 23])
+X_p: torch.Size([123, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 10
+Epoch 1 -- batch 0 / 126 loss: 0.02341531589627266
+Epoch 2 -- batch 0 / 126 loss: 5.108904224471189e-05
+Epoch 3 -- batch 0 / 126 loss: 2.0956213120371103e-05
+Epoch 4 -- batch 0 / 126 loss: 5.177579805604182e-05
+Epoch 5 -- batch 0 / 126 loss: 1.30474936668179e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_1191300251756520
+Epoch 6 -- batch 0 / 126 loss: 2.4525692424504086e-05
+Epoch 7 -- batch 0 / 126 loss: 2.888368362619076e-05
+Epoch 8 -- batch 0 / 126 loss: 1.3020073311054148e-05
+Epoch 9 -- batch 0 / 126 loss: 2.6157840693485923e-05
+Epoch 10 -- batch 0 / 126 loss: 1.1270592040091287e-05
+Saving checkpoint at epoch 10; prefix = chkpt-ID_1191300251756520
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset DBpedia50
+Testing (cite this): batch 0 / 2
+Testing (cite this): batch 1 / 2
+total number of ranks, torch.Size([123])
+====== Ranks ======
+ranks size: torch.Size([123])
+test_loss: 0.11606346815824509
+mr: 6609.76416015625
+mrr: 0.29605913162231445
+h1: 0.24390244483947754
+h3: 0.31707316637039185
+h5: 0.34959349036216736
+h10: 0.3983739912509918
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 168 seconds on 

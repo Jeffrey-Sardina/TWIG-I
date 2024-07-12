@@ -1,0 +1,123 @@
+Arguments received: ['run_exp.py', 'base', 'WN18RR', '20', '5e-3', 'zscore', '128', '128', '500', '0', '1', 'simple', '0', 'None', '1']
+loading dataset
+WN18RR
+X_p: torch.Size([86835, 7])
+n_local: 6
+X_p: torch.Size([2924, 7])
+n_local: 6
+X_p: torch.Size([2824, 7])
+n_local: 6
+Using a total of 6 features
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+init negative sampler with args
+	use_2_hop_fts: False
+	fts_blacklist: {'None'}
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+Creating a new model from scratch
+loading NN
+done loading NN
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=6, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 679 loss: 0.005439456552267075
+batch 500 / 679 loss: 0.0001517837808933109
+Epoch 2 -- batch 0 / 679 loss: 1.4144345186650753e-05
+batch 500 / 679 loss: 0.00014322584320325404
+Epoch 3 -- batch 0 / 679 loss: 1.6738060367060825e-05
+batch 500 / 679 loss: 0.00017686256614979357
+Epoch 4 -- batch 0 / 679 loss: 1.724003959679976e-05
+batch 500 / 679 loss: 0.00017753246356733143
+Epoch 5 -- batch 0 / 679 loss: 1.436898674000986e-05
+batch 500 / 679 loss: 0.0002146435872418806
+Saving checkpoint at epoch 5; prefix = chkpt-ID_8690058098482900
+Epoch 6 -- batch 0 / 679 loss: 2.3856624466134235e-05
+batch 500 / 679 loss: 0.00019094116578344256
+Epoch 7 -- batch 0 / 679 loss: 7.66263110563159e-06
+batch 500 / 679 loss: 0.0001786516368156299
+Epoch 8 -- batch 0 / 679 loss: 2.5866602300084196e-05
+batch 500 / 679 loss: 0.00017289011157117784
+Epoch 9 -- batch 0 / 679 loss: 4.250921847415157e-06
+batch 500 / 679 loss: 0.0001617159286979586
+Epoch 10 -- batch 0 / 679 loss: 1.5023301784822252e-05
+batch 500 / 679 loss: 0.00015019101556390524
+Saving checkpoint at epoch 10; prefix = chkpt-ID_8690058098482900
+Epoch 11 -- batch 0 / 679 loss: 2.0730520191136748e-05
+batch 500 / 679 loss: 0.00016895764565560967
+Epoch 12 -- batch 0 / 679 loss: 5.991061698296107e-06
+batch 500 / 679 loss: 0.00016069418052211404
+Epoch 13 -- batch 0 / 679 loss: 0.0008258133311755955
+batch 500 / 679 loss: 0.00014359324995893985
+Epoch 14 -- batch 0 / 679 loss: 1.3922954167355783e-05
+batch 500 / 679 loss: 0.00017486132855992764
+Epoch 15 -- batch 0 / 679 loss: 2.9796399758197367e-05
+batch 500 / 679 loss: 0.00017604145978111774
+Saving checkpoint at epoch 15; prefix = chkpt-ID_8690058098482900
+Epoch 16 -- batch 0 / 679 loss: 8.242686817538925e-06
+batch 500 / 679 loss: 0.0001692104124231264
+Epoch 17 -- batch 0 / 679 loss: 1.0044990631286055e-05
+batch 500 / 679 loss: 0.00018759047088678926
+Epoch 18 -- batch 0 / 679 loss: 1.125973358284682e-05
+batch 500 / 679 loss: 0.0001674029917921871
+Epoch 19 -- batch 0 / 679 loss: 1.8493352399673313e-05
+batch 500 / 679 loss: 0.00014506674779113382
+Epoch 20 -- batch 0 / 679 loss: 1.5549103409284726e-05
+batch 500 / 679 loss: 0.00015626045933458954
+Saving checkpoint at epoch 20; prefix = chkpt-ID_8690058098482900
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset WN18RR
+Testing (cite this): batch 0 / 23
+batch 0 / 23 loss: 0.10003963112831116
+Testing (cite this): batch 1 / 23
+Testing (cite this): batch 2 / 23
+Testing (cite this): batch 3 / 23
+Testing (cite this): batch 4 / 23
+Testing (cite this): batch 5 / 23
+Testing (cite this): batch 6 / 23
+Testing (cite this): batch 7 / 23
+Testing (cite this): batch 8 / 23
+Testing (cite this): batch 9 / 23
+Testing (cite this): batch 10 / 23
+Testing (cite this): batch 11 / 23
+Testing (cite this): batch 12 / 23
+Testing (cite this): batch 13 / 23
+Testing (cite this): batch 14 / 23
+Testing (cite this): batch 15 / 23
+Testing (cite this): batch 16 / 23
+Testing (cite this): batch 17 / 23
+Testing (cite this): batch 18 / 23
+Testing (cite this): batch 19 / 23
+Testing (cite this): batch 20 / 23
+Testing (cite this): batch 21 / 23
+Testing (cite this): batch 22 / 23
+total number of ranks, torch.Size([5648])
+====== Ranks ======
+ranks size: torch.Size([5648])
+test_loss: 2.268714115023613
+mr: 19602.3515625
+mrr: 0.08815708011388779
+h1: 0.029213881120085716
+h3: 0.13367563486099243
+h5: 0.15616147220134735
+h10: 0.17758499085903168
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 4137 seconds on 

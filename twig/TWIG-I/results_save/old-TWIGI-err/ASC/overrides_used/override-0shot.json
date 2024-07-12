@@ -1,0 +1,10 @@
+{
+    "dataset_names": [
+        "UMLS",
+        "DBpedia50",
+        "CoDExSmall",
+        "OpenEA",
+        "Kinships"
+    ],
+    "epochs": 0
+}

@@ -1,0 +1,6 @@
+{
+    "dataset_names": [
+        "DBpedia50"
+    ],
+    "epochs": 10
+}

@@ -1,0 +1,129 @@
+Arguments received: ['run_exp.py', 'base', 'CoDExSmall', '20', '5e-3', 'zscore', '64', '64', '100', '0', '1', 'simple', '1', 'o_p_cofreq', '1']
+loading dataset
+CoDExSmall
+X_p: torch.Size([32888, 22])
+n_local: 21
+X_p: torch.Size([1828, 22])
+n_local: 21
+X_p: torch.Size([1827, 22])
+n_local: 21
+Using a total of 21 features
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+init negative sampler with args
+	use_2_hop_fts: True
+	fts_blacklist: {'o_p_cofreq'}
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+Creating a new model from scratch
+loading NN
+done loading NN
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=21, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 514 loss: 0.044317446649074554
+batch 500 / 514 loss: 0.0008045097929425538
+Epoch 2 -- batch 0 / 514 loss: 0.0011378463823348284
+batch 500 / 514 loss: 0.00036024206201545894
+Epoch 3 -- batch 0 / 514 loss: 0.0007858105236664414
+batch 500 / 514 loss: 0.0003417983534745872
+Epoch 4 -- batch 0 / 514 loss: 0.001048187492415309
+batch 500 / 514 loss: 0.00024234072770923376
+Epoch 5 -- batch 0 / 514 loss: 0.0005779180792160332
+batch 500 / 514 loss: 0.0002460989053361118
+Saving checkpoint at epoch 5; prefix = chkpt-ID_1501464138720766
+Epoch 6 -- batch 0 / 514 loss: 0.0008052941411733627
+batch 500 / 514 loss: 0.00023514669737778604
+Epoch 7 -- batch 0 / 514 loss: 0.0009392828214913607
+batch 500 / 514 loss: 0.00024398317327722907
+Epoch 8 -- batch 0 / 514 loss: 0.0003973112325184047
+batch 500 / 514 loss: 0.0002080382837448269
+Epoch 9 -- batch 0 / 514 loss: 0.0006121835904195905
+batch 500 / 514 loss: 0.00018632579303812236
+Epoch 10 -- batch 0 / 514 loss: 0.0005095770466141403
+batch 500 / 514 loss: 0.00016469295951537788
+Saving checkpoint at epoch 10; prefix = chkpt-ID_1501464138720766
+Epoch 11 -- batch 0 / 514 loss: 0.000317285128403455
+batch 500 / 514 loss: 0.00012807862367480993
+Epoch 12 -- batch 0 / 514 loss: 0.0003854809910990298
+batch 500 / 514 loss: 0.0002798793138936162
+Epoch 13 -- batch 0 / 514 loss: 0.0003651693114079535
+batch 500 / 514 loss: 0.0002423614205326885
+Epoch 14 -- batch 0 / 514 loss: 0.00038931742892600596
+batch 500 / 514 loss: 0.00027436326490715146
+Epoch 15 -- batch 0 / 514 loss: 0.00033345483825542033
+batch 500 / 514 loss: 0.00013896558084525168
+Saving checkpoint at epoch 15; prefix = chkpt-ID_1501464138720766
+Epoch 16 -- batch 0 / 514 loss: 0.0006862708833068609
+batch 500 / 514 loss: 0.00015406848979182541
+Epoch 17 -- batch 0 / 514 loss: 0.00025525016826577485
+batch 500 / 514 loss: 0.0001600524556124583
+Epoch 18 -- batch 0 / 514 loss: 0.00048517450341023505
+batch 500 / 514 loss: 0.00016772589879110456
+Epoch 19 -- batch 0 / 514 loss: 0.0005945441080257297
+batch 500 / 514 loss: 0.00010195403592661023
+Epoch 20 -- batch 0 / 514 loss: 0.000618833873886615
+batch 500 / 514 loss: 0.00022799665748607367
+Saving checkpoint at epoch 20; prefix = chkpt-ID_1501464138720766
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset CoDExSmall
+Testing (cite this): batch 0 / 29
+batch 0 / 29 loss: 0.09656836837530136
+Testing (cite this): batch 1 / 29
+Testing (cite this): batch 2 / 29
+Testing (cite this): batch 3 / 29
+Testing (cite this): batch 4 / 29
+Testing (cite this): batch 5 / 29
+Testing (cite this): batch 6 / 29
+Testing (cite this): batch 7 / 29
+Testing (cite this): batch 8 / 29
+Testing (cite this): batch 9 / 29
+Testing (cite this): batch 10 / 29
+Testing (cite this): batch 11 / 29
+Testing (cite this): batch 12 / 29
+Testing (cite this): batch 13 / 29
+Testing (cite this): batch 14 / 29
+Testing (cite this): batch 15 / 29
+Testing (cite this): batch 16 / 29
+Testing (cite this): batch 17 / 29
+Testing (cite this): batch 18 / 29
+Testing (cite this): batch 19 / 29
+Testing (cite this): batch 20 / 29
+Testing (cite this): batch 21 / 29
+Testing (cite this): batch 22 / 29
+Testing (cite this): batch 23 / 29
+Testing (cite this): batch 24 / 29
+Testing (cite this): batch 25 / 29
+Testing (cite this): batch 26 / 29
+Testing (cite this): batch 27 / 29
+Testing (cite this): batch 28 / 29
+total number of ranks, torch.Size([3654])
+====== Ranks ======
+ranks size: torch.Size([3654])
+test_loss: 2.335235469043255
+mr: 193.7515106201172
+mrr: 0.4228328466415405
+h1: 0.37493157386779785
+h3: 0.4236453175544739
+h5: 0.44718116521835327
+h10: 0.5145046710968018
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 1099 seconds on 

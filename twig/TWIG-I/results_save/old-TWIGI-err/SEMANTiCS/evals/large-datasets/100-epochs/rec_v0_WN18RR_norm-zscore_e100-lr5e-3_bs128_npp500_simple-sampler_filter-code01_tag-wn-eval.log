@@ -1,0 +1,167 @@
+['run_exp.py', '0', 'WN18RR', '100', '5e-3', 'zscore', '128', '64', '500', '0', '1', 'simple', '0']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+WN18RR
+X_p: torch.Size([86835, 23])
+X_p: torch.Size([2924, 23])
+X_p: torch.Size([2824, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 100
+Epoch 1 -- batch 0 / 679 loss: 0.14664027094841003
+batch 500 / 679 loss: 5.267673259368166e-05
+Epoch 2 -- batch 0 / 679 loss: 2.2821301172371022e-05
+batch 500 / 679 loss: 4.7485806135227904e-05
+Epoch 3 -- batch 0 / 679 loss: 1.937033266585786e-05
+batch 500 / 679 loss: 2.5222952899639495e-05
+Epoch 4 -- batch 0 / 679 loss: 1.5489089491893537e-05
+batch 500 / 679 loss: 2.301925815118011e-05
+Epoch 5 -- batch 0 / 679 loss: 3.2184777865040815e-06
+batch 500 / 679 loss: 2.3501035684603266e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_5336826154703196
+Epoch 6 -- batch 0 / 679 loss: 1.1557885045476723e-05
+batch 500 / 679 loss: 9.582667189533822e-06
+Epoch 7 -- batch 0 / 679 loss: 1.1241306310694199e-05
+batch 500 / 679 loss: 7.924054443719797e-06
+Epoch 8 -- batch 0 / 679 loss: 4.19644902649452e-06
+batch 500 / 679 loss: 8.4627981777885e-06
+Epoch 9 -- batch 0 / 679 loss: 1.8468217604095116e-06
+batch 500 / 679 loss: 7.834755706426222e-06
+Epoch 10 -- batch 0 / 679 loss: 1.2002351468254346e-06
+batch 500 / 679 loss: 7.60675629862817e-06
+Saving checkpoint at epoch 10; prefix = chkpt-ID_5336826154703196
+Epoch 11 -- batch 0 / 679 loss: 3.070469574595336e-06
+batch 500 / 679 loss: 1.3881860468245577e-05
+Epoch 12 -- batch 0 / 679 loss: 6.485017365776002e-06
+batch 500 / 679 loss: 6.171487711981172e-06
+Epoch 13 -- batch 0 / 679 loss: 3.335491555844783e-06
+batch 500 / 679 loss: 6.852536444057478e-06
+Epoch 14 -- batch 0 / 679 loss: 4.009172698715702e-06
+batch 500 / 679 loss: 9.852701623458415e-06
+Epoch 15 -- batch 0 / 679 loss: 9.813215001486242e-06
+batch 500 / 679 loss: 7.68600784795126e-06
+Saving checkpoint at epoch 15; prefix = chkpt-ID_5336826154703196
+Epoch 16 -- batch 0 / 679 loss: 4.924790573568316e-06
+batch 500 / 679 loss: 7.696085958741605e-06
+Epoch 17 -- batch 0 / 679 loss: 6.361664873111295e-06
+batch 500 / 679 loss: 1.0580903108348139e-05
+Epoch 18 -- batch 0 / 679 loss: 1.6142518006745377e-06
+batch 500 / 679 loss: 1.3202841728343628e-05
+Epoch 19 -- batch 0 / 679 loss: 7.644056495337281e-06
+batch 500 / 679 loss: 1.492664887337014e-05
+Epoch 20 -- batch 0 / 679 loss: 1.327946506535227e-06
+batch 500 / 679 loss: 9.538727681501769e-06
+Saving checkpoint at epoch 20; prefix = chkpt-ID_5336826154703196
+Epoch 21 -- batch 0 / 679 loss: 2.3804961983842077e-06
+batch 500 / 679 loss: 1.2797871931979898e-05
+Epoch 22 -- batch 0 / 679 loss: 1.5559510302409763e-06
+batch 500 / 679 loss: 2.796313856379129e-05
+Epoch 23 -- batch 0 / 679 loss: 7.288434971997049e-06
+batch 500 / 679 loss: 7.862914571887814e-06
+Epoch 24 -- batch 0 / 679 loss: 9.996801964007318e-06
+batch 500 / 679 loss: 1.704325586615596e-05
+Epoch 25 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 8.503205208398867e-06
+Saving checkpoint at epoch 25; prefix = chkpt-ID_5336826154703196
+Epoch 26 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 7.585004368593218e-06
+Epoch 27 -- batch 0 / 679 loss: 3.0635906114184763e-06
+batch 500 / 679 loss: 1.638037974771578e-05
+Epoch 28 -- batch 0 / 679 loss: 2.4806449800962582e-06
+batch 500 / 679 loss: 6.347844987431017e-07
+Epoch 29 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 4.564752998703625e-06
+Epoch 30 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 1.613918720977381e-05
+Saving checkpoint at epoch 30; prefix = chkpt-ID_5336826154703196
+Epoch 31 -- batch 0 / 679 loss: 1.9855415303027257e-06
+batch 500 / 679 loss: 1.1954495676036458e-05
+Epoch 32 -- batch 0 / 679 loss: 8.954431905294769e-06
+batch 500 / 679 loss: 1.414740108884871e-05
+Epoch 33 -- batch 0 / 679 loss: 6.517164365504868e-06
+batch 500 / 679 loss: 1.6581825548200868e-05
+Epoch 34 -- batch 0 / 679 loss: 9.424944437341765e-06
+batch 500 / 679 loss: 1.4264928722695913e-05
+Epoch 35 -- batch 0 / 679 loss: 1.6199757055801456e-06
+batch 500 / 679 loss: 9.282442078983877e-06
+Saving checkpoint at epoch 35; prefix = chkpt-ID_5336826154703196
+Epoch 36 -- batch 0 / 679 loss: 5.955710548732895e-06
+batch 500 / 679 loss: 1.1891779649886303e-05
+Epoch 37 -- batch 0 / 679 loss: 6.81256551615661e-07
+batch 500 / 679 loss: 8.098466423689388e-06
+Epoch 38 -- batch 0 / 679 loss: 2.8750525871146237e-06
+batch 500 / 679 loss: 1.2244435311004054e-05
+Epoch 39 -- batch 0 / 679 loss: 1.0764400713014766e-06
+batch 500 / 679 loss: 9.874756869976409e-06
+Epoch 40 -- batch 0 / 679 loss: 1.792345938156359e-05
+batch 500 / 679 loss: 6.0001852943969425e-06
+Saving checkpoint at epoch 40; prefix = chkpt-ID_5336826154703196
+Epoch 41 -- batch 0 / 679 loss: 9.094810593524016e-06
+batch 500 / 679 loss: 1.2607175449375063e-05
+Epoch 42 -- batch 0 / 679 loss: 3.8814196159364656e-06
+batch 500 / 679 loss: 1.1183141396031715e-05
+Epoch 43 -- batch 0 / 679 loss: 6.226120603969321e-06
+batch 500 / 679 loss: 8.9874847617466e-06
+Epoch 44 -- batch 0 / 679 loss: 3.4266836337337736e-06
+batch 500 / 679 loss: 1.1374619134585373e-05
+Epoch 45 -- batch 0 / 679 loss: 1.5625009837094694e-06
+batch 500 / 679 loss: 3.6555238693836145e-06
+Saving checkpoint at epoch 45; prefix = chkpt-ID_5336826154703196
+Epoch 46 -- batch 0 / 679 loss: 3.3657404401310487e-06
+batch 500 / 679 loss: 1.3450779078993946e-05
+Epoch 47 -- batch 0 / 679 loss: 3.282194484199863e-06
+batch 500 / 679 loss: 6.084973392717075e-06
+Epoch 48 -- batch 0 / 679 loss: 3.288758307462558e-06
+batch 500 / 679 loss: 6.898956144141266e-06
+Epoch 49 -- batch 0 / 679 loss: 1.3078595202387078e-06
+batch 500 / 679 loss: 1.385629457217874e-05
+Epoch 50 -- batch 0 / 679 loss: 5.41182544111507e-06
+batch 500 / 679 loss: 9.26775646803435e-06
+Saving checkpoint at epoch 50; prefix = chkpt-ID_5336826154703196
+Epoch 51 -- batch 0 / 679 loss: 1.5624982552253641e-06
+batch 500 / 679 loss: 5.8104251365875825e-06
+Epoch 52 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 5.059364866610849e-06
+Epoch 53 -- batch 0 / 679 loss: 7.654903129150625e-06
+batch 500 / 679 loss: 8.973699550551828e-06
+Epoch 54 -- batch 0 / 679 loss: 2.54813244282559e-07
+batch 500 / 679 loss: 1.6082898582681082e-05
+Epoch 55 -- batch 0 / 679 loss: 4.7468492994084954e-06
+batch 500 / 679 loss: 1.762880856404081e-05
+Saving checkpoint at epoch 55; prefix = chkpt-ID_5336826154703196
+Epoch 56 -- batch 0 / 679 loss: 9.309752385888714e-06
+batch 500 / 679 loss: 1.5909503417788073e-05
+Epoch 57 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 1.473424617870478e-05
+Epoch 58 -- batch 0 / 679 loss: 1.5625000742147677e-06
+batch 500 / 679 loss: 9.293169568991289e-06
+Epoch 59 -- batch 0 / 679 loss: 7.257105608005077e-06
+batch 500 / 679 loss: 1.074618921848014e-05
+Epoch 60 -- batch 0 / 679 loss: 2.712096375034889e-06
+batch 500 / 679 loss: 1.0846130862773862e-05
+Saving checkpoint at epoch 60; prefix = chkpt-ID_5336826154703196
+Epoch 61 -- batch 0 / 679 loss: 4.781586540048011e-06
+batch 500 / 679 loss: 1.003048055281397e-05
+Epoch 62 -- batch 0 / 679 loss: 1.226348558702739e-06
+batch 500 / 679 loss: 1.3400257557805162e-05
+Epoch 63 -- batch 0 / 679 loss: 3.397949285499635e-06
+batch 500 / 679 loss: 2.5272558559663594e-05
+Epoch 64 -- batch 0 / 679 loss: 1.1945159030801733e-06
+batch 500 / 679 loss: 1.2599718502315227e-05

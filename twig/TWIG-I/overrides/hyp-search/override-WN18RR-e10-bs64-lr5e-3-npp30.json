@@ -1,0 +1,8 @@
+{
+"epochs": 10,
+"dataset_names": ["WN18RR"],
+"batch_size": 64,
+"lr": 5e-3,
+"npp": 30,
+"hyp_validation_mode": 1
+}

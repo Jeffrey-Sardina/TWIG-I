@@ -1,0 +1,322 @@
+Arguments received: ['run_exp.py', 'base', 'WN18RR', '100', '5e-3', 'zscore', '128', '64', '500', '0', '1', 'simple', '1', 'None', '0']
+loading dataset
+WN18RR
+X_p: torch.Size([86835, 23])
+n_local: 22
+X_p: torch.Size([2924, 23])
+n_local: 22
+X_p: torch.Size([2824, 23])
+n_local: 22
+Using a total of 22 features
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+init negative sampler with args
+	use_2_hop_fts: True
+	fts_blacklist: {'None'}
+done loading negative samplers
+Running in standard evaluation mode
+TWIG will be evaulaited on the test set
+and will not be tested each epoch on the validation set
+Creating a new model from scratch
+loading NN
+done loading NN
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 100
+Epoch 1 -- batch 0 / 679 loss: 0.14723634719848633
+batch 500 / 679 loss: 0.0001839463657233864
+Epoch 2 -- batch 0 / 679 loss: 3.054544868064113e-05
+batch 500 / 679 loss: 0.00018474977696314454
+Epoch 3 -- batch 0 / 679 loss: 1.3670909538632259e-05
+batch 500 / 679 loss: 0.00016852698172442615
+Epoch 4 -- batch 0 / 679 loss: 1.4797240510233678e-05
+batch 500 / 679 loss: 0.00017355915042571723
+Epoch 5 -- batch 0 / 679 loss: 1.2697330930677708e-05
+batch 500 / 679 loss: 0.00017365407256875187
+Saving checkpoint at epoch 5; prefix = chkpt-ID_2980578518512252
+Epoch 6 -- batch 0 / 679 loss: 1.7560963897267357e-05
+batch 500 / 679 loss: 0.00012176337622804567
+Epoch 7 -- batch 0 / 679 loss: 1.5815790902706794e-05
+batch 500 / 679 loss: 7.270350761245936e-05
+Epoch 8 -- batch 0 / 679 loss: 1.1003157851519063e-05
+batch 500 / 679 loss: 2.9159289624658413e-05
+Epoch 9 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 1.7091986592276953e-05
+Epoch 10 -- batch 0 / 679 loss: 1.0891166311921552e-05
+batch 500 / 679 loss: 2.118149677698966e-05
+Saving checkpoint at epoch 10; prefix = chkpt-ID_2980578518512252
+Epoch 11 -- batch 0 / 679 loss: 1.4780865967622958e-05
+batch 500 / 679 loss: 3.5586021112976596e-05
+Epoch 12 -- batch 0 / 679 loss: 1.4320577065518592e-05
+batch 500 / 679 loss: 1.4834427020105068e-05
+Epoch 13 -- batch 0 / 679 loss: 8.803337550489232e-06
+batch 500 / 679 loss: 2.0165633031865582e-05
+Epoch 14 -- batch 0 / 679 loss: 7.988723154994659e-06
+batch 500 / 679 loss: 5.463476918521337e-05
+Epoch 15 -- batch 0 / 679 loss: 1.6341487935278565e-05
+batch 500 / 679 loss: 1.7399848729837686e-05
+Saving checkpoint at epoch 15; prefix = chkpt-ID_2980578518512252
+Epoch 16 -- batch 0 / 679 loss: 2.3132655769586563e-05
+batch 500 / 679 loss: 1.7802485672291368e-05
+Epoch 17 -- batch 0 / 679 loss: 5.206242349231616e-06
+batch 500 / 679 loss: 2.5844239644357003e-05
+Epoch 18 -- batch 0 / 679 loss: 4.4881147687192424e-07
+batch 500 / 679 loss: 2.02354094653856e-05
+Epoch 19 -- batch 0 / 679 loss: 6.017858595441794e-06
+batch 500 / 679 loss: 1.9253780919825658e-05
+Epoch 20 -- batch 0 / 679 loss: 7.74683849158464e-06
+batch 500 / 679 loss: 2.581806984380819e-05
+Saving checkpoint at epoch 20; prefix = chkpt-ID_2980578518512252
+Epoch 21 -- batch 0 / 679 loss: 1.3313336239662021e-05
+batch 500 / 679 loss: 2.0660407244577073e-05
+Epoch 22 -- batch 0 / 679 loss: 8.290660844068043e-06
+batch 500 / 679 loss: 1.7111153283622116e-05
+Epoch 23 -- batch 0 / 679 loss: 8.195578629965894e-06
+batch 500 / 679 loss: 1.2869928468717262e-05
+Epoch 24 -- batch 0 / 679 loss: 1.1623191312537529e-05
+batch 500 / 679 loss: 2.3449294531019405e-05
+Epoch 25 -- batch 0 / 679 loss: 1.5028233974589966e-05
+batch 500 / 679 loss: 2.8171190933790058e-05
+Saving checkpoint at epoch 25; prefix = chkpt-ID_2980578518512252
+Epoch 26 -- batch 0 / 679 loss: 7.471518529200694e-06
+batch 500 / 679 loss: 1.7229063814738765e-05
+Epoch 27 -- batch 0 / 679 loss: 1.1125470336992294e-05
+batch 500 / 679 loss: 1.8114535123459063e-05
+Epoch 28 -- batch 0 / 679 loss: 1.4048531738808379e-05
+batch 500 / 679 loss: 2.500553455320187e-05
+Epoch 29 -- batch 0 / 679 loss: 5.70627162232995e-06
+batch 500 / 679 loss: 1.7241483874386176e-05
+Epoch 30 -- batch 0 / 679 loss: 9.156110536423512e-06
+batch 500 / 679 loss: 1.5945668565109372e-05
+Saving checkpoint at epoch 30; prefix = chkpt-ID_2980578518512252
+Epoch 31 -- batch 0 / 679 loss: 1.849744512583129e-05
+batch 500 / 679 loss: 9.831705028773285e-06
+Epoch 32 -- batch 0 / 679 loss: 5.253801646176726e-06
+batch 500 / 679 loss: 2.954927913378924e-05
+Epoch 33 -- batch 0 / 679 loss: 2.9944005746074254e-06
+batch 500 / 679 loss: 2.3374999727820978e-05
+Epoch 34 -- batch 0 / 679 loss: 1.7110476619563997e-05
+batch 500 / 679 loss: 1.3973562090541236e-05
+Epoch 35 -- batch 0 / 679 loss: 2.3599523046868853e-06
+batch 500 / 679 loss: 1.665834861341864e-05
+Saving checkpoint at epoch 35; prefix = chkpt-ID_2980578518512252
+Epoch 36 -- batch 0 / 679 loss: 1.6311709259753115e-05
+batch 500 / 679 loss: 1.994307604036294e-05
+Epoch 37 -- batch 0 / 679 loss: 1.3750764992437325e-05
+batch 500 / 679 loss: 1.686262112343684e-05
+Epoch 38 -- batch 0 / 679 loss: 7.685181117267348e-06
+batch 500 / 679 loss: 1.8506347259972245e-05
+Epoch 39 -- batch 0 / 679 loss: 8.495328984281514e-06
+batch 500 / 679 loss: 1.712812081677839e-05
+Epoch 40 -- batch 0 / 679 loss: 1.1371531400072854e-05
+batch 500 / 679 loss: 1.3838500308338553e-05
+Saving checkpoint at epoch 40; prefix = chkpt-ID_2980578518512252
+Epoch 41 -- batch 0 / 679 loss: 2.957122433144832e-06
+batch 500 / 679 loss: 2.2139620341476984e-05
+Epoch 42 -- batch 0 / 679 loss: 8.81733103597071e-06
+batch 500 / 679 loss: 1.707480987533927e-05
+Epoch 43 -- batch 0 / 679 loss: 8.804707249510102e-06
+batch 500 / 679 loss: 1.5122906006581616e-05
+Epoch 44 -- batch 0 / 679 loss: 5.0181374717794824e-06
+batch 500 / 679 loss: 8.995243661047425e-06
+Epoch 45 -- batch 0 / 679 loss: 7.10562653694069e-06
+batch 500 / 679 loss: 1.815905125113204e-05
+Saving checkpoint at epoch 45; prefix = chkpt-ID_2980578518512252
+Epoch 46 -- batch 0 / 679 loss: 5.7395668591198046e-06
+batch 500 / 679 loss: 2.031824624282308e-05
+Epoch 47 -- batch 0 / 679 loss: 6.7123746703146026e-06
+batch 500 / 679 loss: 1.4635958905273583e-05
+Epoch 48 -- batch 0 / 679 loss: 5.291993602440925e-06
+batch 500 / 679 loss: 9.199244232149795e-05
+Epoch 49 -- batch 0 / 679 loss: 1.3079440577712376e-05
+batch 500 / 679 loss: 1.9810908270301297e-05
+Epoch 50 -- batch 0 / 679 loss: 9.35440039029345e-06
+batch 500 / 679 loss: 1.893491207738407e-05
+Saving checkpoint at epoch 50; prefix = chkpt-ID_2980578518512252
+Epoch 51 -- batch 0 / 679 loss: 5.2130158110230695e-06
+batch 500 / 679 loss: 1.847155363066122e-05
+Epoch 52 -- batch 0 / 679 loss: 9.688691534393001e-06
+batch 500 / 679 loss: 2.1788422600366175e-05
+Epoch 53 -- batch 0 / 679 loss: 9.760855391505174e-06
+batch 500 / 679 loss: 1.5633022485417314e-05
+Epoch 54 -- batch 0 / 679 loss: 1.2552684893307742e-05
+batch 500 / 679 loss: 2.1387726519606076e-05
+Epoch 55 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 1.6074332961579785e-05
+Saving checkpoint at epoch 55; prefix = chkpt-ID_2980578518512252
+Epoch 56 -- batch 0 / 679 loss: 1.2875058018835261e-05
+batch 500 / 679 loss: 3.3145137422252446e-05
+Epoch 57 -- batch 0 / 679 loss: 8.663611879455857e-06
+batch 500 / 679 loss: 1.9044657165068202e-05
+Epoch 58 -- batch 0 / 679 loss: 6.443381153076189e-06
+batch 500 / 679 loss: 1.3934470189269632e-05
+Epoch 59 -- batch 0 / 679 loss: 9.040944860316813e-06
+batch 500 / 679 loss: 1.2367449926387053e-05
+Epoch 60 -- batch 0 / 679 loss: 8.467213774565607e-06
+batch 500 / 679 loss: 3.781802661251277e-05
+Saving checkpoint at epoch 60; prefix = chkpt-ID_2980578518512252
+Epoch 61 -- batch 0 / 679 loss: 1.1227102731936611e-05
+batch 500 / 679 loss: 9.209521522279829e-06
+Epoch 62 -- batch 0 / 679 loss: 0.0
+batch 500 / 679 loss: 2.3213000531541184e-05
+Epoch 63 -- batch 0 / 679 loss: 1.1572106814128347e-05
+batch 500 / 679 loss: 2.57931951637147e-05
+Epoch 64 -- batch 0 / 679 loss: 8.768506631895434e-06
+batch 500 / 679 loss: 1.741315281833522e-05
+Epoch 65 -- batch 0 / 679 loss: 8.264643838629127e-06
+batch 500 / 679 loss: 2.5416695280000567e-05
+Saving checkpoint at epoch 65; prefix = chkpt-ID_2980578518512252
+Epoch 66 -- batch 0 / 679 loss: 1.001067903416697e-05
+batch 500 / 679 loss: 2.032751581282355e-05
+Epoch 67 -- batch 0 / 679 loss: 7.347307473537512e-06
+batch 500 / 679 loss: 1.6729010894778185e-05
+Epoch 68 -- batch 0 / 679 loss: 1.3811553799314424e-05
+batch 500 / 679 loss: 1.4304643627838232e-05
+Epoch 69 -- batch 0 / 679 loss: 5.635842626361409e-06
+batch 500 / 679 loss: 1.9779890862992033e-05
+Epoch 70 -- batch 0 / 679 loss: 9.18213845579885e-06
+batch 500 / 679 loss: 2.12320974242175e-05
+Saving checkpoint at epoch 70; prefix = chkpt-ID_2980578518512252
+Epoch 71 -- batch 0 / 679 loss: 1.3634989954880439e-05
+batch 500 / 679 loss: 2.091469468723517e-05
+Epoch 72 -- batch 0 / 679 loss: 2.669661171239568e-06
+batch 500 / 679 loss: 2.4640237825224176e-05
+Epoch 73 -- batch 0 / 679 loss: 0.0044710636138916016
+batch 500 / 679 loss: 1.221934326167684e-05
+Epoch 74 -- batch 0 / 679 loss: 6.811215826019179e-06
+batch 500 / 679 loss: 1.9604984117904678e-05
+Epoch 75 -- batch 0 / 679 loss: 8.134195013553835e-06
+batch 500 / 679 loss: 2.1213705622358248e-05
+Saving checkpoint at epoch 75; prefix = chkpt-ID_2980578518512252
+Epoch 76 -- batch 0 / 679 loss: 9.114591193792876e-06
+batch 500 / 679 loss: 2.529666198824998e-05
+Epoch 77 -- batch 0 / 679 loss: 6.620506610488519e-06
+batch 500 / 679 loss: 2.1978175936965272e-05
+Epoch 78 -- batch 0 / 679 loss: 9.568788300384767e-06
+batch 500 / 679 loss: 1.5929581422824413e-05
+Epoch 79 -- batch 0 / 679 loss: 5.291001343721291e-06
+batch 500 / 679 loss: 2.4881153876776807e-05
+Epoch 80 -- batch 0 / 679 loss: 4.156583599979058e-06
+batch 500 / 679 loss: 2.2334588720696047e-05
+Saving checkpoint at epoch 80; prefix = chkpt-ID_2980578518512252
+Epoch 81 -- batch 0 / 679 loss: 5.020759545004694e-06
+batch 500 / 679 loss: 9.435769243282266e-06
+Epoch 82 -- batch 0 / 679 loss: 4.907078164251288e-06
+batch 500 / 679 loss: 1.0664025467121974e-05
+Epoch 83 -- batch 0 / 679 loss: 2.176187308577937e-06
+batch 500 / 679 loss: 2.3479280571336858e-05
+Epoch 84 -- batch 0 / 679 loss: 2.2111784346634522e-05
+batch 500 / 679 loss: 2.3439039068762213e-05
+Epoch 85 -- batch 0 / 679 loss: 6.299331289483234e-06
+batch 500 / 679 loss: 1.8282171367900446e-05
+Saving checkpoint at epoch 85; prefix = chkpt-ID_2980578518512252
+Epoch 86 -- batch 0 / 679 loss: 5.6919116104836576e-06
+batch 500 / 679 loss: 7.5956600085191894e-06
+Epoch 87 -- batch 0 / 679 loss: 8.428819455730263e-06
+batch 500 / 679 loss: 2.980373210448306e-05
+Epoch 88 -- batch 0 / 679 loss: 5.55304632143816e-06
+batch 500 / 679 loss: 1.8901477233157493e-05
+Epoch 89 -- batch 0 / 679 loss: 1.4516405826725531e-05
+batch 500 / 679 loss: 2.1786279830848798e-05
+Epoch 90 -- batch 0 / 679 loss: 1.5869331036810763e-05
+batch 500 / 679 loss: 1.9339824575581588e-05
+Saving checkpoint at epoch 90; prefix = chkpt-ID_2980578518512252
+Epoch 91 -- batch 0 / 679 loss: 5.683546987711452e-06
+batch 500 / 679 loss: 2.1009042029618286e-05
+Epoch 92 -- batch 0 / 679 loss: 1.3230939657660201e-05
+batch 500 / 679 loss: 8.498967872583307e-06
+Epoch 93 -- batch 0 / 679 loss: 4.537124823400518e-06
+batch 500 / 679 loss: 1.2269281796761788e-05
+Epoch 94 -- batch 0 / 679 loss: 1.0220457625109702e-05
+batch 500 / 679 loss: 2.066926026600413e-05
+Epoch 95 -- batch 0 / 679 loss: 4.309249106881907e-06
+batch 500 / 679 loss: 4.2826897697523236e-05
+Saving checkpoint at epoch 95; prefix = chkpt-ID_2980578518512252
+Epoch 96 -- batch 0 / 679 loss: 4.269136297807563e-06
+batch 500 / 679 loss: 2.1519983420148492e-05
+Epoch 97 -- batch 0 / 679 loss: 7.564015504613053e-06
+batch 500 / 679 loss: 2.7779517040471546e-05
+Epoch 98 -- batch 0 / 679 loss: 4.945172804582398e-06
+batch 500 / 679 loss: 1.8733513570623472e-05
+Epoch 99 -- batch 0 / 679 loss: 1.0398127415101044e-05
+batch 500 / 679 loss: 2.4955115804914385e-05
+Epoch 100 -- batch 0 / 679 loss: 1.3004605534661096e-05
+batch 500 / 679 loss: 1.5501753296121024e-05
+Saving checkpoint at epoch 100; prefix = chkpt-ID_2980578518512252
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset WN18RR
+Testing (cite this): batch 0 / 46
+batch 0 / 46 loss: 0.10004080832004547
+Testing (cite this): batch 1 / 46
+Testing (cite this): batch 2 / 46
+Testing (cite this): batch 3 / 46
+Testing (cite this): batch 4 / 46
+Testing (cite this): batch 5 / 46
+Testing (cite this): batch 6 / 46
+Testing (cite this): batch 7 / 46
+Testing (cite this): batch 8 / 46
+Testing (cite this): batch 9 / 46
+Testing (cite this): batch 10 / 46
+Testing (cite this): batch 11 / 46
+Testing (cite this): batch 12 / 46
+Testing (cite this): batch 13 / 46
+Testing (cite this): batch 14 / 46
+Testing (cite this): batch 15 / 46
+Testing (cite this): batch 16 / 46
+Testing (cite this): batch 17 / 46
+Testing (cite this): batch 18 / 46
+Testing (cite this): batch 19 / 46
+Testing (cite this): batch 20 / 46
+Testing (cite this): batch 21 / 46
+Testing (cite this): batch 22 / 46
+Testing (cite this): batch 23 / 46
+Testing (cite this): batch 24 / 46
+Testing (cite this): batch 25 / 46
+Testing (cite this): batch 26 / 46
+Testing (cite this): batch 27 / 46
+Testing (cite this): batch 28 / 46
+Testing (cite this): batch 29 / 46
+Testing (cite this): batch 30 / 46
+Testing (cite this): batch 31 / 46
+Testing (cite this): batch 32 / 46
+Testing (cite this): batch 33 / 46
+Testing (cite this): batch 34 / 46
+Testing (cite this): batch 35 / 46
+Testing (cite this): batch 36 / 46
+Testing (cite this): batch 37 / 46
+Testing (cite this): batch 38 / 46
+Testing (cite this): batch 39 / 46
+Testing (cite this): batch 40 / 46
+Testing (cite this): batch 41 / 46
+Testing (cite this): batch 42 / 46
+Testing (cite this): batch 43 / 46
+Testing (cite this): batch 44 / 46
+Testing (cite this): batch 45 / 46
+total number of ranks, torch.Size([5848])
+====== Ranks ======
+ranks size: torch.Size([5848])
+test_loss: 4.486927941441536
+mr: 18467.95703125
+mrr: 0.0555693693459034
+h1: 0.037448700517416
+h3: 0.06754446029663086
+h5: 0.08071135729551315
+h10: 0.08926128596067429
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 52207 seconds on 

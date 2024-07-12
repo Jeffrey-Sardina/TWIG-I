@@ -1,0 +1,8 @@
+{
+"epochs": 20,
+"dataset_names": ["DBpedia50"],
+"batch_size": 128,
+"lr": 5e-4,
+"npp": 30,
+"hyp_validation_mode": 0
+}

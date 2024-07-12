@@ -1,0 +1,138 @@
+['run_exp.py', '0', 'WN18RR', '20', '5e-5', 'zscore', '128', '64', '500', '0', '1', 'simple', '1']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+WN18RR
+X_p: torch.Size([86835, 23])
+X_p: torch.Size([2924, 23])
+X_p: torch.Size([2824, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 679 loss: 0.14666680991649628
+batch 500 / 679 loss: 0.0602806881070137
+Epoch 2 -- batch 0 / 679 loss: 0.03486347943544388
+batch 500 / 679 loss: 0.005606614984571934
+Epoch 3 -- batch 0 / 679 loss: 0.002349121030420065
+batch 500 / 679 loss: 0.002894942881539464
+Epoch 4 -- batch 0 / 679 loss: 0.002078472403809428
+batch 500 / 679 loss: 0.002057458972558379
+Epoch 5 -- batch 0 / 679 loss: 0.0016871794359758496
+batch 500 / 679 loss: 0.0015348918968811631
+Saving checkpoint at epoch 5; prefix = chkpt-ID_564410221717716
+Epoch 6 -- batch 0 / 679 loss: 0.0012618830660358071
+batch 500 / 679 loss: 0.0010846639052033424
+Epoch 7 -- batch 0 / 679 loss: 0.0007722980226390064
+batch 500 / 679 loss: 0.0006074388511478901
+Epoch 8 -- batch 0 / 679 loss: 0.00040294750942848623
+batch 500 / 679 loss: 0.0003563534119166434
+Epoch 9 -- batch 0 / 679 loss: 0.00017782299255486578
+batch 500 / 679 loss: 0.0002171558589907363
+Epoch 10 -- batch 0 / 679 loss: 9.267522545997053e-05
+batch 500 / 679 loss: 0.00015256124606821686
+Saving checkpoint at epoch 10; prefix = chkpt-ID_564410221717716
+Epoch 11 -- batch 0 / 679 loss: 8.047518349485472e-05
+batch 500 / 679 loss: 0.00017166347242891788
+Epoch 12 -- batch 0 / 679 loss: 4.5087053877068684e-05
+batch 500 / 679 loss: 9.487094212090597e-05
+Epoch 13 -- batch 0 / 679 loss: 3.8615253288298845e-05
+batch 500 / 679 loss: 0.00011313090362818912
+Epoch 14 -- batch 0 / 679 loss: 4.113458999199793e-05
+batch 500 / 679 loss: 6.921419844729826e-05
+Epoch 15 -- batch 0 / 679 loss: 3.5877543268725276e-05
+batch 500 / 679 loss: 5.9037010942120105e-05
+Saving checkpoint at epoch 15; prefix = chkpt-ID_564410221717716
+Epoch 16 -- batch 0 / 679 loss: 2.8392365493346006e-05
+batch 500 / 679 loss: 4.9535530706634745e-05
+Epoch 17 -- batch 0 / 679 loss: 1.7472308172727935e-05
+batch 500 / 679 loss: 3.871199442073703e-05
+Epoch 18 -- batch 0 / 679 loss: 2.1598954845103435e-05
+batch 500 / 679 loss: 4.219240145175718e-05
+Epoch 19 -- batch 0 / 679 loss: 1.849269392550923e-05
+batch 500 / 679 loss: 2.475269320711959e-05
+Epoch 20 -- batch 0 / 679 loss: 1.3702961041417439e-05
+batch 500 / 679 loss: 3.9936418033903465e-05
+Saving checkpoint at epoch 20; prefix = chkpt-ID_564410221717716
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset WN18RR
+Testing (cite this): batch 0 / 45
+Testing (cite this): batch 1 / 45
+Testing (cite this): batch 2 / 45
+Testing (cite this): batch 3 / 45
+Testing (cite this): batch 4 / 45
+Testing (cite this): batch 5 / 45
+Testing (cite this): batch 6 / 45
+Testing (cite this): batch 7 / 45
+Testing (cite this): batch 8 / 45
+Testing (cite this): batch 9 / 45
+Testing (cite this): batch 10 / 45
+Testing (cite this): batch 11 / 45
+Testing (cite this): batch 12 / 45
+Testing (cite this): batch 13 / 45
+Testing (cite this): batch 14 / 45
+Testing (cite this): batch 15 / 45
+Testing (cite this): batch 16 / 45
+Testing (cite this): batch 17 / 45
+Testing (cite this): batch 18 / 45
+Testing (cite this): batch 19 / 45
+Testing (cite this): batch 20 / 45
+Testing (cite this): batch 21 / 45
+Testing (cite this): batch 22 / 45
+Testing (cite this): batch 23 / 45
+Testing (cite this): batch 24 / 45
+Testing (cite this): batch 25 / 45
+Testing (cite this): batch 26 / 45
+Testing (cite this): batch 27 / 45
+Testing (cite this): batch 28 / 45
+Testing (cite this): batch 29 / 45
+Testing (cite this): batch 30 / 45
+Testing (cite this): batch 31 / 45
+Testing (cite this): batch 32 / 45
+Testing (cite this): batch 33 / 45
+Testing (cite this): batch 34 / 45
+Testing (cite this): batch 35 / 45
+Testing (cite this): batch 36 / 45
+Testing (cite this): batch 37 / 45
+Testing (cite this): batch 38 / 45
+Testing (cite this): batch 39 / 45
+Testing (cite this): batch 40 / 45
+Testing (cite this): batch 41 / 45
+Testing (cite this): batch 42 / 45
+Testing (cite this): batch 43 / 45
+Testing (cite this): batch 44 / 45
+total number of ranks, torch.Size([2824])
+====== Ranks ======
+ranks size: torch.Size([2824])
+test_loss: 4.633389100432396
+mr: 51304.61328125
+mrr: 0.002033507451415062
+h1: 0.0017705382779240608
+h3: 0.0017705382779240608
+h5: 0.0021246459800750017
+h10: 0.002478753449395299
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 4284 seconds on 

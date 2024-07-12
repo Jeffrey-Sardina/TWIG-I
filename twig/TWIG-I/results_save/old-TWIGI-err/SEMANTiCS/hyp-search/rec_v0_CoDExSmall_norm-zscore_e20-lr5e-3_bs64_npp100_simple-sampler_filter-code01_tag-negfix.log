@@ -1,0 +1,122 @@
+['run_exp.py', '0', 'CoDExSmall', '20', '5e-3', 'zscore', '64', '64', '100', '0', '1', 'simple', '1']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+CoDExSmall
+X_p: torch.Size([32888, 23])
+X_p: torch.Size([1828, 23])
+X_p: torch.Size([1827, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 514 loss: 0.11144089698791504
+batch 500 / 514 loss: 5.2187766414135695e-05
+Epoch 2 -- batch 0 / 514 loss: 0.0004927152767777443
+batch 500 / 514 loss: 3.893571192747913e-05
+Epoch 3 -- batch 0 / 514 loss: 0.00024612151901237667
+batch 500 / 514 loss: 6.406777538359165e-05
+Epoch 4 -- batch 0 / 514 loss: 3.0279485145001672e-05
+batch 500 / 514 loss: 3.0038216209504753e-05
+Epoch 5 -- batch 0 / 514 loss: 0.00012865160533692688
+batch 500 / 514 loss: 1.5817699022591114e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_8083201666661708
+Epoch 6 -- batch 0 / 514 loss: 3.583963916753419e-05
+batch 500 / 514 loss: 2.8524559638754e-06
+Epoch 7 -- batch 0 / 514 loss: 8.508294558851048e-05
+batch 500 / 514 loss: 9.770411679710378e-07
+Epoch 8 -- batch 0 / 514 loss: 9.949346713256091e-05
+batch 500 / 514 loss: 0.0
+Epoch 9 -- batch 0 / 514 loss: 4.158716183155775e-05
+batch 500 / 514 loss: 0.0
+Epoch 10 -- batch 0 / 514 loss: 1.9033654098166153e-05
+batch 500 / 514 loss: 0.0
+Saving checkpoint at epoch 10; prefix = chkpt-ID_8083201666661708
+Epoch 11 -- batch 0 / 514 loss: 2.5137187549262308e-05
+batch 500 / 514 loss: 0.0
+Epoch 12 -- batch 0 / 514 loss: 3.122109774267301e-05
+batch 500 / 514 loss: 1.604368480911944e-05
+Epoch 13 -- batch 0 / 514 loss: 7.869025284890085e-05
+batch 500 / 514 loss: 0.0
+Epoch 14 -- batch 0 / 514 loss: 5.7505134464008734e-05
+batch 500 / 514 loss: 0.0
+Epoch 15 -- batch 0 / 514 loss: 6.267931166803464e-05
+batch 500 / 514 loss: 0.0
+Saving checkpoint at epoch 15; prefix = chkpt-ID_8083201666661708
+Epoch 16 -- batch 0 / 514 loss: 9.793738172447775e-06
+batch 500 / 514 loss: 0.0
+Epoch 17 -- batch 0 / 514 loss: 0.00012604225776158273
+batch 500 / 514 loss: 0.0
+Epoch 18 -- batch 0 / 514 loss: 3.949523488699924e-06
+batch 500 / 514 loss: 3.750086762011051e-05
+Epoch 19 -- batch 0 / 514 loss: 3.663909592432901e-05
+batch 500 / 514 loss: 0.0
+Epoch 20 -- batch 0 / 514 loss: 5.791113289888017e-05
+batch 500 / 514 loss: 2.1044839741080068e-05
+Saving checkpoint at epoch 20; prefix = chkpt-ID_8083201666661708
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset CoDExSmall
+Testing (cite this): batch 0 / 29
+Testing (cite this): batch 1 / 29
+Testing (cite this): batch 2 / 29
+Testing (cite this): batch 3 / 29
+Testing (cite this): batch 4 / 29
+Testing (cite this): batch 5 / 29
+Testing (cite this): batch 6 / 29
+Testing (cite this): batch 7 / 29
+Testing (cite this): batch 8 / 29
+Testing (cite this): batch 9 / 29
+Testing (cite this): batch 10 / 29
+Testing (cite this): batch 11 / 29
+Testing (cite this): batch 12 / 29
+Testing (cite this): batch 13 / 29
+Testing (cite this): batch 14 / 29
+Testing (cite this): batch 15 / 29
+Testing (cite this): batch 16 / 29
+Testing (cite this): batch 17 / 29
+Testing (cite this): batch 18 / 29
+Testing (cite this): batch 19 / 29
+Testing (cite this): batch 20 / 29
+Testing (cite this): batch 21 / 29
+Testing (cite this): batch 22 / 29
+Testing (cite this): batch 23 / 29
+Testing (cite this): batch 24 / 29
+Testing (cite this): batch 25 / 29
+Testing (cite this): batch 26 / 29
+Testing (cite this): batch 27 / 29
+Testing (cite this): batch 28 / 29
+total number of ranks, torch.Size([1827])
+====== Ranks ======
+ranks size: torch.Size([1827])
+test_loss: 0.8436610270291567
+mr: 31.856595993041992
+mrr: 0.4850093126296997
+h1: 0.4241926670074463
+h3: 0.4772851765155792
+h5: 0.5199781060218811
+h10: 0.6398467421531677
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 360 seconds on 

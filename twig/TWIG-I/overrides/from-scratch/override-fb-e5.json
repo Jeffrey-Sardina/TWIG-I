@@ -1,0 +1,4 @@
+{
+    "epochs": 5,
+    "dataset_names": ["FB15k237"]
+}

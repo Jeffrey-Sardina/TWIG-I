@@ -1,0 +1,96 @@
+loading model settings from cache: checkpoints/chkpt-ID_5336826154703196.pkl
+overriding original values for epochs. Was 100, now is 10
+overriding original values for dataset_names. Was ['WN18RR'], now is ['DBpedia50']
+It will be trained for 10 more epochs now.
+If you are loading a modle that was itself loaded from checkpoint, the number of epochs listed as already completed above will be incorrect
+until I get around to fxing this, you will have to recursively go through logs to find the total number of epochs run
+loadng TWIG-I model from disk at: checkpoints/chkpt-ID_5336826154703196_e40.pt
+the full config being used is: {'version': 0, 'dataset_names': ['DBpedia50'], 'epochs': 10, 'lr': 0.005, 'normalisation': 'zscore', 'batch_size': 128, 'batch_size_test': 64, 'npp': 500, 'sampler_type': 'simple', 'use_train_filter': False, 'use_valid_and_test_filters': True, 'hyp_validation_mode': False}
+Using provided pre-existing model
+loading dataset
+DBpedia50
+X_p: torch.Size([32203, 23])
+X_p: torch.Size([2095, 23])
+X_p: torch.Size([123, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 10
+Epoch 1 -- batch 0 / 252 loss: 0.016350744292140007
+Epoch 2 -- batch 0 / 252 loss: 1.8341559552936815e-05
+Epoch 3 -- batch 0 / 252 loss: 1.4771681890124455e-05
+Epoch 4 -- batch 0 / 252 loss: 1.6387586583732627e-05
+Epoch 5 -- batch 0 / 252 loss: 2.667356784513686e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_1134717392068495
+Epoch 6 -- batch 0 / 252 loss: 5.59400859856396e-06
+Epoch 7 -- batch 0 / 252 loss: 1.6523596059414558e-05
+Epoch 8 -- batch 0 / 252 loss: 1.4925593859516084e-05
+Epoch 9 -- batch 0 / 252 loss: 4.912535132461926e-06
+Epoch 10 -- batch 0 / 252 loss: 4.875562808592804e-06
+Saving checkpoint at epoch 10; prefix = chkpt-ID_1134717392068495
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset DBpedia50
+Testing (cite this): batch 0 / 33
+Testing (cite this): batch 1 / 33
+Testing (cite this): batch 2 / 33
+Testing (cite this): batch 3 / 33
+Testing (cite this): batch 4 / 33
+Testing (cite this): batch 5 / 33
+Testing (cite this): batch 6 / 33
+Testing (cite this): batch 7 / 33
+Testing (cite this): batch 8 / 33
+Testing (cite this): batch 9 / 33
+Testing (cite this): batch 10 / 33
+Testing (cite this): batch 11 / 33
+Testing (cite this): batch 12 / 33
+Testing (cite this): batch 13 / 33
+Testing (cite this): batch 14 / 33
+Testing (cite this): batch 15 / 33
+Testing (cite this): batch 16 / 33
+Testing (cite this): batch 17 / 33
+Testing (cite this): batch 18 / 33
+Testing (cite this): batch 19 / 33
+Testing (cite this): batch 20 / 33
+Testing (cite this): batch 21 / 33
+Testing (cite this): batch 22 / 33
+Testing (cite this): batch 23 / 33
+Testing (cite this): batch 24 / 33
+Testing (cite this): batch 25 / 33
+Testing (cite this): batch 26 / 33
+Testing (cite this): batch 27 / 33
+Testing (cite this): batch 28 / 33
+Testing (cite this): batch 29 / 33
+Testing (cite this): batch 30 / 33
+Testing (cite this): batch 31 / 33
+Testing (cite this): batch 32 / 33
+total number of ranks, torch.Size([2095])
+====== Ranks ======
+ranks size: torch.Size([2095])
+test_loss: 1.5972926132380962
+mr: 10729.0849609375
+mrr: 0.35406526923179626
+h1: 0.24630071222782135
+h3: 0.4491646885871887
+h5: 0.48114559054374695
+h10: 0.5107398629188538
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 953 seconds on 

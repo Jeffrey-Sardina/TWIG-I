@@ -1,0 +1,427 @@
+['run_exp.py', '0', 'FB15k237', '20', '5e-4', 'zscore', '128', '64', '30', '0', '1', 'simple', '1']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+FB15k237
+X_p: torch.Size([272115, 23])
+X_p: torch.Size([20438, 23])
+X_p: torch.Size([17526, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 2126 loss: 0.1063600406050682
+batch 500 / 2126 loss: 0.0023053032346069813
+batch 1000 / 2126 loss: 0.0008968758629634976
+batch 1500 / 2126 loss: 0.0006045398768037558
+batch 2000 / 2126 loss: 0.0005704501527361572
+Epoch 2 -- batch 0 / 2126 loss: 0.0007571412716060877
+batch 500 / 2126 loss: 0.00022041189367882907
+batch 1000 / 2126 loss: 0.000374875555280596
+batch 1500 / 2126 loss: 0.00029743570485152304
+batch 2000 / 2126 loss: 2.9314511266420595e-05
+Epoch 3 -- batch 0 / 2126 loss: 0.00028334459057077765
+batch 500 / 2126 loss: 0.00013171225145924836
+batch 1000 / 2126 loss: 5.332161163096316e-05
+batch 1500 / 2126 loss: 3.08467642753385e-05
+batch 2000 / 2126 loss: 5.213891563471407e-05
+Epoch 4 -- batch 0 / 2126 loss: 0.00010245345038129017
+batch 500 / 2126 loss: 3.7173478631302714e-05
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 7.934366294648498e-05
+batch 2000 / 2126 loss: 1.9573828467400745e-05
+Epoch 5 -- batch 0 / 2126 loss: 5.9592425714072306e-06
+batch 500 / 2126 loss: 1.7991300410358235e-05
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 4.635815457731951e-06
+batch 2000 / 2126 loss: 9.657048940425739e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_1037142515705545
+Epoch 6 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 8.764950507611502e-06
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 1.4025456948729698e-05
+Epoch 7 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 8.776778486208059e-06
+batch 1000 / 2126 loss: 1.790201713447459e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 1.6777941709733568e-05
+Epoch 8 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.772179479710758e-05
+batch 1000 / 2126 loss: 1.9053195501328446e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 9 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 2.0446444978006184e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 10 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 10; prefix = chkpt-ID_1037142515705545
+Epoch 11 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 3.053224281757139e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 12 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 7.048779480101075e-06
+batch 1000 / 2126 loss: 4.3969870603177696e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 13 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 14 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 15 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 15; prefix = chkpt-ID_1037142515705545
+Epoch 16 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 2.1598980310955085e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 17 -- batch 0 / 2126 loss: 2.2615793113800464e-06
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 18 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 19 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 20 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 2.5737948817550205e-05
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 20; prefix = chkpt-ID_1037142515705545
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset FB15k237
+Testing (cite this): batch 0 / 274
+Testing (cite this): batch 1 / 274
+Testing (cite this): batch 2 / 274
+Testing (cite this): batch 3 / 274
+Testing (cite this): batch 4 / 274
+Testing (cite this): batch 5 / 274
+Testing (cite this): batch 6 / 274
+Testing (cite this): batch 7 / 274
+Testing (cite this): batch 8 / 274
+Testing (cite this): batch 9 / 274
+Testing (cite this): batch 10 / 274
+Testing (cite this): batch 11 / 274
+Testing (cite this): batch 12 / 274
+Testing (cite this): batch 13 / 274
+Testing (cite this): batch 14 / 274
+Testing (cite this): batch 15 / 274
+Testing (cite this): batch 16 / 274
+Testing (cite this): batch 17 / 274
+Testing (cite this): batch 18 / 274
+Testing (cite this): batch 19 / 274
+Testing (cite this): batch 20 / 274
+Testing (cite this): batch 21 / 274
+Testing (cite this): batch 22 / 274
+Testing (cite this): batch 23 / 274
+Testing (cite this): batch 24 / 274
+Testing (cite this): batch 25 / 274
+Testing (cite this): batch 26 / 274
+Testing (cite this): batch 27 / 274
+Testing (cite this): batch 28 / 274
+Testing (cite this): batch 29 / 274
+Testing (cite this): batch 30 / 274
+Testing (cite this): batch 31 / 274
+Testing (cite this): batch 32 / 274
+Testing (cite this): batch 33 / 274
+Testing (cite this): batch 34 / 274
+Testing (cite this): batch 35 / 274
+Testing (cite this): batch 36 / 274
+Testing (cite this): batch 37 / 274
+Testing (cite this): batch 38 / 274
+Testing (cite this): batch 39 / 274
+Testing (cite this): batch 40 / 274
+Testing (cite this): batch 41 / 274
+Testing (cite this): batch 42 / 274
+Testing (cite this): batch 43 / 274
+Testing (cite this): batch 44 / 274
+Testing (cite this): batch 45 / 274
+Testing (cite this): batch 46 / 274
+Testing (cite this): batch 47 / 274
+Testing (cite this): batch 48 / 274
+Testing (cite this): batch 49 / 274
+Testing (cite this): batch 50 / 274
+Testing (cite this): batch 51 / 274
+Testing (cite this): batch 52 / 274
+Testing (cite this): batch 53 / 274
+Testing (cite this): batch 54 / 274
+Testing (cite this): batch 55 / 274
+Testing (cite this): batch 56 / 274
+Testing (cite this): batch 57 / 274
+Testing (cite this): batch 58 / 274
+Testing (cite this): batch 59 / 274
+Testing (cite this): batch 60 / 274
+Testing (cite this): batch 61 / 274
+Testing (cite this): batch 62 / 274
+Testing (cite this): batch 63 / 274
+Testing (cite this): batch 64 / 274
+Testing (cite this): batch 65 / 274
+Testing (cite this): batch 66 / 274
+Testing (cite this): batch 67 / 274
+Testing (cite this): batch 68 / 274
+Testing (cite this): batch 69 / 274
+Testing (cite this): batch 70 / 274
+Testing (cite this): batch 71 / 274
+Testing (cite this): batch 72 / 274
+Testing (cite this): batch 73 / 274
+Testing (cite this): batch 74 / 274
+Testing (cite this): batch 75 / 274
+Testing (cite this): batch 76 / 274
+Testing (cite this): batch 77 / 274
+Testing (cite this): batch 78 / 274
+Testing (cite this): batch 79 / 274
+Testing (cite this): batch 80 / 274
+Testing (cite this): batch 81 / 274
+Testing (cite this): batch 82 / 274
+Testing (cite this): batch 83 / 274
+Testing (cite this): batch 84 / 274
+Testing (cite this): batch 85 / 274
+Testing (cite this): batch 86 / 274
+Testing (cite this): batch 87 / 274
+Testing (cite this): batch 88 / 274
+Testing (cite this): batch 89 / 274
+Testing (cite this): batch 90 / 274
+Testing (cite this): batch 91 / 274
+Testing (cite this): batch 92 / 274
+Testing (cite this): batch 93 / 274
+Testing (cite this): batch 94 / 274
+Testing (cite this): batch 95 / 274
+Testing (cite this): batch 96 / 274
+Testing (cite this): batch 97 / 274
+Testing (cite this): batch 98 / 274
+Testing (cite this): batch 99 / 274
+Testing (cite this): batch 100 / 274
+Testing (cite this): batch 101 / 274
+Testing (cite this): batch 102 / 274
+Testing (cite this): batch 103 / 274
+Testing (cite this): batch 104 / 274
+Testing (cite this): batch 105 / 274
+Testing (cite this): batch 106 / 274
+Testing (cite this): batch 107 / 274
+Testing (cite this): batch 108 / 274
+Testing (cite this): batch 109 / 274
+Testing (cite this): batch 110 / 274
+Testing (cite this): batch 111 / 274
+Testing (cite this): batch 112 / 274
+Testing (cite this): batch 113 / 274
+Testing (cite this): batch 114 / 274
+Testing (cite this): batch 115 / 274
+Testing (cite this): batch 116 / 274
+Testing (cite this): batch 117 / 274
+Testing (cite this): batch 118 / 274
+Testing (cite this): batch 119 / 274
+Testing (cite this): batch 120 / 274
+Testing (cite this): batch 121 / 274
+Testing (cite this): batch 122 / 274
+Testing (cite this): batch 123 / 274
+Testing (cite this): batch 124 / 274
+Testing (cite this): batch 125 / 274
+Testing (cite this): batch 126 / 274
+Testing (cite this): batch 127 / 274
+Testing (cite this): batch 128 / 274
+Testing (cite this): batch 129 / 274
+Testing (cite this): batch 130 / 274
+Testing (cite this): batch 131 / 274
+Testing (cite this): batch 132 / 274
+Testing (cite this): batch 133 / 274
+Testing (cite this): batch 134 / 274
+Testing (cite this): batch 135 / 274
+Testing (cite this): batch 136 / 274
+Testing (cite this): batch 137 / 274
+Testing (cite this): batch 138 / 274
+Testing (cite this): batch 139 / 274
+Testing (cite this): batch 140 / 274
+Testing (cite this): batch 141 / 274
+Testing (cite this): batch 142 / 274
+Testing (cite this): batch 143 / 274
+Testing (cite this): batch 144 / 274
+Testing (cite this): batch 145 / 274
+Testing (cite this): batch 146 / 274
+Testing (cite this): batch 147 / 274
+Testing (cite this): batch 148 / 274
+Testing (cite this): batch 149 / 274
+Testing (cite this): batch 150 / 274
+Testing (cite this): batch 151 / 274
+Testing (cite this): batch 152 / 274
+Testing (cite this): batch 153 / 274
+Testing (cite this): batch 154 / 274
+Testing (cite this): batch 155 / 274
+Testing (cite this): batch 156 / 274
+Testing (cite this): batch 157 / 274
+Testing (cite this): batch 158 / 274
+Testing (cite this): batch 159 / 274
+Testing (cite this): batch 160 / 274
+Testing (cite this): batch 161 / 274
+Testing (cite this): batch 162 / 274
+Testing (cite this): batch 163 / 274
+Testing (cite this): batch 164 / 274
+Testing (cite this): batch 165 / 274
+Testing (cite this): batch 166 / 274
+Testing (cite this): batch 167 / 274
+Testing (cite this): batch 168 / 274
+Testing (cite this): batch 169 / 274
+Testing (cite this): batch 170 / 274
+Testing (cite this): batch 171 / 274
+Testing (cite this): batch 172 / 274
+Testing (cite this): batch 173 / 274
+Testing (cite this): batch 174 / 274
+Testing (cite this): batch 175 / 274
+Testing (cite this): batch 176 / 274
+Testing (cite this): batch 177 / 274
+Testing (cite this): batch 178 / 274
+Testing (cite this): batch 179 / 274
+Testing (cite this): batch 180 / 274
+Testing (cite this): batch 181 / 274
+Testing (cite this): batch 182 / 274
+Testing (cite this): batch 183 / 274
+Testing (cite this): batch 184 / 274
+Testing (cite this): batch 185 / 274
+Testing (cite this): batch 186 / 274
+Testing (cite this): batch 187 / 274
+Testing (cite this): batch 188 / 274
+Testing (cite this): batch 189 / 274
+Testing (cite this): batch 190 / 274
+Testing (cite this): batch 191 / 274
+Testing (cite this): batch 192 / 274
+Testing (cite this): batch 193 / 274
+Testing (cite this): batch 194 / 274
+Testing (cite this): batch 195 / 274
+Testing (cite this): batch 196 / 274
+Testing (cite this): batch 197 / 274
+Testing (cite this): batch 198 / 274
+Testing (cite this): batch 199 / 274
+Testing (cite this): batch 200 / 274
+Testing (cite this): batch 201 / 274
+Testing (cite this): batch 202 / 274
+Testing (cite this): batch 203 / 274
+Testing (cite this): batch 204 / 274
+Testing (cite this): batch 205 / 274
+Testing (cite this): batch 206 / 274
+Testing (cite this): batch 207 / 274
+Testing (cite this): batch 208 / 274
+Testing (cite this): batch 209 / 274
+Testing (cite this): batch 210 / 274
+Testing (cite this): batch 211 / 274
+Testing (cite this): batch 212 / 274
+Testing (cite this): batch 213 / 274
+Testing (cite this): batch 214 / 274
+Testing (cite this): batch 215 / 274
+Testing (cite this): batch 216 / 274
+Testing (cite this): batch 217 / 274
+Testing (cite this): batch 218 / 274
+Testing (cite this): batch 219 / 274
+Testing (cite this): batch 220 / 274
+Testing (cite this): batch 221 / 274
+Testing (cite this): batch 222 / 274
+Testing (cite this): batch 223 / 274
+Testing (cite this): batch 224 / 274
+Testing (cite this): batch 225 / 274
+Testing (cite this): batch 226 / 274
+Testing (cite this): batch 227 / 274
+Testing (cite this): batch 228 / 274
+Testing (cite this): batch 229 / 274
+Testing (cite this): batch 230 / 274
+Testing (cite this): batch 231 / 274
+Testing (cite this): batch 232 / 274
+Testing (cite this): batch 233 / 274
+Testing (cite this): batch 234 / 274
+Testing (cite this): batch 235 / 274
+Testing (cite this): batch 236 / 274
+Testing (cite this): batch 237 / 274
+Testing (cite this): batch 238 / 274
+Testing (cite this): batch 239 / 274
+Testing (cite this): batch 240 / 274
+Testing (cite this): batch 241 / 274
+Testing (cite this): batch 242 / 274
+Testing (cite this): batch 243 / 274
+Testing (cite this): batch 244 / 274
+Testing (cite this): batch 245 / 274
+Testing (cite this): batch 246 / 274
+Testing (cite this): batch 247 / 274
+Testing (cite this): batch 248 / 274
+Testing (cite this): batch 249 / 274
+Testing (cite this): batch 250 / 274
+Testing (cite this): batch 251 / 274
+Testing (cite this): batch 252 / 274
+Testing (cite this): batch 253 / 274
+Testing (cite this): batch 254 / 274
+Testing (cite this): batch 255 / 274
+Testing (cite this): batch 256 / 274
+Testing (cite this): batch 257 / 274
+Testing (cite this): batch 258 / 274
+Testing (cite this): batch 259 / 274
+Testing (cite this): batch 260 / 274
+Testing (cite this): batch 261 / 274
+Testing (cite this): batch 262 / 274
+Testing (cite this): batch 263 / 274
+Testing (cite this): batch 264 / 274
+Testing (cite this): batch 265 / 274
+Testing (cite this): batch 266 / 274
+Testing (cite this): batch 267 / 274
+Testing (cite this): batch 268 / 274
+Testing (cite this): batch 269 / 274
+Testing (cite this): batch 270 / 274
+Testing (cite this): batch 271 / 274
+Testing (cite this): batch 272 / 274
+Testing (cite this): batch 273 / 274
+total number of ranks, torch.Size([17526])
+====== Ranks ======
+ranks size: torch.Size([17526])
+test_loss: 5.780763959046453
+mr: 1003.5801391601562
+mrr: 0.6847596764564514
+h1: 0.6728860139846802
+h3: 0.682642936706543
+h5: 0.6888622641563416
+h10: 0.7024991512298584
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 5460 seconds on 

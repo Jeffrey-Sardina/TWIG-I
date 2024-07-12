@@ -1,0 +1,7 @@
+{
+    "dataset_names": [
+        "FB15k-237",
+        "WN18RR"
+    ],
+    "epochs": 0
+}

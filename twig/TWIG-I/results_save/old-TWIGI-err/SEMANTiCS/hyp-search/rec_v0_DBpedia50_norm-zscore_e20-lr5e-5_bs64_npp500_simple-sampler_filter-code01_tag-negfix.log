@@ -1,0 +1,95 @@
+['run_exp.py', '0', 'DBpedia50', '20', '5e-5', 'zscore', '64', '64', '500', '0', '1', 'simple', '1']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+DBpedia50
+X_p: torch.Size([32203, 23])
+X_p: torch.Size([2095, 23])
+X_p: torch.Size([123, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 504 loss: 0.11182001233100891
+batch 500 / 504 loss: 0.07586245238780975
+Epoch 2 -- batch 0 / 504 loss: 0.07509949803352356
+batch 500 / 504 loss: 0.05029767006635666
+Epoch 3 -- batch 0 / 504 loss: 0.049841124564409256
+batch 500 / 504 loss: 0.025683801621198654
+Epoch 4 -- batch 0 / 504 loss: 0.023869315162301064
+batch 500 / 504 loss: 0.013734221458435059
+Epoch 5 -- batch 0 / 504 loss: 0.010288841091096401
+batch 500 / 504 loss: 0.007211634889245033
+Saving checkpoint at epoch 5; prefix = chkpt-ID_5827370697956902
+Epoch 6 -- batch 0 / 504 loss: 0.004050003364682198
+batch 500 / 504 loss: 0.0038637216202914715
+Epoch 7 -- batch 0 / 504 loss: 0.002174630295485258
+batch 500 / 504 loss: 0.0020274673588573933
+Epoch 8 -- batch 0 / 504 loss: 0.0009845594177022576
+batch 500 / 504 loss: 0.0014973158249631524
+Epoch 9 -- batch 0 / 504 loss: 0.0006090096430853009
+batch 500 / 504 loss: 0.0008747779647819698
+Epoch 10 -- batch 0 / 504 loss: 0.0004037999897263944
+batch 500 / 504 loss: 0.0006879406282678246
+Saving checkpoint at epoch 10; prefix = chkpt-ID_5827370697956902
+Epoch 11 -- batch 0 / 504 loss: 0.00027170826797373593
+batch 500 / 504 loss: 0.0004976114723831415
+Epoch 12 -- batch 0 / 504 loss: 0.00024666287936270237
+batch 500 / 504 loss: 0.0004374465497676283
+Epoch 13 -- batch 0 / 504 loss: 0.00024861551355570555
+batch 500 / 504 loss: 0.00035031299921683967
+Epoch 14 -- batch 0 / 504 loss: 0.00017860499792732298
+batch 500 / 504 loss: 0.00026115868240594864
+Epoch 15 -- batch 0 / 504 loss: 0.00016779641737230122
+batch 500 / 504 loss: 0.0003255555348005146
+Saving checkpoint at epoch 15; prefix = chkpt-ID_5827370697956902
+Epoch 16 -- batch 0 / 504 loss: 0.0001308873324887827
+batch 500 / 504 loss: 0.0002629066293593496
+Epoch 17 -- batch 0 / 504 loss: 0.00012938487634528428
+batch 500 / 504 loss: 0.00020725636568386108
+Epoch 18 -- batch 0 / 504 loss: 9.354137000627816e-05
+batch 500 / 504 loss: 0.00020447123097255826
+Epoch 19 -- batch 0 / 504 loss: 0.00010817339352797717
+batch 500 / 504 loss: 0.00022891683329362422
+Epoch 20 -- batch 0 / 504 loss: 9.453441452933475e-05
+batch 500 / 504 loss: 0.00020443482208065689
+Saving checkpoint at epoch 20; prefix = chkpt-ID_5827370697956902
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset DBpedia50
+Testing (cite this): batch 0 / 2
+Testing (cite this): batch 1 / 2
+total number of ranks, torch.Size([123])
+====== Ranks ======
+ranks size: torch.Size([123])
+test_loss: 0.1418583169579506
+mr: 17949.462890625
+mrr: 0.1565508395433426
+h1: 0.12195122241973877
+h3: 0.1869918704032898
+h5: 0.19512194395065308
+h10: 0.2195121943950653
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 4831 seconds on 

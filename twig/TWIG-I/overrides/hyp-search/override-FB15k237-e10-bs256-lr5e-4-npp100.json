@@ -1,0 +1,8 @@
+{
+"epochs": 10,
+"dataset_names": ["FB15k237"],
+"batch_size": 256,
+"lr": 5e-4,
+"npp": 100,
+"hyp_validation_mode": 1
+}

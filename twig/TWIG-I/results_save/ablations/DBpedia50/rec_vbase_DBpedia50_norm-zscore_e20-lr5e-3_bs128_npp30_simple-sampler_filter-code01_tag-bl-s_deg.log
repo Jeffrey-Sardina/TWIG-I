@@ -1,0 +1,81 @@
+Arguments received: ['run_exp.py', 'base', 'DBpedia50', '20', '5e-3', 'zscore', '128', '128', '30', '0', '1', 'simple', '1', 's_deg', '1']
+loading dataset
+DBpedia50
+X_p: torch.Size([32203, 22])
+n_local: 21
+X_p: torch.Size([2095, 22])
+n_local: 21
+X_p: torch.Size([123, 22])
+n_local: 21
+Using a total of 21 features
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+init negative sampler with args
+	use_2_hop_fts: True
+	fts_blacklist: {'s_deg'}
+done loading negative samplers
+Running in hyperparameter evaluation mode
+TWIG will be evaulaited on the validation set
+and will not be tested each epoch on the validation set
+Creating a new model from scratch
+loading NN
+done loading NN
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=21, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- batch 0 / 252 loss: 0.07544615864753723
+Epoch 2 -- batch 0 / 252 loss: 0.00015590649854857475
+Epoch 3 -- batch 0 / 252 loss: 8.957379759522155e-05
+Epoch 4 -- batch 0 / 252 loss: 0.00017088724416680634
+Epoch 5 -- batch 0 / 252 loss: 6.165343074826524e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_4130292239390614
+Epoch 6 -- batch 0 / 252 loss: 0.00011613449169090018
+Epoch 7 -- batch 0 / 252 loss: 0.00012422402505762875
+Epoch 8 -- batch 0 / 252 loss: 3.7247104046400636e-05
+Epoch 9 -- batch 0 / 252 loss: 0.00010134498006664217
+Epoch 10 -- batch 0 / 252 loss: 2.745010715443641e-05
+Saving checkpoint at epoch 10; prefix = chkpt-ID_4130292239390614
+Epoch 11 -- batch 0 / 252 loss: 5.743415385950357e-05
+Epoch 12 -- batch 0 / 252 loss: 8.163764869095758e-05
+Epoch 13 -- batch 0 / 252 loss: 0.00013918323384132236
+Epoch 14 -- batch 0 / 252 loss: 0.0
+Epoch 15 -- batch 0 / 252 loss: 1.8175376681028865e-05
+Saving checkpoint at epoch 15; prefix = chkpt-ID_4130292239390614
+Epoch 16 -- batch 0 / 252 loss: 1.3335239600564819e-05
+Epoch 17 -- batch 0 / 252 loss: 7.027702508821676e-07
+Epoch 18 -- batch 0 / 252 loss: 2.638675505295396e-05
+Epoch 19 -- batch 0 / 252 loss: 5.333929948392324e-05
+Epoch 20 -- batch 0 / 252 loss: 2.460128416714724e-05
+Saving checkpoint at epoch 20; prefix = chkpt-ID_4130292239390614
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset DBpedia50
+Testing (cite this): batch 0 / 1
+batch 0 / 1 loss: 0.05330822244286537
+total number of ranks, torch.Size([246])
+====== Ranks ======
+ranks size: torch.Size([246])
+test_loss: 0.05330822244286537
+mr: 6627.052734375
+mrr: 0.44193944334983826
+h1: 0.3983739912509918
+h3: 0.47154471278190613
+h5: 0.5040650367736816
+h10: 0.5243902206420898
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 546 seconds on 

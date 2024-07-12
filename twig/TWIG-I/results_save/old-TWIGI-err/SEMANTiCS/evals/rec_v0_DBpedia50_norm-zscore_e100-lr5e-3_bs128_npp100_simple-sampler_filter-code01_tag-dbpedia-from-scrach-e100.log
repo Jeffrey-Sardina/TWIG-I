@@ -1,0 +1,199 @@
+['run_exp.py', '0', 'DBpedia50', '100', '5e-3', 'zscore', '128', '64', '100', '0', '1', 'simple', '0']
+Creating a new model from scratch
+loading NN
+done loading NN
+loading dataset
+DBpedia50
+X_p: torch.Size([32203, 23])
+X_p: torch.Size([2095, 23])
+X_p: torch.Size([123, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 100
+Epoch 1 -- batch 0 / 252 loss: 0.1102731004357338
+Epoch 2 -- batch 0 / 252 loss: 8.038448140723631e-05
+Epoch 3 -- batch 0 / 252 loss: 6.271617894526571e-05
+Epoch 4 -- batch 0 / 252 loss: 3.029881372640375e-05
+Epoch 5 -- batch 0 / 252 loss: 2.2935591914574616e-05
+Saving checkpoint at epoch 5; prefix = chkpt-ID_9813934559503256
+Epoch 6 -- batch 0 / 252 loss: 1.5725785488029942e-05
+Epoch 7 -- batch 0 / 252 loss: 3.0174778657965362e-05
+Epoch 8 -- batch 0 / 252 loss: 3.3217202144442126e-05
+Epoch 9 -- batch 0 / 252 loss: 6.294151535257697e-05
+Epoch 10 -- batch 0 / 252 loss: 8.024633643799461e-06
+Saving checkpoint at epoch 10; prefix = chkpt-ID_9813934559503256
+Epoch 11 -- batch 0 / 252 loss: 4.632599666365422e-05
+Epoch 12 -- batch 0 / 252 loss: 2.7463001970318146e-05
+Epoch 13 -- batch 0 / 252 loss: 1.032799445965793e-05
+Epoch 14 -- batch 0 / 252 loss: 1.6651303667458706e-05
+Epoch 15 -- batch 0 / 252 loss: 5.3542835303233005e-06
+Saving checkpoint at epoch 15; prefix = chkpt-ID_9813934559503256
+Epoch 16 -- batch 0 / 252 loss: 9.63522688834928e-06
+Epoch 17 -- batch 0 / 252 loss: 3.09835777443368e-05
+Epoch 18 -- batch 0 / 252 loss: 2.2734633603249677e-05
+Epoch 19 -- batch 0 / 252 loss: 1.7031465176842175e-05
+Epoch 20 -- batch 0 / 252 loss: 1.8714781617745757e-05
+Saving checkpoint at epoch 20; prefix = chkpt-ID_9813934559503256
+Epoch 21 -- batch 0 / 252 loss: 3.3876214729389176e-05
+Epoch 22 -- batch 0 / 252 loss: 1.3166386452212464e-05
+Epoch 23 -- batch 0 / 252 loss: 1.1714962965925224e-05
+Epoch 24 -- batch 0 / 252 loss: 7.812500371073838e-06
+Epoch 25 -- batch 0 / 252 loss: 9.931341082847212e-06
+Saving checkpoint at epoch 25; prefix = chkpt-ID_9813934559503256
+Epoch 26 -- batch 0 / 252 loss: 2.1816007574670948e-05
+Epoch 27 -- batch 0 / 252 loss: 2.7199354008189403e-05
+Epoch 28 -- batch 0 / 252 loss: 2.9770440960419364e-05
+Epoch 29 -- batch 0 / 252 loss: 5.392178991314722e-06
+Epoch 30 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 30; prefix = chkpt-ID_9813934559503256
+Epoch 31 -- batch 0 / 252 loss: 1.3058312106295489e-05
+Epoch 32 -- batch 0 / 252 loss: 6.2054095906205475e-06
+Epoch 33 -- batch 0 / 252 loss: 1.999444248212967e-05
+Epoch 34 -- batch 0 / 252 loss: 5.909980245633051e-06
+Epoch 35 -- batch 0 / 252 loss: 2.3449700165656395e-05
+Saving checkpoint at epoch 35; prefix = chkpt-ID_9813934559503256
+Epoch 36 -- batch 0 / 252 loss: 4.511448878474766e-06
+Epoch 37 -- batch 0 / 252 loss: 0.0
+Epoch 38 -- batch 0 / 252 loss: 1.6283976947306655e-05
+Epoch 39 -- batch 0 / 252 loss: 6.370211849571206e-06
+Epoch 40 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 40; prefix = chkpt-ID_9813934559503256
+Epoch 41 -- batch 0 / 252 loss: 1.5120642274268903e-05
+Epoch 42 -- batch 0 / 252 loss: 1.596248330315575e-05
+Epoch 43 -- batch 0 / 252 loss: 0.0
+Epoch 44 -- batch 0 / 252 loss: 4.763461674883729e-06
+Epoch 45 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 45; prefix = chkpt-ID_9813934559503256
+Epoch 46 -- batch 0 / 252 loss: 0.0
+Epoch 47 -- batch 0 / 252 loss: 5.049764240538934e-06
+Epoch 48 -- batch 0 / 252 loss: 0.0
+Epoch 49 -- batch 0 / 252 loss: 0.0
+Epoch 50 -- batch 0 / 252 loss: 5.767641596321482e-06
+Saving checkpoint at epoch 50; prefix = chkpt-ID_9813934559503256
+Epoch 51 -- batch 0 / 252 loss: 2.2942579107620986e-06
+Epoch 52 -- batch 0 / 252 loss: 6.527498499053763e-06
+Epoch 53 -- batch 0 / 252 loss: 0.0
+Epoch 54 -- batch 0 / 252 loss: 0.0
+Epoch 55 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 55; prefix = chkpt-ID_9813934559503256
+Epoch 56 -- batch 0 / 252 loss: 1.1524848559929524e-05
+Epoch 57 -- batch 0 / 252 loss: 0.0
+Epoch 58 -- batch 0 / 252 loss: 1.9312603399157524e-05
+Epoch 59 -- batch 0 / 252 loss: 7.812500371073838e-06
+Epoch 60 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 60; prefix = chkpt-ID_9813934559503256
+Epoch 61 -- batch 0 / 252 loss: 0.0
+Epoch 62 -- batch 0 / 252 loss: 0.0
+Epoch 63 -- batch 0 / 252 loss: 0.0
+Epoch 64 -- batch 0 / 252 loss: 1.766538480296731e-05
+Epoch 65 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 65; prefix = chkpt-ID_9813934559503256
+Epoch 66 -- batch 0 / 252 loss: 9.68778294918593e-06
+Epoch 67 -- batch 0 / 252 loss: 5.997668722557137e-06
+Epoch 68 -- batch 0 / 252 loss: 0.0
+Epoch 69 -- batch 0 / 252 loss: 1.1169418030476663e-05
+Epoch 70 -- batch 0 / 252 loss: 1.7340715203317814e-05
+Saving checkpoint at epoch 70; prefix = chkpt-ID_9813934559503256
+Epoch 71 -- batch 0 / 252 loss: 0.0
+Epoch 72 -- batch 0 / 252 loss: 7.812490366632119e-06
+Epoch 73 -- batch 0 / 252 loss: 8.072313903539907e-06
+Epoch 74 -- batch 0 / 252 loss: 1.42906617384142e-06
+Epoch 75 -- batch 0 / 252 loss: 1.4144802662485745e-05
+Saving checkpoint at epoch 75; prefix = chkpt-ID_9813934559503256
+Epoch 76 -- batch 0 / 252 loss: 5.661284376401454e-06
+Epoch 77 -- batch 0 / 252 loss: 0.0
+Epoch 78 -- batch 0 / 252 loss: 1.001363398245303e-05
+Epoch 79 -- batch 0 / 252 loss: 0.0
+Epoch 80 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 80; prefix = chkpt-ID_9813934559503256
+Epoch 81 -- batch 0 / 252 loss: 0.0
+Epoch 82 -- batch 0 / 252 loss: 9.571034752298146e-06
+Epoch 83 -- batch 0 / 252 loss: 1.2070682714693248e-05
+Epoch 84 -- batch 0 / 252 loss: 3.1198338547255844e-05
+Epoch 85 -- batch 0 / 252 loss: 7.843656817385636e-07
+Saving checkpoint at epoch 85; prefix = chkpt-ID_9813934559503256
+Epoch 86 -- batch 0 / 252 loss: 7.812509466020856e-06
+Epoch 87 -- batch 0 / 252 loss: 7.414601896016393e-06
+Epoch 88 -- batch 0 / 252 loss: 1.0762501005956437e-05
+Epoch 89 -- batch 0 / 252 loss: 2.6565585358184762e-06
+Epoch 90 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 90; prefix = chkpt-ID_9813934559503256
+Epoch 91 -- batch 0 / 252 loss: 0.0
+Epoch 92 -- batch 0 / 252 loss: 5.4159136197995394e-06
+Epoch 93 -- batch 0 / 252 loss: 0.0
+Epoch 94 -- batch 0 / 252 loss: 0.0
+Epoch 95 -- batch 0 / 252 loss: 0.0
+Saving checkpoint at epoch 95; prefix = chkpt-ID_9813934559503256
+Epoch 96 -- batch 0 / 252 loss: 1.7813063095672987e-06
+Epoch 97 -- batch 0 / 252 loss: 1.267590960196685e-05
+Epoch 98 -- batch 0 / 252 loss: 0.0
+Epoch 99 -- batch 0 / 252 loss: 3.828777153103147e-06
+Epoch 100 -- batch 0 / 252 loss: 7.812494914105628e-06
+Saving checkpoint at epoch 100; prefix = chkpt-ID_9813934559503256
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset DBpedia50
+Testing (cite this): batch 0 / 33
+Testing (cite this): batch 1 / 33
+Testing (cite this): batch 2 / 33
+Testing (cite this): batch 3 / 33
+Testing (cite this): batch 4 / 33
+Testing (cite this): batch 5 / 33
+Testing (cite this): batch 6 / 33
+Testing (cite this): batch 7 / 33
+Testing (cite this): batch 8 / 33
+Testing (cite this): batch 9 / 33
+Testing (cite this): batch 10 / 33
+Testing (cite this): batch 11 / 33
+Testing (cite this): batch 12 / 33
+Testing (cite this): batch 13 / 33
+Testing (cite this): batch 14 / 33
+Testing (cite this): batch 15 / 33
+Testing (cite this): batch 16 / 33
+Testing (cite this): batch 17 / 33
+Testing (cite this): batch 18 / 33
+Testing (cite this): batch 19 / 33
+Testing (cite this): batch 20 / 33
+Testing (cite this): batch 21 / 33
+Testing (cite this): batch 22 / 33
+Testing (cite this): batch 23 / 33
+Testing (cite this): batch 24 / 33
+Testing (cite this): batch 25 / 33
+Testing (cite this): batch 26 / 33
+Testing (cite this): batch 27 / 33
+Testing (cite this): batch 28 / 33
+Testing (cite this): batch 29 / 33
+Testing (cite this): batch 30 / 33
+Testing (cite this): batch 31 / 33
+Testing (cite this): batch 32 / 33
+total number of ranks, torch.Size([2095])
+====== Ranks ======
+ranks size: torch.Size([2095])
+test_loss: 1.9899361915886402
+mr: 6504.197265625
+mrr: 0.3226175904273987
+h1: 0.2830548882484436
+h3: 0.34463006258010864
+h5: 0.3694510757923126
+h10: 0.3899761438369751
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 2434 seconds on 

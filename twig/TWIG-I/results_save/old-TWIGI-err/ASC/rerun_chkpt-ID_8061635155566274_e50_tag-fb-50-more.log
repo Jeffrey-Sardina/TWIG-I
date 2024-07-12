@@ -1,0 +1,631 @@
+loading model settings from cache: checkpoints/chkpt-ID_8061635155566274.pkl
+overriding original values for dataset_names. Was ['FB15k237'], now is ['FB15k-237']
+overriding original values for epochs. Was 50, now is 50
+It will be trained for 50 more epochs now.
+If you are loading a modle that was itself loaded from checkpoint, the number of epochs listed as already completed above will be incorrect
+until I get around to fxing this, you will have to recursively go through logs to find the total number of epochs run
+loadng TWIG-I model from disk at: checkpoints/chkpt-ID_8061635155566274_e50.pt
+the full config being used is: {'version': 0, 'dataset_names': ['FB15k-237'], 'epochs': 50, 'lr': 0.0005, 'normalisation': 'zscore', 'batch_size': 128, 'batch_size_test': 64, 'npp': 500, 'sampler_type': 'simple', 'use_train_filter': False, 'use_valid_and_test_filters': True, 'hyp_validation_mode': False}
+Using provided pre-existing model
+loading dataset
+FB15k-237
+X_p: torch.Size([272115, 23])
+X_p: torch.Size([20438, 23])
+X_p: torch.Size([17526, 23])
+done loading dataset
+loading filters
+done loading filters
+loading negative samplers
+loading triple features from cache
+done loading negative samplers
+running training and eval
+TWIG_KGL_v0(
+  (linear_struct_1): Linear(in_features=22, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 50
+Epoch 1 -- batch 0 / 2126 loss: 1.072209443009342e-06
+batch 500 / 2126 loss: 3.5024115732085193e-06
+batch 1000 / 2126 loss: 6.60181876810384e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 2 -- batch 0 / 2126 loss: 4.41368501924444e-06
+batch 500 / 2126 loss: 1.53330961438769e-06
+batch 1000 / 2126 loss: 3.626827947300626e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 3 -- batch 0 / 2126 loss: 1.4742406619916437e-06
+batch 500 / 2126 loss: 1.4440689710681909e-06
+batch 1000 / 2126 loss: 1.0496524737391155e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 4 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 1.0151533388125245e-05
+batch 1000 / 2126 loss: 8.667961424180248e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 5 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 6.345166639221134e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 1.5115316500668996e-06
+Saving checkpoint at epoch 5; prefix = chkpt-ID_2290687557284591
+Epoch 6 -- batch 0 / 2126 loss: 3.9463939174311236e-06
+batch 500 / 2126 loss: 5.158601652510697e-07
+batch 1000 / 2126 loss: 2.8252904940018198e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 7 -- batch 0 / 2126 loss: 1.64599041454494e-05
+batch 500 / 2126 loss: 2.6319853532186244e-06
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 8 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 1.077760953194229e-05
+batch 1000 / 2126 loss: 1.2959667401446495e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 1.0577803550404496e-05
+Epoch 9 -- batch 0 / 2126 loss: 1.1151043963764096e-06
+batch 500 / 2126 loss: 1.237888568539347e-06
+batch 1000 / 2126 loss: 9.17328350169555e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 10 -- batch 0 / 2126 loss: 1.619857471268915e-06
+batch 500 / 2126 loss: 3.285875209257938e-06
+batch 1000 / 2126 loss: 1.9940068796131527e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 10; prefix = chkpt-ID_2290687557284591
+Epoch 11 -- batch 0 / 2126 loss: 2.2746867500700318e-07
+batch 500 / 2126 loss: 5.659792805090547e-06
+batch 1000 / 2126 loss: 9.832014256971888e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 12 -- batch 0 / 2126 loss: 4.454602731129853e-06
+batch 500 / 2126 loss: 7.477622148144292e-06
+batch 1000 / 2126 loss: 3.793606424551399e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 5.018582101001812e-07
+Epoch 13 -- batch 0 / 2126 loss: 6.85413056089601e-07
+batch 500 / 2126 loss: 6.893717454659054e-07
+batch 1000 / 2126 loss: 4.306678420107346e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 14 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 5.5165069170470815e-06
+batch 1000 / 2126 loss: 6.749789918103488e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 6.020392447680933e-06
+Epoch 15 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.787701189139625e-06
+batch 1000 / 2126 loss: 1.0535874025663361e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 15; prefix = chkpt-ID_2290687557284591
+Epoch 16 -- batch 0 / 2126 loss: 2.9900993467890657e-06
+batch 500 / 2126 loss: 2.861715074686799e-06
+batch 1000 / 2126 loss: 3.1418007893080357e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 17 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 8.811115321805119e-07
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 18 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 8.173965397872962e-06
+batch 1000 / 2126 loss: 1.216138571180636e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 19 -- batch 0 / 2126 loss: 1.7828506315709092e-07
+batch 500 / 2126 loss: 4.289522621547803e-06
+batch 1000 / 2126 loss: 6.716986263199942e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 20 -- batch 0 / 2126 loss: 4.9876489356392995e-06
+batch 500 / 2126 loss: 7.255336640810128e-06
+batch 1000 / 2126 loss: 7.980677878549614e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 20; prefix = chkpt-ID_2290687557284591
+Epoch 21 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 5.055052497482393e-06
+batch 1000 / 2126 loss: 1.1940672948185238e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 2.598926585051231e-06
+Epoch 22 -- batch 0 / 2126 loss: 1.2168061402917374e-06
+batch 500 / 2126 loss: 3.2309901598637225e-06
+batch 1000 / 2126 loss: 1.0418179954285733e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 6.252510047488613e-07
+Epoch 23 -- batch 0 / 2126 loss: 2.282794866914628e-06
+batch 500 / 2126 loss: 2.905235987782362e-06
+batch 1000 / 2126 loss: 2.1982839371048613e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 4.4372981733431516e-08
+Epoch 24 -- batch 0 / 2126 loss: 4.398451892484445e-06
+batch 500 / 2126 loss: 2.8679010029009078e-06
+batch 1000 / 2126 loss: 1.0895635114138713e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 25 -- batch 0 / 2126 loss: 1.1018819350283593e-06
+batch 500 / 2126 loss: 2.0339389266155194e-06
+batch 1000 / 2126 loss: 2.4675252916495083e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 25; prefix = chkpt-ID_2290687557284591
+Epoch 26 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.6460587580222636e-06
+batch 1000 / 2126 loss: 4.941058250551578e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 27 -- batch 0 / 2126 loss: 3.122550879197661e-06
+batch 500 / 2126 loss: 6.326717084448319e-06
+batch 1000 / 2126 loss: 1.0132611123481183e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 6.048458658369782e-07
+Epoch 28 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 1.7514861610834487e-05
+batch 1000 / 2126 loss: 4.619103037839523e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 29 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.266118028477649e-06
+batch 1000 / 2126 loss: 8.498467650497332e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 3.87150464575825e-07
+Epoch 30 -- batch 0 / 2126 loss: 1.4237614323064918e-06
+batch 500 / 2126 loss: 3.4374224924249575e-06
+batch 1000 / 2126 loss: 1.0521814886033098e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 30; prefix = chkpt-ID_2290687557284591
+Epoch 31 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 8.661273568577599e-06
+batch 1000 / 2126 loss: 7.183455636550207e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 32 -- batch 0 / 2126 loss: 3.2617090255371295e-06
+batch 500 / 2126 loss: 4.058517333760392e-06
+batch 1000 / 2126 loss: 1.1056874882342527e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 33 -- batch 0 / 2126 loss: 5.3734688663098495e-06
+batch 500 / 2126 loss: 1.1627488675003406e-05
+batch 1000 / 2126 loss: 3.7760494251415366e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 34 -- batch 0 / 2126 loss: 1.8776321439872845e-06
+batch 500 / 2126 loss: 5.350621449906612e-06
+batch 1000 / 2126 loss: 3.467481519692228e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 35 -- batch 0 / 2126 loss: 9.698363101051655e-06
+batch 500 / 2126 loss: 7.793890972607187e-07
+batch 1000 / 2126 loss: 2.3885955670266412e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 35; prefix = chkpt-ID_2290687557284591
+Epoch 36 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 4.641369287128327e-06
+batch 1000 / 2126 loss: 0.0
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 37 -- batch 0 / 2126 loss: 2.9296284083102364e-06
+batch 500 / 2126 loss: 1.2039828106935602e-05
+batch 1000 / 2126 loss: 1.2803182869447483e-07
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 38 -- batch 0 / 2126 loss: 1.2788937056029681e-06
+batch 500 / 2126 loss: 7.291783731488977e-06
+batch 1000 / 2126 loss: 4.088368768861983e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 39 -- batch 0 / 2126 loss: 2.504334815967013e-06
+batch 500 / 2126 loss: 2.4158910036931047e-06
+batch 1000 / 2126 loss: 8.387705747736618e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 40 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.053479304071516e-06
+batch 1000 / 2126 loss: 6.06756020715693e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 40; prefix = chkpt-ID_2290687557284591
+Epoch 41 -- batch 0 / 2126 loss: 2.39584721839492e-07
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 2.1672990442311857e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 2.8894557999592507e-06
+Epoch 42 -- batch 0 / 2126 loss: 4.644385853680433e-07
+batch 500 / 2126 loss: 3.6143046600045636e-06
+batch 1000 / 2126 loss: 4.4211042222741526e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 43 -- batch 0 / 2126 loss: 5.938957201578887e-07
+batch 500 / 2126 loss: 1.1685276149364654e-05
+batch 1000 / 2126 loss: 1.2964330380782485e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 44 -- batch 0 / 2126 loss: 5.030481133871945e-06
+batch 500 / 2126 loss: 2.2348124275595183e-06
+batch 1000 / 2126 loss: 1.8889524653786793e-05
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 45 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 1.7371409057886922e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 45; prefix = chkpt-ID_2290687557284591
+Epoch 46 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 1.1442025424912572e-05
+batch 1000 / 2126 loss: 3.5605282846518094e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 47 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 3.1832298645895207e-06
+batch 1000 / 2126 loss: 3.1904269235383254e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 6.110706749495876e-07
+Epoch 48 -- batch 0 / 2126 loss: 1.0816001122293528e-05
+batch 500 / 2126 loss: 1.0050824130303226e-05
+batch 1000 / 2126 loss: 4.733107289212057e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 49 -- batch 0 / 2126 loss: 6.005146246934601e-07
+batch 500 / 2126 loss: 1.4116383681539446e-05
+batch 1000 / 2126 loss: 4.0681143218535e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Epoch 50 -- batch 0 / 2126 loss: 0.0
+batch 500 / 2126 loss: 0.0
+batch 1000 / 2126 loss: 1.514780137767957e-06
+batch 1500 / 2126 loss: 0.0
+batch 2000 / 2126 loss: 0.0
+Saving checkpoint at epoch 50; prefix = chkpt-ID_2290687557284591
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset FB15k-237
+Testing (cite this): batch 0 / 320
+Testing (cite this): batch 1 / 320
+Testing (cite this): batch 2 / 320
+Testing (cite this): batch 3 / 320
+Testing (cite this): batch 4 / 320
+Testing (cite this): batch 5 / 320
+Testing (cite this): batch 6 / 320
+Testing (cite this): batch 7 / 320
+Testing (cite this): batch 8 / 320
+Testing (cite this): batch 9 / 320
+Testing (cite this): batch 10 / 320
+Testing (cite this): batch 11 / 320
+Testing (cite this): batch 12 / 320
+Testing (cite this): batch 13 / 320
+Testing (cite this): batch 14 / 320
+Testing (cite this): batch 15 / 320
+Testing (cite this): batch 16 / 320
+Testing (cite this): batch 17 / 320
+Testing (cite this): batch 18 / 320
+Testing (cite this): batch 19 / 320
+Testing (cite this): batch 20 / 320
+Testing (cite this): batch 21 / 320
+Testing (cite this): batch 22 / 320
+Testing (cite this): batch 23 / 320
+Testing (cite this): batch 24 / 320
+Testing (cite this): batch 25 / 320
+Testing (cite this): batch 26 / 320
+Testing (cite this): batch 27 / 320
+Testing (cite this): batch 28 / 320
+Testing (cite this): batch 29 / 320
+Testing (cite this): batch 30 / 320
+Testing (cite this): batch 31 / 320
+Testing (cite this): batch 32 / 320
+Testing (cite this): batch 33 / 320
+Testing (cite this): batch 34 / 320
+Testing (cite this): batch 35 / 320
+Testing (cite this): batch 36 / 320
+Testing (cite this): batch 37 / 320
+Testing (cite this): batch 38 / 320
+Testing (cite this): batch 39 / 320
+Testing (cite this): batch 40 / 320
+Testing (cite this): batch 41 / 320
+Testing (cite this): batch 42 / 320
+Testing (cite this): batch 43 / 320
+Testing (cite this): batch 44 / 320
+Testing (cite this): batch 45 / 320
+Testing (cite this): batch 46 / 320
+Testing (cite this): batch 47 / 320
+Testing (cite this): batch 48 / 320
+Testing (cite this): batch 49 / 320
+Testing (cite this): batch 50 / 320
+Testing (cite this): batch 51 / 320
+Testing (cite this): batch 52 / 320
+Testing (cite this): batch 53 / 320
+Testing (cite this): batch 54 / 320
+Testing (cite this): batch 55 / 320
+Testing (cite this): batch 56 / 320
+Testing (cite this): batch 57 / 320
+Testing (cite this): batch 58 / 320
+Testing (cite this): batch 59 / 320
+Testing (cite this): batch 60 / 320
+Testing (cite this): batch 61 / 320
+Testing (cite this): batch 62 / 320
+Testing (cite this): batch 63 / 320
+Testing (cite this): batch 64 / 320
+Testing (cite this): batch 65 / 320
+Testing (cite this): batch 66 / 320
+Testing (cite this): batch 67 / 320
+Testing (cite this): batch 68 / 320
+Testing (cite this): batch 69 / 320
+Testing (cite this): batch 70 / 320
+Testing (cite this): batch 71 / 320
+Testing (cite this): batch 72 / 320
+Testing (cite this): batch 73 / 320
+Testing (cite this): batch 74 / 320
+Testing (cite this): batch 75 / 320
+Testing (cite this): batch 76 / 320
+Testing (cite this): batch 77 / 320
+Testing (cite this): batch 78 / 320
+Testing (cite this): batch 79 / 320
+Testing (cite this): batch 80 / 320
+Testing (cite this): batch 81 / 320
+Testing (cite this): batch 82 / 320
+Testing (cite this): batch 83 / 320
+Testing (cite this): batch 84 / 320
+Testing (cite this): batch 85 / 320
+Testing (cite this): batch 86 / 320
+Testing (cite this): batch 87 / 320
+Testing (cite this): batch 88 / 320
+Testing (cite this): batch 89 / 320
+Testing (cite this): batch 90 / 320
+Testing (cite this): batch 91 / 320
+Testing (cite this): batch 92 / 320
+Testing (cite this): batch 93 / 320
+Testing (cite this): batch 94 / 320
+Testing (cite this): batch 95 / 320
+Testing (cite this): batch 96 / 320
+Testing (cite this): batch 97 / 320
+Testing (cite this): batch 98 / 320
+Testing (cite this): batch 99 / 320
+Testing (cite this): batch 100 / 320
+Testing (cite this): batch 101 / 320
+Testing (cite this): batch 102 / 320
+Testing (cite this): batch 103 / 320
+Testing (cite this): batch 104 / 320
+Testing (cite this): batch 105 / 320
+Testing (cite this): batch 106 / 320
+Testing (cite this): batch 107 / 320
+Testing (cite this): batch 108 / 320
+Testing (cite this): batch 109 / 320
+Testing (cite this): batch 110 / 320
+Testing (cite this): batch 111 / 320
+Testing (cite this): batch 112 / 320
+Testing (cite this): batch 113 / 320
+Testing (cite this): batch 114 / 320
+Testing (cite this): batch 115 / 320
+Testing (cite this): batch 116 / 320
+Testing (cite this): batch 117 / 320
+Testing (cite this): batch 118 / 320
+Testing (cite this): batch 119 / 320
+Testing (cite this): batch 120 / 320
+Testing (cite this): batch 121 / 320
+Testing (cite this): batch 122 / 320
+Testing (cite this): batch 123 / 320
+Testing (cite this): batch 124 / 320
+Testing (cite this): batch 125 / 320
+Testing (cite this): batch 126 / 320
+Testing (cite this): batch 127 / 320
+Testing (cite this): batch 128 / 320
+Testing (cite this): batch 129 / 320
+Testing (cite this): batch 130 / 320
+Testing (cite this): batch 131 / 320
+Testing (cite this): batch 132 / 320
+Testing (cite this): batch 133 / 320
+Testing (cite this): batch 134 / 320
+Testing (cite this): batch 135 / 320
+Testing (cite this): batch 136 / 320
+Testing (cite this): batch 137 / 320
+Testing (cite this): batch 138 / 320
+Testing (cite this): batch 139 / 320
+Testing (cite this): batch 140 / 320
+Testing (cite this): batch 141 / 320
+Testing (cite this): batch 142 / 320
+Testing (cite this): batch 143 / 320
+Testing (cite this): batch 144 / 320
+Testing (cite this): batch 145 / 320
+Testing (cite this): batch 146 / 320
+Testing (cite this): batch 147 / 320
+Testing (cite this): batch 148 / 320
+Testing (cite this): batch 149 / 320
+Testing (cite this): batch 150 / 320
+Testing (cite this): batch 151 / 320
+Testing (cite this): batch 152 / 320
+Testing (cite this): batch 153 / 320
+Testing (cite this): batch 154 / 320
+Testing (cite this): batch 155 / 320
+Testing (cite this): batch 156 / 320
+Testing (cite this): batch 157 / 320
+Testing (cite this): batch 158 / 320
+Testing (cite this): batch 159 / 320
+Testing (cite this): batch 160 / 320
+Testing (cite this): batch 161 / 320
+Testing (cite this): batch 162 / 320
+Testing (cite this): batch 163 / 320
+Testing (cite this): batch 164 / 320
+Testing (cite this): batch 165 / 320
+Testing (cite this): batch 166 / 320
+Testing (cite this): batch 167 / 320
+Testing (cite this): batch 168 / 320
+Testing (cite this): batch 169 / 320
+Testing (cite this): batch 170 / 320
+Testing (cite this): batch 171 / 320
+Testing (cite this): batch 172 / 320
+Testing (cite this): batch 173 / 320
+Testing (cite this): batch 174 / 320
+Testing (cite this): batch 175 / 320
+Testing (cite this): batch 176 / 320
+Testing (cite this): batch 177 / 320
+Testing (cite this): batch 178 / 320
+Testing (cite this): batch 179 / 320
+Testing (cite this): batch 180 / 320
+Testing (cite this): batch 181 / 320
+Testing (cite this): batch 182 / 320
+Testing (cite this): batch 183 / 320
+Testing (cite this): batch 184 / 320
+Testing (cite this): batch 185 / 320
+Testing (cite this): batch 186 / 320
+Testing (cite this): batch 187 / 320
+Testing (cite this): batch 188 / 320
+Testing (cite this): batch 189 / 320
+Testing (cite this): batch 190 / 320
+Testing (cite this): batch 191 / 320
+Testing (cite this): batch 192 / 320
+Testing (cite this): batch 193 / 320
+Testing (cite this): batch 194 / 320
+Testing (cite this): batch 195 / 320
+Testing (cite this): batch 196 / 320
+Testing (cite this): batch 197 / 320
+Testing (cite this): batch 198 / 320
+Testing (cite this): batch 199 / 320
+Testing (cite this): batch 200 / 320
+Testing (cite this): batch 201 / 320
+Testing (cite this): batch 202 / 320
+Testing (cite this): batch 203 / 320
+Testing (cite this): batch 204 / 320
+Testing (cite this): batch 205 / 320
+Testing (cite this): batch 206 / 320
+Testing (cite this): batch 207 / 320
+Testing (cite this): batch 208 / 320
+Testing (cite this): batch 209 / 320
+Testing (cite this): batch 210 / 320
+Testing (cite this): batch 211 / 320
+Testing (cite this): batch 212 / 320
+Testing (cite this): batch 213 / 320
+Testing (cite this): batch 214 / 320
+Testing (cite this): batch 215 / 320
+Testing (cite this): batch 216 / 320
+Testing (cite this): batch 217 / 320
+Testing (cite this): batch 218 / 320
+Testing (cite this): batch 219 / 320
+Testing (cite this): batch 220 / 320
+Testing (cite this): batch 221 / 320
+Testing (cite this): batch 222 / 320
+Testing (cite this): batch 223 / 320
+Testing (cite this): batch 224 / 320
+Testing (cite this): batch 225 / 320
+Testing (cite this): batch 226 / 320
+Testing (cite this): batch 227 / 320
+Testing (cite this): batch 228 / 320
+Testing (cite this): batch 229 / 320
+Testing (cite this): batch 230 / 320
+Testing (cite this): batch 231 / 320
+Testing (cite this): batch 232 / 320
+Testing (cite this): batch 233 / 320
+Testing (cite this): batch 234 / 320
+Testing (cite this): batch 235 / 320
+Testing (cite this): batch 236 / 320
+Testing (cite this): batch 237 / 320
+Testing (cite this): batch 238 / 320
+Testing (cite this): batch 239 / 320
+Testing (cite this): batch 240 / 320
+Testing (cite this): batch 241 / 320
+Testing (cite this): batch 242 / 320
+Testing (cite this): batch 243 / 320
+Testing (cite this): batch 244 / 320
+Testing (cite this): batch 245 / 320
+Testing (cite this): batch 246 / 320
+Testing (cite this): batch 247 / 320
+Testing (cite this): batch 248 / 320
+Testing (cite this): batch 249 / 320
+Testing (cite this): batch 250 / 320
+Testing (cite this): batch 251 / 320
+Testing (cite this): batch 252 / 320
+Testing (cite this): batch 253 / 320
+Testing (cite this): batch 254 / 320
+Testing (cite this): batch 255 / 320
+Testing (cite this): batch 256 / 320
+Testing (cite this): batch 257 / 320
+Testing (cite this): batch 258 / 320
+Testing (cite this): batch 259 / 320
+Testing (cite this): batch 260 / 320
+Testing (cite this): batch 261 / 320
+Testing (cite this): batch 262 / 320
+Testing (cite this): batch 263 / 320
+Testing (cite this): batch 264 / 320
+Testing (cite this): batch 265 / 320
+Testing (cite this): batch 266 / 320
+Testing (cite this): batch 267 / 320
+Testing (cite this): batch 268 / 320
+Testing (cite this): batch 269 / 320
+Testing (cite this): batch 270 / 320
+Testing (cite this): batch 271 / 320
+Testing (cite this): batch 272 / 320
+Testing (cite this): batch 273 / 320
+Testing (cite this): batch 274 / 320
+Testing (cite this): batch 275 / 320
+Testing (cite this): batch 276 / 320
+Testing (cite this): batch 277 / 320
+Testing (cite this): batch 278 / 320
+Testing (cite this): batch 279 / 320
+Testing (cite this): batch 280 / 320
+Testing (cite this): batch 281 / 320
+Testing (cite this): batch 282 / 320
+Testing (cite this): batch 283 / 320
+Testing (cite this): batch 284 / 320
+Testing (cite this): batch 285 / 320
+Testing (cite this): batch 286 / 320
+Testing (cite this): batch 287 / 320
+Testing (cite this): batch 288 / 320
+Testing (cite this): batch 289 / 320
+Testing (cite this): batch 290 / 320
+Testing (cite this): batch 291 / 320
+Testing (cite this): batch 292 / 320
+Testing (cite this): batch 293 / 320
+Testing (cite this): batch 294 / 320
+Testing (cite this): batch 295 / 320
+Testing (cite this): batch 296 / 320
+Testing (cite this): batch 297 / 320
+Testing (cite this): batch 298 / 320
+Testing (cite this): batch 299 / 320
+Testing (cite this): batch 300 / 320
+Testing (cite this): batch 301 / 320
+Testing (cite this): batch 302 / 320
+Testing (cite this): batch 303 / 320
+Testing (cite this): batch 304 / 320
+Testing (cite this): batch 305 / 320
+Testing (cite this): batch 306 / 320
+Testing (cite this): batch 307 / 320
+Testing (cite this): batch 308 / 320
+Testing (cite this): batch 309 / 320
+Testing (cite this): batch 310 / 320
+Testing (cite this): batch 311 / 320
+Testing (cite this): batch 312 / 320
+Testing (cite this): batch 313 / 320
+Testing (cite this): batch 314 / 320
+Testing (cite this): batch 315 / 320
+Testing (cite this): batch 316 / 320
+Testing (cite this): batch 317 / 320
+Testing (cite this): batch 318 / 320
+Testing (cite this): batch 319 / 320
+total number of ranks, torch.Size([20438])
+====== Ranks ======
+ranks size: torch.Size([20438])
+test_loss: 3.795437928909905
+mr: 92.5490493774414
+mrr: 0.7827287316322327
+h1: 0.7716508507728577
+h3: 0.7812897562980652
+h5: 0.7864272594451904
+h10: 0.7994911670684814
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 26438 seconds on 

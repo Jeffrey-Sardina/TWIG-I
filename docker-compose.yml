@@ -4,8 +4,6 @@ services:
         container_name: twig-twm
         image: nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
         network_mode: "host"
-        # ports:
-        #     - 8000:8000
 
         # Set up workspace
         working_dir: /workspace

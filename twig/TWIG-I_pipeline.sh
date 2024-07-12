@@ -14,8 +14,8 @@ tag=${10}
 sampler="simple"
 version="base"
 normalisation="zscore"
-use_train_filter='0' #was 0
-use_valid_and_test_filters='1' #was 0
+use_train_filter='0'
+use_valid_and_test_filters='1'
 
 export TWIG_CHANNEL=3
 

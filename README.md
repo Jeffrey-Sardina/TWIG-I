@@ -16,6 +16,7 @@ Finally, **TWIG-I is completely GenAI free**. No GenAI tools were used to create
 TWIG-I itself is a sort of library for learning to solve the LP task without embeddings. It does this using pre-defined structural features (a total of 22) that describe the local degrees and predicate frequencies in and around around a triple.
 
 As much as is possible, all functionality is placed into its own module files. These are
+- **early_stopper.py** -- contains the logic for early stopping during training. Early stopping, by default, not used during hyperparamter validation, only during final eval on the test set.
 - **load_data.py** -- contains all logic for loading, pre-processing, and normalising data used for training, testing, and validation.
 - **loss.py** -- contains implementations of all loss functions
 - **negative_sampler.py** -- contains all implementations of negative samplers; i.e. the part of TWIG that creates randomly corrupted triples to uses as negative examples during training.
@@ -114,6 +115,14 @@ If you want to implement something that is ot a pairwise loss (i.e. pointwise or
 
 ### Adding a new Optimiser
 To add an optimiser (or to make an optimiser with new hyperparameters), just edit `load_optimiser` in `run_exp.py` with whatever configuration you want. Currently the only hyperparameter to the optimiser that we expose for TWIG-I is learning rate -- if you want to change others, you'll have to manually implement them there.
+
+### Adding or Editting an Early Stopping
+If you want to keep the same general method (burn in + patience, stopping if MRR does not improve on the validation set) than you can edit the values for burn in and patience in `main` in `run_exp.py`. If you want to add an entirely new early stopping method, you will need to code that in `early_stopper.py` in a new class with the same API as the existing one.
+
+If your new early stopper has a new API, then you will need to change:
+- how it is created in `load_early_stopper` in `run_exp.py`
+- how it is initialised in `main` in `run_exp.py`
+- how it is used in `run_training` in `trainer.py`
 
 ## Understanding TWIG-I at Scale
 ### Memory Scaling

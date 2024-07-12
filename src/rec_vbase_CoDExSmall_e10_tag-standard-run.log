@@ -34,3 +34,14 @@ TWIGI_Base(
 )
 REC: Training with epochs = 10
 Epoch 1 -- batch 0 / 514 loss: 0.11222846806049347
+batch 500 / 514 loss: 0.0021755737252533436
+Epoch 2 -- batch 0 / 514 loss: 0.0030814202036708593
+batch 500 / 514 loss: 4.0042355976765975e-05
+Epoch 3 -- batch 0 / 514 loss: 0.0026341343764215708
+batch 500 / 514 loss: 0.0006006627227179706
+Epoch 4 -- batch 0 / 514 loss: 0.0005629211664199829
+batch 500 / 514 loss: 3.398938861209899e-05
+Epoch 5 -- batch 0 / 514 loss: 5.485873407451436e-05
+batch 500 / 514 loss: 7.550899226771435e-06
+Saving checkpoint at epoch 5; prefix = chkpt-ID_8947809090263443
+Epoch 6 -- batch 0 / 514 loss: 8.578021515859291e-05

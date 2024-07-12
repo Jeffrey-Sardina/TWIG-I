@@ -44,7 +44,7 @@ If you have a custom dataset (such as a KG you made youself), you need to add th
 
 Each file must be a tab-separated values file where each row represents a triple in the order subject, predicate, object. Once you have done this, you can have TWIG-I use your dataset by passing "MyKG" to it as the datasets parameter, exactly as you would with a PyKEEN dataset.
 
-Note: I **highly** recommend that you use the `../TWIG-I_pipeline.sh` and `../TWIG-I_from_checkpoint.sh` for your training / finetuning as these files abstract away much of the complexitty that you do not need to deal with directly. They also take care of automatic logging and the such.
+Note: I **highly** recommend that you use the `jobs/train-eval.sh` and `jobs/from-checkpoint.sh` for your training / finetuning as these files abstract away much of the complexitty that you do not need to deal with directly. They also take care of automatic logging and the such.
 
 ## Extending TWIG-I
 We're all researchers, right? So you are probably here thinking: "This is super cool (well, I hope you are thinking that at least!). I have a super awesome idea that uses TWIG-I how do I implement it?"
@@ -57,7 +57,7 @@ TWIG-I scores triples given a single triple feature vector, and outputting a sin
 As long as you accept `n_local` many features as input in your firest layer and output (for each for in the input) a single scalr-valued score, it does not matter what operations you perform, and all of your changes can be made in (and only in) that one file.
 
 ### Removing Features from the Default Feature Vector
-Want to do a feature ablation? We have you covered! It's quite easy -- just run `../TWIG-I_pipeline.sh` and pass the names of the features you **do not** want to use to its `$fts_blacklist` parameter on the command line. Easy as! As a quick note, all possible features (22 total) that are used by default are (in order):
+Want to do a feature ablation? We have you covered! It's quite easy -- just run `jobs/train-eval.sh` and pass the names of the features you **do not** want to use to its `$fts_blacklist` parameter on the command line. Easy as! As a quick note, all possible features (22 total) that are used by default are (in order):
 
 Features describing the structure of the given triple (6):
 - s_deg

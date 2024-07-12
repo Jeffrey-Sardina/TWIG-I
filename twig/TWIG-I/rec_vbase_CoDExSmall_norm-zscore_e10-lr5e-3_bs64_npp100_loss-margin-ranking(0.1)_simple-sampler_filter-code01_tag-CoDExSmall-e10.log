@@ -34,3 +34,25 @@ TWIGI_Base(
 )
 REC: Training with epochs = 10
 Epoch 1 -- batch 0 / 514 loss: 0.11206750571727753
+batch 500 / 514 loss: 0.00022131834703031927
+Epoch 2 -- batch 0 / 514 loss: 0.00413191644474864
+Traceback (most recent call last):
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/run_exp.py", line 461, in <module>
+    main(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/run_exp.py", line 385, in main
+    train_and_eval(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/run_exp.py", line 262, in train_and_eval
+    run_training(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/trainer.py", line 415, in run_training
+    train_epoch(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/trainer.py", line 175, in train_epoch
+    loss_val, _,= do_batch(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/trainer.py", line 81, in do_batch
+    X_neg, npps = negative_samplers[dateset_name].get_batch_negatives(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/negative_sampler.py", line 240, in get_batch_negatives
+    negs, npp_returned = self.get_negatives(
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/negative_sampler.py", line 348, in get_negatives
+    self.struct_loader.vec_from_prefab_ocorr(prefab, s, p, o_corr)
+  File "/home/alaeaus/Documentos/Forbairt/TWIG-I/twig/TWIG-I/load_data.py", line 207, in vec_from_prefab_ocorr
+    prefab[O_MIN_DEG_NEIGHBOUR_IDX] = self.neighbour_nodes[o][MIN_VALUE_IDX]
+KeyboardInterrupt

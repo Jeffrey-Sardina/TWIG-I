@@ -15,7 +15,7 @@ Finally, **TWIG-I is completely GenAI free**. No GenAI tools were used to create
 ## Architecture of the Library
 TWIG-I itself is a sort of library for learning to solve the LP task without embeddings. It does this using pre-defined structural features (a total of 22) that describe the local degrees and predicate frequencies in and around around a triple.
 
-As much as is possible, all functionality is placed into its own module files. These are
+As much as is possible, all functionality is placed into its own module files. These are all in the `src/` folder, and are as follows:
 - **early_stopper.py** -- contains the logic for early stopping during training. Early stopping, by default, not used during hyperparamter validation, only during final eval on the test set.
 - **load_data.py** -- contains all logic for loading, pre-processing, and normalising data used for training, testing, and validation.
 - **loss.py** -- contains implementations of all loss functions

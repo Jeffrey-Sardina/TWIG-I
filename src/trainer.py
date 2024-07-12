@@ -449,11 +449,11 @@ def run_training(
 
         # chechpointing
         if epoch_num % checkpoint_every_n == 0:
-            save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir)
+            save_checkpoint(epoch_num, model, model_name_prefix)
             
         # validation / early stopping
         if valid_every_n > 0 and epoch_num % valid_every_n == 0 and epoch_num != epochs:
-            save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir)
+            save_checkpoint(epoch_num, model, model_name_prefix)
             results = test(
                 dataloaders=valid_dataloaders,
                 model=model,

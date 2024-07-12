@@ -7,6 +7,7 @@ import torch
 from utils import get_triples, calc_graph_stats, get_triples_by_idx, load_custom_dataset
 from negative_sampler import *
 from loss import *
+from early_stopper import *
 from pykeen import datasets as pykeendatasets
 import random
 import pickle
@@ -41,7 +42,7 @@ def load_nn(version, n_local):
     The values it returns are:
         - model (torch.nn.Module): the PyTorch NN Model object containing TWIG's neural architecture.
     '''
-    print('loading NN')
+    print('loading NN')self, start_epoch, patience, mode, precision
     valid_versions = ('base', 'linear')
     if version == "base":
         model = TWIGI_Base(
@@ -86,7 +87,7 @@ def load_dataset(
     ''''
     load_dataset() loads all training, testing, and validation data
     assocaited with a single dataset. The dataset is given by name and
-    must be one of the datasets defined in PyKEEN (https://github.com/pykeen/pykeen#datasets)
+    must be one of the datasets defined self, start_epoch, patience, mode, precisionin PyKEEN (https://github.com/pykeen/pykeen#datasets)
 
     The dataset load uses function implementation in load_data.py and also
     performs all needed preprocessing, normalisation, etc such that the returned
@@ -206,7 +207,7 @@ def load_negative_samplers(
                 n_bins=30,
                 mode="near-negative",
                 dataset_name=dataset_name,
-                simple_negative_sampler=simple_sampler
+                simple_negative_sampler=self, start_epoch, patience, mode, precisionsimple_sampler
             )
         else:
             assert False, f'Unknown negative sampler type requested: {sampler_type}. Only "simple" and "vecgtor" are supported currently.'
@@ -238,6 +239,28 @@ def load_loss_function(loss_fn_name):
         assert False, f"Invalid loss function name given: {loss_fn_name}. Expected one of: 'margin-ranking(<margin-val>)', 'pairwise-logistic'"
     return loss_function
 
+def load_early_stopper(start_epoch, patience, mode):
+    '''
+    load_early_stopper() created an early stopper object for TWIG-I to track if it should tirgger early stopping or not
+
+    The arguments it accepts are:
+        - start_epoch (int): the first epoch on which the early stopping could be applied (this is often called a `burn-in` time)
+        - patience (int): the number of epochs to wait after seeing what would otherwise be a stop-condition before the early stopping is actually applied.
+        - mode (str): the mode of early stopping to use. Options are as follows:
+            - "on-falter" -- trigger early stopping the first time a validation result does not get better than a previous result
+            - "never" -- never do early stopping
+    The values it returns are:
+        - early_stopper (Early_Stopper): an Early_Stopper object that TWIG-I should use to determine if it should stop training early, or None if not early stopping is wanted.
+    '''
+    precision = 3
+    early_stopper = Early_Stopper(
+        start_epoch=start_epoch,
+        patience=patience,
+        mode=mode,
+        precision=precision
+    )
+    return early_stopper
+
 def train_and_eval(
         model,
         training_dataloaders,
@@ -253,6 +276,7 @@ def train_and_eval(
         checkpoint_dir,
         checkpoint_every_n,
         valid_every_n,
+        early_stopper
     ):
     ''''
     train_and_eval() runs the training and evaluation loops on the data, and prints all results.
@@ -273,6 +297,7 @@ def train_and_eval(
         - checkpoint_dir (str): the directory in which to save checkpoints (currently unused, as checkpoints are not saved)
         - checkpoint_every_n (int): the interval of epochs after which a checkpoint should be saved during training.
         - valid_every_n (int): the interval of epochs after which TWIG-I should be evaluated on its validation dataset.
+        - early_stopper (Early_Stopper): an Early_Stopper object that TWIG-I should use to determine if it should stop training early, or None if not early stopping is wanted.
 
     The values it returns are:
         - No values are returned.
@@ -292,7 +317,8 @@ def train_and_eval(
         model_name_prefix=model_name_prefix,
         checkpoint_dir=checkpoint_dir,
         checkpoint_every_n=checkpoint_every_n,
-        valid_every_n=valid_every_n
+        valid_every_n=valid_every_n,
+        early_stopper=early_stopper
     )
     print("done with training and eval")
 
@@ -376,20 +402,6 @@ def main(
         X_pos=X_pos
     )
 
-    # make sure we assign what data split we are testing on -- test or valid
-    if hyp_validation_mode:
-        print('Running in hyperparameter evaluation mode')
-        print('TWIG will be evaulaited on the validation set')
-        print('and will not be tested each epoch on the validation set')
-        valid_every_n = -1
-        data_to_test_on = dataloaders['valid']
-    else:
-        print('Running in standard evaluation mode')
-        print('TWIG will be evaulaited on the test set')
-        print('and will not be tested each epoch on the validation set')
-        valid_every_n = -1
-        data_to_test_on = dataloaders['test']
-
     # load (or create from scratch) the model we will be training
     if preexisting_model is not None:
         print('Using provided pre-existing model')
@@ -408,6 +420,27 @@ def main(
     # load loss function
     loss_function = load_loss_function(loss_function)
 
+    # load the early stopper and configute testing / validation data
+    if hyp_validation_mode:
+        print('Running in hyperparameter evaluation mode')
+        print('TWIG will be evaulaited on the validation set')
+        print('and will not be tested each epoch on the validation set')
+        valid_every_n = -1
+        early_stopper_mode = "never"
+        data_to_test_on = dataloaders['valid']
+    else:
+        print('Running in standard evaluation mode')
+        print('TWIG will be evaulaited on the test set')
+        print('and will not be tested each epoch on the validation set')
+        valid_every_n = 5
+        early_stopper_mode = "on-falter"
+        data_to_test_on = dataloaders['test']
+    early_stopper = load_early_stopper(
+        start_epoch=5,
+        patience=10,
+        mode=early_stopper_mode
+    )
+
     # finally, we call the training and evaluation loops
     train_and_eval(
         model=model,
@@ -423,7 +456,8 @@ def main(
         model_name_prefix=model_name_prefix,
         checkpoint_dir=checkpoint_dir,
         checkpoint_every_n=5,
-        valid_every_n=valid_every_n
+        valid_every_n=valid_every_n,
+        early_stopper=early_stopper
     )
 
 if __name__ == '__main__':

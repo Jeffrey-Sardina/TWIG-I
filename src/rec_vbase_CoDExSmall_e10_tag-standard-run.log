@@ -45,3 +45,62 @@ Epoch 5 -- batch 0 / 514 loss: 5.485873407451436e-05
 batch 500 / 514 loss: 7.550899226771435e-06
 Saving checkpoint at epoch 5; prefix = chkpt-ID_8947809090263443
 Epoch 6 -- batch 0 / 514 loss: 8.578021515859291e-05
+batch 500 / 514 loss: 0.00011195377010153607
+Epoch 7 -- batch 0 / 514 loss: 0.0005541489808820188
+batch 500 / 514 loss: 0.0008308296673931181
+Epoch 8 -- batch 0 / 514 loss: 0.0008398694917559624
+batch 500 / 514 loss: 8.396136763622053e-06
+Epoch 9 -- batch 0 / 514 loss: 0.0
+batch 500 / 514 loss: 1.2368452644295758e-06
+Epoch 10 -- batch 0 / 514 loss: 0.00048449545283801854
+batch 500 / 514 loss: 0.0009067734936252236
+Saving checkpoint at epoch 10; prefix = chkpt-ID_8947809090263443
+Done Training!
+
+==================================
+Testing (cite this): dataloader for dataset CoDExSmall
+Testing (cite this): batch 0 / 29
+batch 0 / 29 loss: 0.018075332045555115
+Testing (cite this): batch 1 / 29
+Testing (cite this): batch 2 / 29
+Testing (cite this): batch 3 / 29
+Testing (cite this): batch 4 / 29
+Testing (cite this): batch 5 / 29
+Testing (cite this): batch 6 / 29
+Testing (cite this): batch 7 / 29
+Testing (cite this): batch 8 / 29
+Testing (cite this): batch 9 / 29
+Testing (cite this): batch 10 / 29
+Testing (cite this): batch 11 / 29
+Testing (cite this): batch 12 / 29
+Testing (cite this): batch 13 / 29
+Testing (cite this): batch 14 / 29
+Testing (cite this): batch 15 / 29
+Testing (cite this): batch 16 / 29
+Testing (cite this): batch 17 / 29
+Testing (cite this): batch 18 / 29
+Testing (cite this): batch 19 / 29
+Testing (cite this): batch 20 / 29
+Testing (cite this): batch 21 / 29
+Testing (cite this): batch 22 / 29
+Testing (cite this): batch 23 / 29
+Testing (cite this): batch 24 / 29
+Testing (cite this): batch 25 / 29
+Testing (cite this): batch 26 / 29
+Testing (cite this): batch 27 / 29
+Testing (cite this): batch 28 / 29
+total number of ranks, torch.Size([3654])
+====== Ranks ======
+ranks size: torch.Size([3654])
+test_loss: 0.7456395039334893
+mr: 88.96770477294922
+mrr: 0.6965773701667786
+h1: 0.6680350303649902
+h3: 0.7036125063896179
+h5: 0.7164750695228577
+h10: 0.743842363357544
+==================================
+
+Done Testing!
+done with training and eval
+Experiments took 200 seconds

@@ -1,8 +1,0 @@
-{
-"epochs": 10,
-"dataset_names": ["CoDExSmall"],
-"batch_size": 64,
-"lr": 5e-4,
-"npp": 100,
-"hyp_validation_mode": 1
-}

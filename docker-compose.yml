@@ -8,7 +8,8 @@ services:
         # Set up workspace
         working_dir: /workspace
         volumes:
-            - ./twig/:/workspace/twig
+            - ./jobs/:/workspace/jobs
+            - ./src/:/workspace/src
             - ./install/:/workspace/install
 
         # Enable nvidia https://docs.docker.com/compose/gpu-support/

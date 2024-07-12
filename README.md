@@ -27,13 +27,14 @@ As much as is possible, all functionality is placed into its own module files. T
 
 All of these files are fully documented, so if you are curious about how anything works see the function comments in those files. If you don't know where to start, the answer is simple: **run_exp.py**. It calls all o the other files as sub-routines to corrdinate the entire learning process from data loading to writing the results. From there, you can look at any specific module that you want.
 
-## Reproducing the Results of the TWIG-I Paper
-To reproduce the results of the TWIG-I paper, use the files
-- **../batch-twigi-hyp-search.sh** -- for the hyperparmater search on all datasets
-- **.../batch-twigi.sh** -- to run TWIG-I on its optimal hyperparameters
-- **../batch-twigi-finetune.sh** -- to run TWIG-I with finetuning. Note that **you will have to edit the checkpoint IDs** to use your own based on the random IDs generated while running TWIG on its optimal hyperparameters.
+## Running Basic Experiments with TWIG-I
+The folder `jobs/examples/` contains preset example exerpiments that you can modify and run very quickly and easily. These are:
+- **jobs/examples/ft-ablations.sh** -- for feature ablations of the TWIG-I model
+- **jobs/examples/finetune.sh** -- to load a pre-trained TWIG-I model and fine-tune it onto a new KG. Note that **you will have to edit the checkpoint IDs** to use your own based on the random IDs generated while running TWIG on its optimal hyperparameters
+- **jobs/examples/hypsearch.sh** -- for running a hyperparameter search over some TWIG-I hyperparameters
+- **jobs/examples/standard-run.sh** -- for running a training and evaluation on a given set of hyperparameters
 
-## Using TWIG-I on New Datasets (Standard for Finetuning)
+## Using TWIG-I on New Datasets (Standard or Finetuning)
 There are 2 ways to use TWIG-I on a new dataset. If you dataset is given in PyKEEN's default list (https://github.com/pykeen/pykeen#datasets), you can simply pass it by name to TWIG-I and all will work out-of-the-box since TWIG-I uses PyKEEN as a backend data loader.
 
 If you have a custom dataset (such as a KG you made youself), you need to add them into `custom_datasets/`. To be specific, you your new KG is named MyKG, you need to create the following files:
@@ -110,6 +111,9 @@ To add a new loss function, you need to edit the `loss.py` file. All losses righ
 Once you have your loss, edit `load_loss_function` in `run_exp.py` to allow TWIG-I to load your custom loss.
 
 If you want to implement something that is ot a pairwise loss (i.e. pointwise or setwise losses, or other losses), you will need to not only modify `loss.py` as above, but may also need to modify how scores are calcualted and send to the loss function in `do_batch` in `trainer.py`. This depends heavily on hte loss you are implementing, so I will leave it there for now.
+
+### Adding a new Optimiser
+To add an optimiser (or to make an optimiser with new hyperparameters), just edit `load_optimiser` in `run_exp.py` with whatever configuration you want. Currently the only hyperparameter to the optimiser that we expose for TWIG-I is learning rate -- if you want to change others, you'll have to manually implement them there.
 
 ## Understanding TWIG-I at Scale
 ### Memory Scaling

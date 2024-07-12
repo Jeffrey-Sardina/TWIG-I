@@ -1,6 +1,0 @@
-Using seed 93541971
-INFO:pykeen.evaluation.evaluator:Starting batch_size search for evaluation now...
-INFO:pykeen.evaluation.evaluator:Concluded batch_size search with batch_size=2048.
-INFO:pykeen.evaluation.evaluator:Evaluation took 0.28s seconds
-INFO:pykeen.triples.triples_factory:Stored TriplesFactory(num_entities=2034, num_relations=42, create_inverse_triples=False, num_triples=32888, path="/home/alaeaus/.data/pykeen/datasets/codexsmall/train.txt") to file:///mnt/c/Users/jeffr/Documents/Forbairt/Twig-TWM/twig/TWIG-I/baseline_exps/ComplEx_CoDExSmall_hypID-266/training_triples
-INFO:pykeen.pipeline.api:Saved to directory: file:///mnt/c/Users/jeffr/Documents/Forbairt/Twig-TWM/twig/TWIG-I/baseline_exps/ComplEx_CoDExSmall_hypID-266

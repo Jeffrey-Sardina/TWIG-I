@@ -1,4 +1,0 @@
-{
-    "epochs": 20,
-    "dataset_names": ["DBpedia50"]
-}

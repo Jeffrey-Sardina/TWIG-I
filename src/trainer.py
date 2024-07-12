@@ -365,6 +365,29 @@ def test(
 
     return results
 
+def save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir):
+    '''
+    save_checkpoint() saves a TWIG-I checkpoint.
+
+    The arguments it accepts are:
+        - epoch_num (int): the current epoch
+        - model (torch.nn.Module): the PyTorch NN Model object containing TWIG's neural architecture.
+        - model_name_prefix (str): prefix to the name of saved checkpoints.
+        - checkpoint_dir (str): directiory in which to store checkpoints.
+    
+    The values it returns are:
+        - None
+    '''
+    print(f'Saving checkpoint at epoch {epoch_num}; prefix = {model_name_prefix}')
+    state_data = f'e{epoch_num}'
+    torch.save(
+        model,
+            os.path.join(
+                checkpoint_dir,
+                f'{model_name_prefix}_{state_data}.pt'
+            )
+        )
+
 def run_training(
         model,
         training_dataloaders,
@@ -397,7 +420,7 @@ def run_training(
         - verbose (bool): whether to output loss values occaisonally at certain batch numbers.
         - model_name_prefix (str): prefix to the name of saved checkpoints.
         - checkpoint_dir (str): directiory in which to store checkpoints.
-        - checkpoint_every_n (int): not used.
+        - checkpoint_every_n (int): the number of epochs after which TWIG-I should save a checkpoint. Note that a checkpoint will also be saved whenever validation is run.
         - valid_every_n (int): the number of epochs after which validation should be run on the validation dataset to track training. Currently also reports performance on the training dataset to give a measure of how everfir the model may be.
         - early_stopper (Early_Stopper): an Early_Stopper object that TWIG-I should use to determine if it should stop training early, or None if not early stopping is wanted.
         
@@ -414,6 +437,8 @@ def run_training(
     for t in range(epochs):
         epoch_num = t+1
         print(f"Epoch {epoch_num} -- ", end='')
+
+        # train for an epoch
         train_epoch(
             dataloaders=training_dataloaders,
             model=model,
@@ -426,18 +451,11 @@ def run_training(
 
         # chechpointing
         if epoch_num % checkpoint_every_n == 0:
-            print(f'Saving checkpoint at epoch {epoch_num}; prefix = {model_name_prefix}')
-            state_data = f'e{epoch_num}'
-            torch.save(
-                model,
-                    os.path.join(
-                        checkpoint_dir,
-                        f'{model_name_prefix}_{state_data}.pt'
-                    )
-                )
+            save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir)
             
         # validation / early stopping
         if valid_every_n > 0 and epoch_num % valid_every_n == 0 and epoch_num != epochs:
+            save_checkpoint(epoch_num, model, model_name_prefix, checkpoint_dir)
             results = test(
                 dataloaders=valid_dataloaders,
                 model=model,
@@ -448,22 +466,13 @@ def run_training(
                 purpose='Validation'
             )
             model.train() # put back in training mode (test puts it in eval mode)
-
             do_stop = True
             for dataset_name in results:
                 valid_mrr = results[dataset_name]['mrr']
                 if not early_stopper.assess_validation_result(epoch_num, valid_mrr):
                     do_stop = False
             if do_stop:
-                print(f'Early stopping! Saving checkpoint at epoch {epoch_num}; prefix = {model_name_prefix}')
-                state_data = f'e{epoch_num}'
-                torch.save(
-                    model,
-                        os.path.join(
-                            checkpoint_dir,
-                            f'{model_name_prefix}_{state_data}.pt'
-                        )
-                    )
+                print(f'Early stopping triggered at epoch {epoch_num}')
                 break
 
     print("Done Training!")

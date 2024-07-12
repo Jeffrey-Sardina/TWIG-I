@@ -1,7 +1,7 @@
 # TWIG-I
 Jeffrey Seathrún Sardina and Alok Debnath
 
-**NOTE**: Releases used in publications are contained in their own repos for ease of access -- and this is not neccessarily the same. This is the development repo for TWIG-I, where new implementations are tested. The documentation may at times be lacking or old, and the code is not necessarily fully tested in the way code attached to published repos would be. That said, this version tends to be substantially more potimise in terms of speed and performance, and it is this branch (only) that is under active development.
+**NOTE**: Releases used in publications are contained in their own repos for ease of access -- and this is not neccessarily the same code as would be found there. This is the development repo for TWIG-I, where new implementations are tested. The documentation may at times be lacking or old, and the code is not necessarily fully tested in the way code attached to published repos would be. That said, this version tends to be substantially more potimise in terms of speed and performance, and it is this branch (only) that is under active development.
 
 ## What is TWIG-I?
 Topologically-Weighted Intelligence Generation for Inference (TWIG-I) is an embedding-free, graph-structure-based link predictor build to work on knowledge graphs. To put it simply, **TWIG-I models the link prediction task as a regression task**. The input features are hand-crafted graph structure features, and the output value is a plausibility score for each triple.
@@ -48,7 +48,7 @@ Note: I **highly** recommend that you use the `../TWIG-I_pipeline.sh` and `../TW
 ## Extending TWIG-I
 We're all researchers, right? So you are probably here thinking: "This is super cool (well, I hope you are thinking that at least!). I have a super awesome idea that uses TWIG-I how do I implement it?"
 
-This section will teach you how to do that. A word, however -- while I have made every effort to amke this code interoperatble, modular, and extensible, it is still research code and is not as well-build as other systems (say PyKEEN) which ahve large development teams. If you have any issues, please raise an issue on GitHub and I'd be happy to help out!
+This section will teach you how to do that. A word, however -- while I have made every effort to make this code interoperatble, modular, and extensible, it is still research code and is not as well-built as other systems (say PyKEEN) which have large development teams. If you have any issues, please raise an issue on GitHub and I'd be happy to help out!
 
 ### Making a New Triple Scoring Model
 TWIG-I scores triples given a single triple feature vector, and outputting a single score (higher scores represnt that a triple is more plausibly true). If you want to add a new model, you can do this in `twig_nn.py`. Just copy on of the existing models and edit however you would like.
@@ -86,12 +86,14 @@ Features decribing the neighbourhood of the object node in the given triple (8):
 - o_mean_freq_rel
 - o_num_rels
 
+This approach is great for testing, but will lead to notably somewhat increased runtimes due to the way that features are removed. If you want to (permanently) delete a feature, this is a more involved process. Take a look at the section on adding a new feature to what needs to change -- and then just do that in reverse :D
+
 ### Adding new Features to TWIG-I
-Adding new features is quite straighforward. If you want to do this you need to modify the data loader. Since data loading is defined exactly once, these cchanges should propagate to everything, inclluding the negative sampler, seamlessly.
+Adding new features is (somewhat) straightforward, although it has been made somewhat more involved due to several runtime optimisations I have made to how data is loaded. If you want to do this you need to modify the data loader.
 
-**load_data.py** -- Modify the `Structure_Loader` class to add you feature to the feature vecor it outputs from `__call__`. You may want to modify `build_neighbour_cache` if you want to precalculate some features to a cache as an optimisation strategy, but this is not necessary.
+**load_data.py** -- Modify the `Structure_Loader` class to add you feature to the feature vecor it outputs from `__call__`. You may want to modify `build_neighbour_cache` if you want to precalculate some features to a cache as an optimisation strategy, but this is not necessary. You will also need to modify `create_negative_prefab_ocorr`, `vec_from_prefab_ocorr`, `create_negative_prefab_scorr`, and `vec_from_prefab_scorr` -- these are functions used in negative sampling -- to load your feature there. Finally, you will need to index your feature by adding it to the feature index maps under the contants heading at the top of the file.
 
-As long as you keep the general structure of the TWIG-I code, you should be able to do feature ablation (see above) on your custom features just as well as on the default features!
+As long as you keep the general structure of the TWIG-I code and add your new feature into the `ft_to_idx` registry, you should be able to do feature ablation (see above) on your custom features just as well as on the default features!
 
 ### Adding a New Negative Sampling Strategy
 To add a new negative sampling strategy, you need to modify `negative_sampler.py`. Specifically, you must extend the `Negative_Sampler` class and implement the `get_negatives` function. Note that you abolsutely MUST define two modes for your negative sampler:
@@ -105,7 +107,7 @@ If your negative sampler needs more arguments to its init function that are norm
 ### Adding a New Loss Function
 To add a new loss function, you need to edit the `loss.py` file. All losses right now are assumed to be pairwise losses -- i.e. comparing the score of each negative to its positive in 1:1 pairs and penalising cases where the negative outscores the positive. If you want to implement a new pairwise loss function, it will be super easy: just copy one of the losses in the file and write your own equation inside!
 
-Once you have your loss, tell the `trainer.py` file to use it by replacing `loss_fn = ...` with the name of the getter for your function (i.e. `loss_fn = get_my_new_loss(your_hyperparams)`)
+Once you have your loss, edit `load_loss_function` in `run_exp.py` to allow TWIG-I to load your custom loss.
 
 If you want to implement something that is ot a pairwise loss (i.e. pointwise or setwise losses, or other losses), you will need to not only modify `loss.py` as above, but may also need to modify how scores are calcualted and send to the loss function in `do_batch` in `trainer.py`. This depends heavily on hte loss you are implementing, so I will leave it there for now.
 
@@ -150,11 +152,11 @@ TWIG's memory usage is **not** significantly impacted by other components (that 
 - **The TWIG-I neural architecture.** TWIG-I's neural architecutre has (including bias terms) 351 parameters. Using float32 as a datatype, this means that around 1.4KB of memory for all those parameters. Add on a bit for gradients and the such, and this is safely remain under 10KB of memory. Unless you *massively* increase the size of this netowrk (to, say 1 million parameters), it is pretty much guaranteed to enver be a memory bottleneck. And there is no evidennce that such a large NN would every be needed or beneficial at the moment.
 
 ### Runtime Scaling
-I have not heavily optimised TWIG-I for runtime, except to ensure it can run FB15k-237 and WN18RR in a reasonable amount of tie (under a day). You could probably get a 2x to 4x speedup by going through the code with (likely many) edits / re-writes for optimum speed. This section will go into the areas that (I think) are the most impactful on runtime (at the per-epoch level).
+I have not heavily optimised TWIG-I for runtime, except to ensure it can run FB15k-237 and WN18RR in a reasonable amount of tie (under a day). I've opptimised the performance of TWIG-I heavily compared to v1.0, so this code should run substantially faster (locally, I think it is around 7-10x faster). This section will go into the areas that (I think) are the most impactful on runtime (at the per-epoch level). There are almost certainly further optimisations to be made.
 
-**The Negative Sampler**. The negative sampler is by far the biggest runtime bottleneck -- after all, without it, all we have is a 22-fearure input vector at a tiny (351-parameeter), 3-layer neural network. On top of that, 99% of the default negative sampler runs on CPU, not GPU, wich means it will be a bottleneck in an otherwise all-GPU pipeline. These operations are actually quite fast dictioanry lookups, but en masse they take a lot of time. As such, any attempt to optimise runtime should probably begin with a critical re-analysis of the negative sampler.
+**The Negative Sampler**. The negative sampler is by far the biggest runtime bottleneck -- after all, without it, all we have is a 22-fearure input vector at a tiny (351-parameeter), 3-layer neural network. On top of that, 99% of the simple negative sampler runs on CPU, not GPU, wich means it will be a bottleneck in an otherwise all-GPU pipeline. These operations are actually quite fast dictioanry lookups, but en masse they take a lot of time. As such, any attempt to optimise runtime should probably begin with a critical of the negative sampler.
 
-I actually have an improvment on this in the works (the Vector Negative Sampler) which could possibly lead to massive improvements in training speed. However, the default negative sampler format (of currupting triples, and thereby acccessing the feature cache in RAM / CPU memory) must be used in evaluation for fairness and comparision to other link predictors. This means that there will probably always be some sort of a bottleneck there (even if we can manage to significantly reduce it).
+I actually have an alternate on this in the works (the Vector Negative Sampler) which could possibly lead to massive improvements in training speed. However, the default negative sampler format (of corrupting triples, and thereby acccessing the feature cache in RAM / CPU memory) must be used in evaluation for fairness and comparision to other link predictors. This means that there will probably always be some sort of a bottleneck there (even if we can manage to significantly reduce it).
 
 **The Loss Calculation**. I **don't** mean the implementation in the `loss.py` file, which I would expect to be quite fast. What I mean here is specifically the way that `do_batch` in `trainer.py` prepared for a pairwise loss: is extends the tensor of all scores of positive triple to match the size of the tensor of the scores of all negatives (see the call to `repeat_interleave`). While this results in the code for loss calculation to be extremely simple, it adds a lot of memory and requires Tensor creation at every step, which I expect takes some time. It may not be an issue -- but I have a feeling this part of the code could be optimised further.
 
@@ -180,6 +182,8 @@ Can I use TWIG-I for commercial pruposes? Currently TWIG-I is made available und
 Do you have any other TWIG-I adjacent work? Yep -- It's called TWIG ;)). TWIG-I is actuially a re-imagining of TWIG. You can find TWIG here: https://github.com/Jeffrey-Sardina/TWIG-release-1.0. The differece is that TWIG learns to **simulate and predict the output of KGEs**, where as **TWIG-I does link prediction itself**. They are based on a very similar codebase.
 
 Can I pip / apt-get / conda / etc install TWIG-I? Not yet, sorry! I'll try for pip at some poiont, but I have never messed with such dark magics before.
+
+What are your plans for the future of TWIG-I? The first thing I want to do is to add all the expected ML features -- a few more loss functions, more optimiser options, schedulers, early stoppers, etc. I'm also looking into standardising TWIG-I configurations with JSON / YML configuration files, to allow more control wuing those over the learning process, After that I will look at taking this from "reference implementation" level to be an actual library -- allowing much easier extension of TWIG-I, pip compatibility, etc.
 
 ## Citation
 If you have found this helpful, or used TWIG-I in your work, please drop us a citation at:

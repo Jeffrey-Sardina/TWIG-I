@@ -20,7 +20,7 @@ apt install -y git # needed for PyKEEN internals
 apt install -y sqlite # needed for optuna, used by PyKEEN
 conda create -n "twig" python=3.9 pip
 conda run --no-capture-output -n twig pip install torch torchvision torchaudio torcheval
-conda run --no-capture-output -n twig pip install pykeen frozendict
+conda run --no-capture-output -n twig pip install pykeen frozendict numpy
 conda init bash
 
 # Add to conda to .bashrc

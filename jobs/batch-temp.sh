@@ -1,10 +1,10 @@
 #!/bin/bash
 
-datasets="CoDExSmall"
+datasets="UMLS"
 epochs=10
 npp=100
 lr=5e-3
-hyp_validation_mode=1
+hyp_validation_mode=0
 batch_size=64
 batch_size_test=64
 loss_fn="margin-ranking(0.1)"

@@ -11,7 +11,7 @@ from frozendict import frozendict
 Constant Definitions
 ====================
 '''
-device = "cuda"
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 class Negative_Sampler:   
     def get_negatives(self, purpose, triple_index, npp, **kwargs):

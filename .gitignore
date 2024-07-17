@@ -1,3 +1,4 @@
 *.pt
 *.pkl
 *.pyc
+.vscode/

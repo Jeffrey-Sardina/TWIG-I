@@ -10,6 +10,10 @@ import inspect
 import os
 from glob import glob
 import copy
+import itertools
+from collections.abc import Iterable
+import random
+import time
 
 '''
 =========
@@ -158,7 +162,7 @@ def do_job(
         loss_function="margin-ranking(0.1)",
         early_stopper=Early_Stopper(
             start_epoch=5,
-            patience=10,
+            patience=15,
             mode="on-falter",
             precision=3
         ),
@@ -239,7 +243,7 @@ def ablation_job(
         dataset_names,
         model=['base'],
         negative_sampler=['simple'],
-        loss_function=['margin-ranking(0.01), margin-ranking(0.1), margin-ranking(0.5), pairwise-logistic'],
+        loss_function=['margin-ranking(0.01)', 'margin-ranking(0.1)', 'margin-ranking(0.5)', 'pairwise-logistic'],
         early_stopper=[None],
         optimizer=['Adam'],
         optimizer_args = {
@@ -260,12 +264,15 @@ def ablation_job(
         },
         tag="Ablation Job",
         ablation_metric='mrr',
+        ablation_type='full', #or 'rand'
+        timeout=-1, #seconds
+        max_iterations=-1,
         train_and_eval_after = False,
         train_and_eval_args = {
             "epochs": 100,
             "early_stopper": Early_Stopper(
                 start_epoch=5,
-                patience=10,
+                patience=15,
                 mode="on-falter",
                 precision=3
             ),
@@ -273,6 +280,11 @@ def ablation_job(
             "hyp_validation_mode": False
         }
     ):
+    # detect invalid combinations
+    if ablation_type == 'full':
+        assert timeout <= 0 or timeout == None, "If 'full' ablations are done, timeout cannot be set"
+        assert max_iterations <= 0 or max_iterations == None, "If 'full' ablations are done, max_iterations cannot be set"
+
     # assign defaults if needed
     if not "lr" in optimizer_args:
         optimizer_args["lr"] =  [5e-3, 5e-4]
@@ -283,7 +295,7 @@ def ablation_job(
     if not "batch_size_test" in data_args:
         data_args["batch_size_test"] = [64]
     if not "fts_blacklist" in data_args:
-        data_args["fts_blacklist"] = [set()]
+        data_args["fts_blacklist"] = [frozenset()]
     if not "epochs" in training_args:
         training_args["epochs"] = [10]
     if not "npp" in training_args:
@@ -296,7 +308,7 @@ def ablation_job(
         if not "early_stopper" in train_and_eval_args:
             train_and_eval_args["early_stopper"] = Early_Stopper(
                 start_epoch=5,
-                patience=10,
+                patience=15,
                 mode="on-falter",
                 precision=3
             ),
@@ -305,70 +317,129 @@ def ablation_job(
         if not "hyp_validation_mode" in train_and_eval_args:
             train_and_eval_args["hyp_validation_mode"] = False
 
+    # correct input -- if a single value was given, make it a single-valued list
+    if type(dataset_names) == str:
+        dataset_names = [dataset_names]
+    if type(model) == str:
+        model = [model]
+    if type(negative_sampler) == str or not isinstance(negative_sampler, Iterable):
+        negative_sampler = [negative_sampler]
+    if type(loss_function) == str or not isinstance(loss_function, Iterable):
+        loss_function = [loss_function]
+    if not isinstance(dataset_names, Iterable):
+        early_stopper = [early_stopper]
+    if type(optimizer) == str or not isinstance(loss_function, Iterable):
+        optimizer = [optimizer]
+    for key in optimizer_args:
+        if type(optimizer_args[key]) == str or not isinstance(optimizer_args[key], Iterable):
+            optimizer_args[key] = [optimizer_args[key]]
+    for key in data_args:
+        if type(data_args[key]) == str or not isinstance(data_args[key], Iterable):
+            data_args[key] = [data_args[key]]
+    for key in training_args:
+        if type(training_args[key]) == str or not isinstance(training_args[key], Iterable):
+            training_args[key] = [training_args[key]]
+
+    # make all sets frozensets so we can hash them
+    frozen_bl = []
+    for bl in data_args["fts_blacklist"]:
+        frozen_bl.append(frozenset(bl))
+    data_args["fts_blacklist"] = frozen_bl
+
+    # create grid
+    grid = list(itertools.product(
+        model,
+        negative_sampler,
+        loss_function,
+        early_stopper,
+        data_args["normalisation"],
+        optimizer,
+        optimizer_args["lr"],
+        data_args["batch_size"],
+        data_args["batch_size_test"],
+        data_args["fts_blacklist"],
+        training_args["epochs"],
+        training_args["npp"],
+        training_args["hyp_validation_mode"]
+    ))
+
+    # configure ablation type settings
+    if ablation_type == 'rand':
+        random.shuffle(grid)
+        if max_iterations and max_iterations > 0:
+            grid = grid[:max_iterations]
+    elif ablation_type == 'full':
+        pass # nothing to do
+    else:
+        assert False, f"Invalid ablation type: {ablation_type}. Must bbe either 'full' or 'rand'"  
+
+    # run ablations on the grid
     ablation_results = {}
     best_metric = 0.0
     best_results = None
     best_settings = None
-    for mod in model:
-        for neg_samp in negative_sampler:
-            for loss_fn in loss_function:
-                for es in early_stopper:
-                    for norm in data_args["normalisation"]:
-                        for opt in optimizer:
-                            for lr in optimizer_args["lr"]:
-                                for bs in data_args["batch_sizes"]:
-                                    for test_bs in data_args["batch_size_test"]:
-                                        for ft_blacklist in data_args["fts_blacklist"]:
-                                            for n_epochs in training_args["epochs"]:
-                                                for npp_val in training_args["npp"]:
-                                                    for hyp_val_mode in training_args["hyp_validation_mode"]:
-                                                        settings = (
-                                                            mod,
-                                                            neg_samp,
-                                                            loss_fn,
-                                                            es,
-                                                            opt,
-                                                            lr,
-                                                            norm,
-                                                            bs,
-                                                            test_bs,
-                                                            ft_blacklist,
-                                                            n_epochs,
-                                                            npp_val,
-                                                            hyp_val_mode
-                                                        )
-                                                        # need this so if a model type is ever re-used, we train it from its initial point, not from the last ablation!
-                                                        # TODO: should verify manually that this is the case as well!
-                                                        mod_copy = copy.deepcopy(mod)
-                                                        results = do_job(
-                                                            dataset_names=dataset_names,
-                                                            model=mod_copy,
-                                                            optimizer=opt,
-                                                            negative_sampler=neg_samp,
-                                                            loss_function=loss_fn,
-                                                            early_stopper=es,
-                                                            data_args = {
-                                                                "normalisation": norm,
-                                                                "batch_size": bs,
-                                                                "batch_size_test": test_bs,
-                                                                "fts_blacklist": ft_blacklist,
-                                                            },
-                                                            training_args={
-                                                                "epochs": n_epochs,
-                                                                "npp": npp_val,
-                                                                "hyp_validation_mode": hyp_val_mode
-                                                            },
-                                                            tag=tag
-                                                        )
-                                                        ablation_results[settings] = results
-                                                        metrics = []
-                                                        for dataset_name in dataset_names:
-                                                            metrics.append(results[dataset_name][ablation_metric])
-                                                        metric_avg = sum(metrics) / len(metrics)
-                                                        if metric_avg > best_metric:
-                                                            best_metric = metric_avg
-                                                            best_results = results
-                                                            best_settings = settings
+    start_time = time.time()
+    for settings in grid:
+        # unpack (same order as put into itertools)
+        (
+            mod,
+            neg_samp,
+            loss_fn,
+            es,
+            norm,
+            opt,
+            lr,
+            bs,
+            test_bs,
+            ft_blacklist,
+            n_epochs,
+            npp_val,
+            hyp_val_mode
+        ) = settings
+
+        # need this so if a model type is ever re-used, we train it from its initial point, not from the last ablation!
+        # TODO: should verify manually that this is the case as well!
+        mod_copy = copy.deepcopy(mod)
+
+        # run the experiment
+        results = do_job(
+            dataset_names=dataset_names,
+            model=mod_copy,
+            optimizer=opt,
+            negative_sampler=neg_samp,
+            loss_function=loss_fn,
+            early_stopper=es,
+            data_args = {
+                "normalisation": norm,
+                "batch_size": bs,
+                "batch_size_test": test_bs,
+                "fts_blacklist": ft_blacklist,
+            },
+            training_args={
+                "epochs": n_epochs,
+                "npp": npp_val,
+                "hyp_validation_mode": hyp_val_mode
+            },
+            tag=tag
+        )
+
+        # process results (and record them!)
+        ablation_results[settings] = results
+        metrics = []
+        for dataset_name in dataset_names:
+            metrics.append(results[dataset_name][ablation_metric])
+        metric_avg = sum(metrics) / len(metrics)
+        if metric_avg > best_metric:
+            best_metric = metric_avg
+            best_results = results
+            best_settings = settings
+        
+        # check if we have reached or exceeded the timeout
+        end_time = time.time()
+        if timeout and timeout > 0 and end_time - start_time >= timeout:
+            print('Ablation timeout reached; stopping')
+            break
+
     print('Ablation done!')
     print('The best settings found were:')
     (
@@ -376,9 +447,9 @@ def ablation_job(
         neg_samp,
         loss_fn,
         es,
+        norm,
         opt,
         lr,
-        norm,
         bs,
         test_bs,
         ft_blacklist,
@@ -492,7 +563,7 @@ def finetune_job(
         loss_function=None,
         early_stopper=Early_Stopper(
             start_epoch=5,
-            patience=10,
+            patience=15,
             mode="on-falter",
             precision=3
         ),
@@ -577,7 +648,7 @@ def finetune_ablation_job(
             "epochs": 100,
             "early_stopper": Early_Stopper(
                 start_epoch=5,
-                patience=10,
+                patience=15,
                 mode="on-falter",
                 precision=3
             ),

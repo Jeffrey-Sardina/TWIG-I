@@ -208,6 +208,9 @@ def write_stats_data(triples_set_name, triples_data_dict):
         - triples_set_name (str) the name of the triples spllit (i.e. train, test, valid, or all)
         - triples_data_dict (dict of <a lot og things>): a dict that contains all data that is to be printed
 
+    The values it returns are:
+        - None
+
     NOTE: If it was not obvious this is a sub-routine called by other functions in this code. Don't call it to print your own dictionaries!
     '''
     degrees = triples_data_dict['degrees']

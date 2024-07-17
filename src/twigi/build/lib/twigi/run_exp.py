@@ -327,8 +327,8 @@ def main(
         version,
         dataset_names,
         epochs,
-        lr,
-        optimizer_name,
+        optimizer_args,
+        optimizer,
         normalisation,
         batch_size,
         batch_size_test,
@@ -340,6 +340,7 @@ def main(
         fts_blacklist,
         hyp_validation_mode,
         preexisting_model=None,
+        early_stopper=None
     ):
     '''
     main() coordinates all of the major modules of TWIG, loads and prepares data, the NN, filters, and model hyparapmeters, (etc). It then calls the training loop, and finally conducts an evaluation of TWIG-I's performance. Since all of these functionalities are implemented in various modules, main() is more or less just a list of function calls that coordinate them all.
@@ -350,28 +351,6 @@ def main(
     The values it returns are:
         - results (dict str -> str -> float): the results output from train_and_eval(). The first key is the dataset name, and the second key is the name of the metric. The value contained is a float value of the specified metric on the specified dataset. An example of accessing its data could thus be results['UMLS']['mrr'], which will return the MRR value TWIG acheived on the UMLS dataset.
     '''
-    # save hyperparameter settings
-    model_name_prefix = 'chkpt-ID_' + str(int(random.random() * 10**16))
-    checkpoint_config_name = os.path.join(checkpoint_dir, f'{model_name_prefix}.pkl')
-    with open(checkpoint_config_name, 'wb') as cache:
-        to_save = {
-            "version": version,
-            "dataset_names": dataset_names,
-            "epochs": epochs,
-            "lr": lr,
-            "normalisation": normalisation,
-            "batch_size": batch_size,
-            "batch_size_test": batch_size_test,
-            "npp": npp,
-            "use_train_filter": use_train_filter,
-            "use_valid_and_test_filters": use_valid_and_test_filters,
-            "sampler_type": sampler_type,
-            "loss_function": loss_function,
-            "fts_blacklist": fts_blacklist,
-            "hyp_validation_mode": hyp_validation_mode
-        }
-        pickle.dump(to_save, cache)
-
     # load datasets (as PyTorch Dataloaders) and normalisation functions (they
     # are needed again in the training loopo for negative generation)
     dataloaders, norm_funcs, X_pos, n_local = load_dataset(
@@ -413,9 +392,9 @@ def main(
 
     # load an optimizer for the TWIG-I model
     optimizer = load_optimizer(
-        optimizer_name=optimizer_name,
+        optimizer_name=optimizer,
         model=model,
-        lr=lr
+        **optimizer_args
     )
 
     # load loss function
@@ -436,11 +415,37 @@ def main(
         valid_every_n = 5
         early_stopper_mode = "on-falter"
         data_to_test_on = dataloaders['test']
-    early_stopper = load_early_stopper(
-        start_epoch=5,
-        patience=10,
-        mode=early_stopper_mode
-    )
+    if not early_stopper:
+        early_stopper = load_early_stopper(
+            start_epoch=5,
+            patience=10,
+            mode=early_stopper_mode
+        )
+
+    # save hyperparameter settings
+    model_name_prefix = 'chkpt-ID_' + str(int(random.random() * 10**16))
+    checkpoint_config_name = os.path.join(checkpoint_dir, f'{model_name_prefix}.pkl')
+    with open(checkpoint_config_name, 'wb') as cache:
+        to_save = {
+            "version": version,
+            "dataset_names": dataset_names,
+            "epochs": epochs,
+            "optimizer": optimizer_name,
+            "optimizer_args": optimizer_args,
+            "lr": lr,
+            "normalisation": normalisation,
+            "batch_size": batch_size,
+            "batch_size_test": batch_size_test,
+            "npp": npp,
+            "use_train_filter": use_train_filter,
+            "use_valid_and_test_filters": use_valid_and_test_filters,
+            "sampler_type": sampler_type,
+            "loss_function": loss_function,
+            "fts_blacklist": fts_blacklist,
+            "hyp_validation_mode": hyp_validation_mode,
+            "early_stopper": early_stopper
+        }
+        pickle.dump(to_save, cache)
 
     # finally, we call the training and evaluation loops
     results = train_and_eval(
@@ -526,7 +531,7 @@ if __name__ == '__main__':
         version=version,
         dataset_names=dataset_names,
         epochs=epochs,
-        lr=lr,
+        optimizer_args={"lr": lr},
         optimizer_name=optimizer_name,
         normalisation=normalisation,
         batch_size=batch_size,

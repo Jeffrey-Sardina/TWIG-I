@@ -21,7 +21,7 @@ torch.manual_seed(17)
 Constant Definitions
 ====================
 '''
-device = "cuda"
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Feature index maps
 TOTAL_NUM_FTS = 22

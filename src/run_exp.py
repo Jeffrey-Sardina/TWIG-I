@@ -72,9 +72,9 @@ def load_optimizer(optimizer_name, model, lr):
     The values it returns are:
         - optimizer (torch.optim.Optimizer): the optimizer object to be used
     '''
-    if optimizer_name == "adam":
+    if optimizer_name.lower() == "adam":
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    elif optimizer_name == "adagrad":
+    elif optimizer_name.lower() == "adagrad":
         optimizer = torch.optim.Adagrad(model.parameters(), lr=lr)
     else:
         assert False, f"Unrecognised optimizer: {optimizer_name}"

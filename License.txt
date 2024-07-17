@@ -1,3 +1,3 @@
-TWIG-I-v1.0 is made available under the CC BY-NC-SA 4.0 License.
+TWIG-I is made available under the CC BY-NC-SA 4.0 License.
 
 See the license here: https://creativecommons.org/licenses/by-nc-sa/4.0/ 

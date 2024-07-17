@@ -8,7 +8,7 @@ setuptools.setup(
     name="twigi", 
   
     # version of the module 
-    version="1.0.5",
+    version="1.0.7",
   
     # Name of Author 
     author="Jeffrey Seathrún Sardina", 

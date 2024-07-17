@@ -86,7 +86,7 @@ def load_chkpt(
 
 def run_from_chkpt(model, model_config):
     '''
-    run_from_chkpt() uses the given model and model configuration to run more training for TWIG-I (i.e. finetuning, or continuation from where training last stopped. All training is done by handing this off to `run_exp.py` to avoid code duplication -- this function just gets the data in the fight order and format.
+    run_from_chkpt() uses the given model and model configuration to run more training for TWIG-I (i.e. finetuning, or continuation) from where training last stopped. All training is done by handing this off to `run_exp.py` to avoid code duplication -- this function just gets the data in the fight order and format.
 
     The arguments it accepts are:
         - model (torch.nn.Module): the loaded TWIG-I model to use
@@ -137,9 +137,9 @@ if __name__ == '__main__':
     torch_checkpont_path = sys.argv[1]
     model_config_path = sys.argv[2]
     model_config_override = sys.argv[3]
-    load_and_run_from_chkpt(
+    model, model_config = load_chkpt(
         torch_checkpont_path=torch_checkpont_path,
         model_config_path=model_config_path,
         model_config_override=model_config_override
     )
-    
+    run_from_chkpt(model, model_config)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: twigi
-Version: 1.0.5
+Version: 1.0.7
 Summary: TWIG-I: Embedding-free, treansfer-learning, enabled link prediction using graph topology :D
 Home-page: https://github.com/Jeffrey-Sardina
 Author: Jeffrey Seathrún Sardina
@@ -30,6 +30,317 @@ To be more exact, TWIG-I uses a constant set of handpicked features to describe 
 TWIG-I is meant as an alternative to other link predictors such as Knowledge Graph Embeddings and Graph Neural Networks which create latent embedding for every node (and, sometimes, edge) in a knowledge graph. Full details on TWIG-I, its uses, its strengths and weaknesses, and its palce in the literature can be found in the paper (see the citation at the bottom of this README).
 
 Finally, **TWIG-I is completely GenAI free**. No GenAI tools were used to create TWIG-I, its documentation, or to help in the communication of it. Under no circumtances are we willing for TWIG-I to be used as input to training a GenAI algorithm --  we as authors retain copyright on TWIG-I and are unwilling for it, its paper, or its documentation to be used for this purpose.
+
+## Using TWIG-I from Pypi
+TWIG-I can now be isntalled from pypi! It works with Python 3.9 (and likely most other recent versions). You can install it with:
+```
+pip install twigi
+```
+
+It is highly recommened you install TWIG-I in its own conda environment to avoid package conflicts. For example,
+```
+conda create --name twigi-env python=3.9
+conda activate twigi-env
+pip install twigi
+```
+
+Once you have installed twigi, there are 4 main tasks it can do for you
+- train on a single KG (or concurrently on a set of KGs)
+- perform ablations / hyperparameter optimisation
+- finetune an existing TWIG-I model on a new KG / set of KGs
+- perform ablations / hyperparameter optimisation for the finetuning process
+
+We will give examples of the most common uses in turn.
+
+### To Train on a Single KG
+To do this, use the `do_job` function. The minimum you need to provide to is one argument `dataset_names`. This will use the default TWIG-I model (`base`) and default (arbitrary, likely not opimal) hyperparameters. You can do this as:
+```
+from twigi.twigi import do_job
+do_job('UMLS', model='base')
+```
+
+By default, TIWG-I will run on the validation set (even if early stopping is not in use) and save checkpoints every 5 epochs.
+
+If you want to specify hyperparameters, you can do that as well.
+```
+from twigi.twigi import do_job
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    negative_sampler="simple",
+    loss_function="margin-ranking(0.1)",
+    optimizer='Adam',
+    optimizer_args = {
+        "lr": 5e-3
+    },
+    data_args = {
+        "normalisation": "zscore",
+        "batch_size": 64,
+        "batch_size_test": 64,
+    },
+    training_args={
+        "epochs": 20,
+        "npp": 30,
+        "hyp_validation_mode": False
+    },
+    tag="super-cool-model"
+)
+```
+
+We support early stopping using our Early_Stopper class. For example,
+```
+from twigi.twigi import do_job, Early_Stopper
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    early_stopper=Early_Stopper(
+        start_epoch=5,
+        patience=15,
+        mode="on-falter",
+        precision=3
+    ),
+)
+```
+
+We also allow you to blacklist the default features so that TWIG-I will not use them when training. For example:
+```
+from twigi.twigi import do_job
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    data_args = {
+        "fts_blacklist": {'s_deg', 'o_deg'},
+    },
+)
+```
+
+For reference, the full funciton API and its defaults are given below:
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    negative_sampler="simple",
+    loss_function="margin-ranking(0.1)",
+    early_stopper=Early_Stopper(
+        start_epoch=5,
+        patience=15,
+        mode="on-falter",
+        precision=3
+    ),
+    optimizer='Adam',
+    optimizer_args = {
+        "lr": 5e-3
+    },
+    data_args = {
+        "normalisation": "zscore",
+        "batch_size": 64,
+        "batch_size_test": 64,
+        "fts_blacklist": set(),
+    },
+    training_args={
+        "epochs": 20,
+        "npp": 30,
+        "hyp_validation_mode": False
+    },
+    tag="super-cool-model"
+)
+
+### To Run a Hyperparameter Search or Ablation Study
+Running a hyperparameter search is done with `ablation_job`. Similar to running a TWIG model, it has a default hyperparameter grid (of 144 hyperparameter combinations in total). This is not exhaustive, so in pracactive you may want to add more.
+
+You can run the default grid for a given KG as so:
+```
+from twigi.twigi import ablation_job
+ablation_job("UMLS", model='base')
+```
+
+You can also tell TWIG-I to run evaluation on the test set once it finds the optimal hyperparamters. You can do this as so:
+```
+from twigi.twigi import ablation_job
+ablation_job("UMLS", model='base', train_and_eval_after=True)
+```
+
+You can perform a feature ablation study by using the feature blacklist parameters of `data_args`. For example:
+```
+from twigi.twigi import ablation_job
+ablation_job(
+    dataset_names="UMLS",
+    model='base',
+    data_args = {
+        "fts_blacklist": [
+            {"s_deg"},
+            {"o_deg"},
+            {"p_freq"},
+            {"s_deg", "o_deg"},
+            {"s_deg", "p_freq"},
+            {"o_deg", "p_freq"},
+        ],
+    },
+)
+```
+
+For reference, the full API of the function, and the default values assigned to all elements, are given below:
+```
+from twigi.twigi import ablation_job
+ablation_job(
+    dataset_names="UMLS",
+    model=['base'],
+    negative_sampler=['simple'],
+    loss_function=['margin-ranking(0.01)', 'margin-ranking(0.1)', 'margin-ranking(0.5)', 'pairwise-logistic'],
+    early_stopper=[None],
+    optimizer=['Adam'],
+    optimizer_args = {
+        "lr": [5e-3, 5e-4]
+    },
+    data_args = {
+        "normalisation": ["zscore", "minmax"],
+        "batch_size": [64, 128, 256],
+        "batch_size_test": [64],
+        "fts_blacklist": [
+            set()
+        ],
+    },
+    training_args={
+        "epochs": [10],
+        "npp": [30, 100, 250],
+        "hyp_validation_mode": [True]
+    },
+    tag="Ablation-Job",
+    ablation_metric='mrr',
+    ablation_type=None, #full or rand, if given
+    timeout=-1, #seconds
+    max_iterations=-1,
+    train_and_eval_after = False,
+    train_and_eval_args = {
+        "epochs": 100,
+        "early_stopper": Early_Stopper(
+            start_epoch=5,
+            patience=15,
+            mode="on-falter",
+            precision=3
+        ),
+        "batch_size_test": 64,
+        "hyp_validation_mode": False
+    }
+)
+```
+
+### To Finetune a Pretrained Model onto a New KG
+Funetuning pretrained models can be done with the `finetune_job` function. At a minimum, you must provide:
+- the name of the dataset to finetune to
+- the checkpoint_id of the pretrained model
+- the number of epochs to train for
+
+Aside from this, the API is almost identical to that of the `do_job` function. Note that you *cannot* specify a different model (as you are loading an existing one!) nor a feature blacklist (as the model was pretrained to expect a fixed set of features). By default, TWIG-I will keep all settings from the original training round (these are saved with the checkpoint). As a result, **you can use this to resume training after a crash, or to add more epochs of training to a previously trained model.**
+
+The checkpoint ID of a model is always printed in the output of TWIG-I while training. It can also be found in the `checkpoints/` folder as part of checkpoint filenames. it will look something like `chkpt-ID_1726265127922990`, but with a different number attached to the end.
+
+A simple example of this follows. Please note that you will have to replace the checkpoint ID below with the ID of the checkpoint saved locally to your computer.
+```
+from twigi.twigi import finetune_job
+finetune_job(
+    dataset_names="UMLS",
+    checkpoint_id="chkpt-ID_1726265127922990",
+    training_args={
+        "epochs": 10
+    },
+)
+```
+
+TWIG-I defaults to useing the most recent checkpoint for finetuning. If you want to specify a different on, you can do that with the `epoch_state` parameter. For example (make sure to change the value of `epoch_state` to what you want!):
+```
+from twigi.twigi import finetune_job
+finetune_job(
+    dataset_names="UMLS",
+    checkpoint_id="chkpt-ID_1726265127922990",
+    epoch_state=5,
+    training_args={
+        "epochs": 10
+    },
+)
+```
+
+For reference, the full API of the function, and the default values assigned to all elements, are given below:
+```
+from twigi.twigi import finetune_job
+finetune_job(
+    dataset_names,
+    checkpoint_id,
+    epoch_state=-1,
+    negative_sampler=None,
+    loss_function=None,
+    early_stopper=Early_Stopper(
+        start_epoch=5,
+        patience=15,
+        mode="on-falter",
+        precision=3
+    ),
+    optimizer=None,
+    optimizer_args=None,
+    data_args=None,
+    training_args=None,
+    tag="Finetune-Job"
+)
+```
+
+### To Run a Hyperparameter Search for Finetuning
+Finetuning, in out experience, often requires different parameters than those used in pretraining. You can optimise those with the `finetune_ablation_job` function. The API to this is almost identical to the `ablation_job` function, except:
+- a feature blacklist cannot be specified (for the same reasons that it cannot be given for finetuning in general)
+- a few parameters (akin to those used in finetuning) were added to control the finetuning process
+
+Note that the number of epochs to train for need not be given -- it will default to 10 for thte hyperparameter search if a valus is not specified.
+
+The simplest example of using this pipeline is given below:
+```
+from twigi.twigi import finetune_ablation_job
+finetune_ablation_job(
+    dataset_names="UMLS",
+    checkpoint_id="chkpt-ID_1726265127922990",
+)
+```
+
+After that, you can add more parameters exactly as done with `ablation_job` or `finetune_job` to specify the grid of model settings to use, the epoch state to load from, etc. The full function signature, with all default values, is given below for reference.
+```
+from twigi.twigi import finetune_ablation_job
+finetune_ablation_job(
+    dataset_names,
+    checkpoint_id,
+    epoch_state=-1,
+    negative_sampler=['simple'],
+    loss_function=['margin-ranking(0.01)', 'margin-ranking(0.1)', 'margin-ranking(0.5)', 'pairwise-logistic'],
+    early_stopper=[None],
+    optimizer=['Adam'],
+    optimizer_args = {
+        "lr": [5e-3, 5e-4]
+    },
+    data_args = {
+        "normalisation": ["zscore", "minmax"],
+        "batch_size": [64, 128, 256],
+        "batch_size_test": [64],
+    },
+    training_args={
+        "epochs": [10],
+        "npp": [30, 100, 250],
+        "hyp_validation_mode": [True]
+    },
+    tag="Ablation-Job",
+    ablation_metric='mrr',
+    ablation_type=None, 
+    timeout=-1,
+    max_iterations=-1,
+    train_and_eval_after = False,
+    train_and_eval_args = {
+        "epochs": 100,
+        "early_stopper": Early_Stopper(
+            start_epoch=5,
+            patience=15,
+            mode="on-falter",
+            precision=3
+        ),
+        "batch_size_test": 64,
+        "hyp_validation_mode": False
+    }
+)
+```
 
 ## Architecture of the Library
 TWIG-I itself is a sort of library for learning to solve the LP task without embeddings. It does this using pre-defined structural features (a total of 22) that describe the local degrees and predicate frequencies in and around around a triple.

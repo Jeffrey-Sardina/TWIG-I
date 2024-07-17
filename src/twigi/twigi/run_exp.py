@@ -60,22 +60,21 @@ def load_nn(version, n_local):
     print("done loading NN")
     return model
 
-def load_optimizer(optimizer_name, model, lr):
+def load_optimizer(optimizer_name, model, **optimizer_args):
     '''
     load_optimizer() loads a PyTorch optimizer for use during learning. 
 
     The arguments it accepts are:
         - optimizer_name (str): the name of the optimizer that should be used.
         - model (torch.nn.Module): the PyTorch NN Model object containing TWIG's neural architecture.
-        - lr: the learning rate to be usedd by TWIG-I.
 
     The values it returns are:
         - optimizer (torch.optim.Optimizer): the optimizer object to be used
     '''
     if optimizer_name.lower() == "adam":
-        optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+        optimizer = torch.optim.Adam(model.parameters(), **optimizer_args)
     elif optimizer_name.lower() == "adagrad":
-        optimizer = torch.optim.Adagrad(model.parameters(), lr=lr)
+        optimizer = torch.optim.Adagrad(model.parameters(), **optimizer_args)
     else:
         assert False, f"Unrecognised optimizer: {optimizer_name}"
     return optimizer
@@ -323,6 +322,46 @@ def train_and_eval(
     print("done with training and eval")
     return results
 
+def save_model_settings(
+        checkpoint_config_name,
+        version,
+        dataset_names,
+        epochs,
+        optimizer_name,
+        optimizer_args,
+        normalisation,
+        batch_size,
+        batch_size_test,
+        npp,
+        use_train_filter,
+        use_valid_and_test_filters,
+        sampler_type,
+        loss_function,
+        fts_blacklist,
+        hyp_validation_mode,
+        early_stopper
+    ):
+    with open(checkpoint_config_name, 'wb') as cache:
+        to_save = {
+            "version": version,
+            "dataset_names": dataset_names,
+            "epochs": epochs,
+            "optimizer": optimizer_name,
+            "optimizer_args": optimizer_args,
+            "normalisation": normalisation,
+            "batch_size": batch_size,
+            "batch_size_test": batch_size_test,
+            "npp": npp,
+            "use_train_filter": use_train_filter,
+            "use_valid_and_test_filters": use_valid_and_test_filters,
+            "sampler_type": sampler_type,
+            "loss_function": loss_function,
+            "fts_blacklist": fts_blacklist,
+            "hyp_validation_mode": hyp_validation_mode,
+            "early_stopper": early_stopper
+        }
+        pickle.dump(to_save, cache)
+
 def main(
         version,
         dataset_names,
@@ -425,27 +464,25 @@ def main(
     # save hyperparameter settings
     model_name_prefix = 'chkpt-ID_' + str(int(random.random() * 10**16))
     checkpoint_config_name = os.path.join(checkpoint_dir, f'{model_name_prefix}.pkl')
-    with open(checkpoint_config_name, 'wb') as cache:
-        to_save = {
-            "version": version,
-            "dataset_names": dataset_names,
-            "epochs": epochs,
-            "optimizer": optimizer_name,
-            "optimizer_args": optimizer_args,
-            "lr": lr,
-            "normalisation": normalisation,
-            "batch_size": batch_size,
-            "batch_size_test": batch_size_test,
-            "npp": npp,
-            "use_train_filter": use_train_filter,
-            "use_valid_and_test_filters": use_valid_and_test_filters,
-            "sampler_type": sampler_type,
-            "loss_function": loss_function,
-            "fts_blacklist": fts_blacklist,
-            "hyp_validation_mode": hyp_validation_mode,
-            "early_stopper": early_stopper
-        }
-        pickle.dump(to_save, cache)
+    save_model_settings(
+        checkpoint_config_name,
+        version,
+        dataset_names,
+        epochs,
+        optimizer_name,
+        optimizer_args,
+        normalisation,
+        batch_size,
+        batch_size_test,
+        npp,
+        use_train_filter,
+        use_valid_and_test_filters,
+        sampler_type,
+        loss_function,
+        fts_blacklist,
+        hyp_validation_mode,
+        early_stopper
+    )
 
     # finally, we call the training and evaluation loops
     results = train_and_eval(
@@ -474,7 +511,6 @@ if __name__ == '__main__':
         - version: the version of the Neural Network to run. Default: "base"
         - dataset_names: the name (or names) of datasets to train and test on. This should either be a dataset natively present in PyKEEN (https://github.com/pykeen/pykeen#datasets), or a dataset (pre-split into train, test, valid splits) present in the local `./custom_datasets/` folder as [dataset_name].<train/test/valid>. If multiple are given, their training triples will be concatenated into a single tensor that is trained on, and testing will be done individually on each testing set of each dataset. When multiple datasets are given, they should be delimited by "_", as in "UMLS_DBpedia50_Kinships"
         - epochs: the number of epochs to train for
-        - lr: the learning rate to use during training. We do not use an LR scheduler, so the learning rate will not update during training. In all, cases, the default implementation of the Adam optimizer is used
         - optimizer_name: the optimizer to use to update model weights during learning.
         - normalisation: the normalisation method to be used when loading data (and when created vectorised forms of negatively sampled triples). "zscore", "minmax", and "none" are currently supported.
         - batch_size: the batch size to use while training

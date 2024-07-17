@@ -451,10 +451,6 @@ def run_training(
             verbose=verbose
         )        
 
-        # chechpointing
-        if epoch_num % checkpoint_every_n == 0:
-            save_checkpoint(epoch_num, model, model_name_prefix)
-            
         # validation / early stopping
         if valid_every_n > 0 and epoch_num % valid_every_n == 0 and epoch_num != epochs:
             save_checkpoint(epoch_num, model, model_name_prefix)
@@ -476,6 +472,8 @@ def run_training(
             if do_stop:
                 print(f'Early stopping triggered at epoch {epoch_num}')
                 break
+        elif epoch_num % checkpoint_every_n == 0:
+            save_checkpoint(epoch_num, model, model_name_prefix)
 
     print("Done Training!")
 

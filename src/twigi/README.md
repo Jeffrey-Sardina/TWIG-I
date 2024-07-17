@@ -96,6 +96,7 @@ do_job(
 ```
 
 For reference, the full funciton API and its defaults are given below:
+```
 do_job(
     dataset_names="UMLS",
     model='base',
@@ -124,6 +125,7 @@ do_job(
     },
     tag="super-cool-model"
 )
+```
 
 ### To Run a Hyperparameter Search or Ablation Study
 Running a hyperparameter search is done with `ablation_job`. Similar to running a TWIG model, it has a default hyperparameter grid (of 144 hyperparameter combinations in total). This is not exhaustive, so in pracactive you may want to add more.

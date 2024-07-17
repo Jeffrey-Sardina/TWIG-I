@@ -1,5 +1,5 @@
 # imports from twigi
-from run_exp import main, load_dataset, load_filters, load_negative_samplers, train_and_eval, load_nn, load_loss_function, load_optimizer
+from run_exp import main, load_dataset, load_filters, load_negative_samplers, train_and_eval, load_nn, load_loss_function, load_optimizer, save_model_settings
 from run_from_checkpoint import load_model_config
 from twig_nn import *
 from early_stopper import Early_Stopper
@@ -89,22 +89,18 @@ def manage_job_inputs(
             model = "linear"
         else:
             assert False, f"Invalid TWIG-I NN class given: {negative_sampler}"
-    elif type(model) is torch.nn.Module:
-        pass #user-defined model (already instantiated)
     else:
-        assert False, f"Unsupported input for model: {model}"
+        pass #user-defined model (already instantiated)
 
     # load default optimizer if needed
     if not optimizer:
         optimizer = torch.optim.Adam(model.parameters(), **optimizer_args)
     elif type(optimizer) == str:
-        optimizer = load_optimizer(optimizer, model, optimizer_args['lr'])
+        optimizer = load_optimizer(optimizer, model, **optimizer_args)
     elif inspect.isclass(optimizer):
         optimizer = optimizer(model.parameters(), **optimizer_args)
-    elif isinstance(optimizer, torch.Optimizer):
-        pass #user-defined negative sampler (already instantiated)
     else:
-        assert False, f"Unsupported input for optimizer: {optimizer}"
+        pass #user-defined negative sampler (already instantiated)
 
     # now we need to set up the negative sampler
     if type(negative_sampler) == str:
@@ -196,6 +192,7 @@ def do_job(
     print(f"\t tag: {tag}")
     print()
     
+    loss_function_name = loss_function
     (
         model,
         dataloaders,
@@ -219,8 +216,31 @@ def do_job(
     )
 
     # set up internal variables
-    model_name_prefix = tag + 'chkpt-ID_' + str(int(random.random() * 10**16))
+    model_name_prefix = tag + '-chkpt-ID_' + str(int(random.random() * 10**16))
 
+    # save model settings
+    checkpoint_config_name = os.path.join(checkpoint_dir, f'{model_name_prefix}.pkl')
+    save_model_settings(
+        checkpoint_config_name=checkpoint_config_name,
+        version='ignore',
+        dataset_names=dataset_names,
+        epochs=training_args["epochs"],
+        optimizer_name=optimizer,
+        optimizer_args=optimizer_args,
+        normalisation=data_args["normalisation"],
+        batch_size=data_args["batch_size"],
+        batch_size_test=data_args["batch_size_test"],
+        npp=training_args["npp"],
+        use_train_filter=False,
+        use_valid_and_test_filters=True,
+        sampler_type=negative_sampler,
+        loss_function=loss_function_name,
+        fts_blacklist=data_args["fts_blacklist"],
+        hyp_validation_mode=training_args["hyp_validation_mode"],
+        early_stopper=early_stopper
+    )
+
+    # run exp
     results = train_and_eval(
         model=model,
         training_dataloaders=dataloaders['train'],
@@ -262,9 +282,9 @@ def ablation_job(
             "npp": [30, 100, 250],
             "hyp_validation_mode": [True]
         },
-        tag="Ablation Job",
+        tag="Ablation-Job",
         ablation_metric='mrr',
-        ablation_type='full', #or 'rand'
+        ablation_type=None, #full or rand, if given
         timeout=-1, #seconds
         max_iterations=-1,
         train_and_eval_after = False,
@@ -302,6 +322,13 @@ def ablation_job(
         training_args["npp"] = [30, 100, 250]
     if not "hyp_validation_mode" in training_args:
         training_args["hyp_validation_mode"] = [True]
+    if not ablation_type:
+        # do random if the user request a stopping metric
+        if timeout or timeout > 0 or max_iterations or max_iterations > 0:
+            ablation_type = 'rand'
+        else:
+            # if no stopping metic is chosen for ablations, assume the user wants them all
+            ablation_type = 'full'
     if train_and_eval_after:
         if not "epochs" in train_and_eval_args:
             train_and_eval_args["epochs"] = 100
@@ -318,9 +345,9 @@ def ablation_job(
             train_and_eval_args["hyp_validation_mode"] = False
 
     # correct input -- if a single value was given, make it a single-valued list
-    if type(dataset_names) == str:
+    if type(dataset_names) == str or not isinstance(dataset_names, Iterable):
         dataset_names = [dataset_names]
-    if type(model) == str:
+    if type(model) == str or not isinstance(model, Iterable):
         model = [model]
     if type(negative_sampler) == str or not isinstance(negative_sampler, Iterable):
         negative_sampler = [negative_sampler]
@@ -328,7 +355,7 @@ def ablation_job(
         loss_function = [loss_function]
     if not isinstance(dataset_names, Iterable):
         early_stopper = [early_stopper]
-    if type(optimizer) == str or not isinstance(loss_function, Iterable):
+    if type(optimizer) == str or not isinstance(optimizer, Iterable):
         optimizer = [optimizer]
     for key in optimizer_args:
         if type(optimizer_args[key]) == str or not isinstance(optimizer_args[key], Iterable):
@@ -366,8 +393,7 @@ def ablation_job(
     # configure ablation type settings
     if ablation_type == 'rand':
         random.shuffle(grid)
-        if max_iterations and max_iterations > 0:
-            grid = grid[:max_iterations]
+        grid = grid[:max_iterations]
     elif ablation_type == 'full':
         pass # nothing to do
     else:
@@ -379,6 +405,7 @@ def ablation_job(
     best_results = None
     best_settings = None
     start_time = time.time()
+    print(f'Running on a grid of size {len(grid)}')
     for settings in grid:
         # unpack (same order as put into itertools)
         (
@@ -501,18 +528,18 @@ def ablation_job(
                 "npp": npp_val,
                 "hyp_validation_mode": train_and_eval_args["hyp_validation_mode"]
             },
-            tag=f"{tag}_train-and-eval-on-best"
+            tag=f"{tag}_train-eval-on-best"
         )
 
-def get_epoch_state(checkpoint_id):
-    all_epoch_states = glob(os.path.join(checkpoint_dir, f"{checkpoint_id}*.pt"))
-    all_epoch_states = []
+def get_epoch_state(checkpoint_id, epoch_state):
+    all_epoch_states = glob(os.path.join(checkpoint_dir, f"*{checkpoint_id}*.pt"))
+    epoch_state_vals = []
     for filename in all_epoch_states:
         file_epoch_state = os.path.basename(filename).split('_')[-1].split('.')[0].replace('e', '')
-        all_epoch_states.append(file_epoch_state)
+        epoch_state_vals.append(int(file_epoch_state))
     if epoch_state < 0:
-        epoch_state = max(all_epoch_states)
-    assert epoch_state in all_epoch_states, f"Provided epoch state {epoch_state} does not have a corresponding checkpont. Please choose an epoch state from {all_epoch_states}"
+        epoch_state = max(epoch_state_vals)
+    assert epoch_state in epoch_state_vals, f"Provided epoch state {epoch_state} does not have a corresponding checkpont. Please choose an epoch state from {epoch_state_vals}"
     return epoch_state
 
 def apply_user_override(
@@ -575,15 +602,23 @@ def finetune_job(
     ):
     if data_args:
         assert not "fts_blacklist" in data_args, "Feature blacklist cannot be changed during fintuning"
-    tag += "-from-" + checkpoint_id
 
     # load the desired epoch state
-    epoch_state = get_epoch_state(checkpoint_id)
+    epoch_state = get_epoch_state(checkpoint_id, epoch_state)
 
-    # load the model and config
-    torch_checkpont_path = os.path.join(checkpoint_dir, f"{checkpoint_id}_e{epoch_state}.pt")
-    model_config_path = os.path.join(checkpoint_dir, f"{checkpoint_id}.pkl")
+    # make a unique tag
+    tag += "-from-" + checkpoint_id + f'_e{epoch_state}'
+
+    # load the model
+    torch_checkpont_path = glob(os.path.join(checkpoint_dir, f'*{checkpoint_id}_e{epoch_state}.pt'))
+    assert len(torch_checkpont_path) == 1, f"expected to find exactly one file but found: {torch_checkpont_path} for query {os.path.join(checkpoint_dir, f'*{checkpoint_id}_e{epoch_state}.pt')}"
+    torch_checkpont_path = torch_checkpont_path[0]
     pretrained_model = torch.load(torch_checkpont_path)
+    
+    # load the config
+    model_config_path = glob(os.path.join(checkpoint_dir, f"*{checkpoint_id}.pkl"))
+    assert len(model_config_path) == 1
+    model_config_path = model_config_path[0]
     model_config = apply_user_override(
         model_config=load_model_config(model_config_path),
         negative_sampler=negative_sampler,
@@ -611,7 +646,7 @@ def finetune_job(
         },
         training_args={
             "epochs": model_config['epochs'],
-            "npp": model_config['nmodelpp'],
+            "npp": model_config['npp'],
             "hyp_validation_mode": model_config['hyp_validation_mode']
         },
         tag=tag
@@ -622,7 +657,7 @@ def finetune_ablation_job(
         checkpoint_id,
         epoch_state=-1,
         negative_sampler=['simple'],
-        loss_function=['margin-ranking(0.01), margin-ranking(0.1), margin-ranking(0.5), pairwise-logistic'],
+        loss_function=['margin-ranking(0.01)', 'margin-ranking(0.1)', 'margin-ranking(0.5)', 'pairwise-logistic'],
         early_stopper=[None],
         optimizer=['Adam'],
         optimizer_args = {
@@ -632,17 +667,17 @@ def finetune_ablation_job(
             "normalisation": ["zscore", "minmax"],
             "batch_size": [64, 128, 256],
             "batch_size_test": [64],
-            "fts_blacklist": [
-                set()
-            ],
         },
         training_args={
             "epochs": [10],
             "npp": [30, 100, 250],
             "hyp_validation_mode": [True]
         },
-        tag="Ablation Job",
+        tag="Ablation-Job",
         ablation_metric='mrr',
+        ablation_type=None, 
+        timeout=-1,
+        max_iterations=-1,
         train_and_eval_after = False,
         train_and_eval_args = {
             "epochs": 100,
@@ -661,45 +696,30 @@ def finetune_ablation_job(
     tag += "-from-" + checkpoint_id
 
     # load the desired epoch state
-    epoch_state = get_epoch_state(checkpoint_id)
+    epoch_state = get_epoch_state(checkpoint_id, epoch_state)
 
-    # load the model and config
-    torch_checkpont_path = os.path.join(checkpoint_dir, f"{checkpoint_id}_e{epoch_state}.pt")
-    model_config_path = os.path.join(checkpoint_dir, f"{checkpoint_id}.pkl")
+    # load the model
+    torch_checkpont_path = glob(os.path.join(checkpoint_dir, f'*{checkpoint_id}_e{epoch_state}.pt'))
+    assert len(torch_checkpont_path) == 1, f"expected to find exactly one file but found: {torch_checkpont_path} for query {os.path.join(checkpoint_dir, f'*{checkpoint_id}_e{epoch_state}.pt')}"
+    torch_checkpont_path = torch_checkpont_path[0]
     pretrained_model = torch.load(torch_checkpont_path)
-    model_config = apply_user_override(
-        model_config=load_model_config(model_config_path),
+
+    # run the ablation
+    results = ablation_job(
+        dataset_names=dataset_names,
+        model=pretrained_model,
         negative_sampler=negative_sampler,
         loss_function=loss_function,
         early_stopper=early_stopper,
         optimizer=optimizer,
         optimizer_args=optimizer_args,
         data_args=data_args,
-        training_args=training_args
-    )
-
-    # run the ablation
-    results = ablation_job(
-        dataset_names=dataset_names,
-        model=pretrained_model,
-        negative_sampler=model_config['sampler_type'],
-        loss_function=model_config['loss_function'],
-        early_stopper=model_config['early_stopper'],
-        optimizer=model_config['optimizer'],
-        optimizer_args=model_config['optimizer_args'],
-        data_args = {
-            "normalisation": model_config['normalisation'],
-            "batch_size": model_config['batch_size'],
-            "batch_size_test": model_config['batch_size_test'],
-            "fts_blacklist": model_config['fts_blacklist'],
-        },
-        training_args={
-            "epochs": model_config['epochs'],
-            "npp": model_config['nmodelpp'],
-            "hyp_validation_mode": model_config['hyp_validation_mode']
-        },
+        training_args=training_args,
         tag=tag,
         ablation_metric=ablation_metric,
+        ablation_type=ablation_type, 
+        timeout=timeout,
+        max_iterations=max_iterations,
         train_and_eval_after=train_and_eval_after,
         train_and_eval_args=train_and_eval_args
     )

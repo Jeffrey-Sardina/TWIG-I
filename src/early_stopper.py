@@ -6,7 +6,7 @@ class Early_Stopper:
         NOTE that epochs are 1-indexed, so the first epoch is epoch 1.
 
         The arguments it accepts are:
-            - start_epoch (int): the first epoch on which the early stopping could be applied (this is often called a `burn-in` time)
+            - start_epoch (int): the number of epochs to wait before early stopping metrics will be considered. This means that prevous MRR values are not collected before this value, and as such at they cannot contribute to early stopping.
             - patience (int): the number of epochs to wait after seeing what would otherwise be a stop-condition before the early stopping is actually applied. This is inclusive: so if it is 10, and early stopping is done very 5 epochs, it will make a choice based on the current eval and the one previous validation cycle. If it is 15, in the above sample, it will make a choice based on the last 2 validation cycles, etc.
             - mode (str): the mode of early stopping to use. Options are as follows:
                 - "on-falter" -- trigger early stopping the first time a validation result does not get better than a previous result
@@ -48,11 +48,12 @@ class Early_Stopper:
         curr_mrr = int(round((float(curr_mrr) * 10  ** self.precision), 0))
         if len(self.validation_results) > 0:
             if self.mode == "on-falter":
-                if curr_epoch > self.start_epoch and self.is_faltering(curr_epoch, curr_mrr):
+                if self.is_faltering(curr_epoch, curr_mrr):
                     should_stop = True
             else:
                 assert False, f"Unknown mode: {self.mode}. Mode must be one of: {self.valid_modes}"
-        self.validation_results.append((curr_epoch, curr_mrr))
+        if curr_epoch > self.start_epoch:
+            self.validation_results.append((curr_epoch, curr_mrr))
         return should_stop
 
     def is_faltering(self, curr_epoch, curr_mrr):

@@ -16,13 +16,6 @@ import random
 import pickle
 
 '''
-===============
-Reproducibility
-===============
-'''
-torch.manual_seed(17)
-
-'''
 =========
 Constants
 =========

@@ -10,13 +10,6 @@ from frozendict import frozendict
 from array import array
 
 '''
-===============
-Reproducibility
-===============
-'''
-torch.manual_seed(17)
-
-'''
 ====================
 Constant Definitions
 ====================

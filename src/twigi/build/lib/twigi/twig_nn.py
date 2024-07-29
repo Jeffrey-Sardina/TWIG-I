@@ -3,13 +3,6 @@ import torch
 from torch import nn
 
 '''
-===============
-Reproducibility
-===============
-'''
-torch.manual_seed(17)
-
-'''
 ==========================
 Neural Network Definitions
 ==========================

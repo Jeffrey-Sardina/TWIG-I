@@ -6,13 +6,6 @@ import torch
 import os
 
 '''
-===============
-Reproducibility
-===============
-'''
-torch.manual_seed(17)
-
-'''
 ====================
 Constant Definitions
 ====================

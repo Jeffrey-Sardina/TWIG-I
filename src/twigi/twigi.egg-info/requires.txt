@@ -1,7 +1,0 @@
-numpy
-torch
-torchvision
-torchaudio
-torcheval
-pykeen
-frozendict

@@ -1,0 +1,7 @@
+numpy==2.0.0
+torch
+torchvision
+torchaudio
+torcheval
+pykeen
+frozendict

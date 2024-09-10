@@ -217,7 +217,7 @@ Funetuning pretrained models can be done with the `finetune_job` function. At a 
 
 Aside from this, the API is almost identical to that of the `do_job` function. Note that you *cannot* specify a different model (as you are loading an existing one!) nor a feature blacklist (as the model was pretrained to expect a fixed set of features). By default, TWIG-I will keep all settings from the original training round (these are saved with the checkpoint). As a result, **you can use this to resume training after a crash, or to add more epochs of training to a previously trained model.**
 
-The checkpoint ID of a model is always printed in the output of TWIG-I while training. It can also be found in the `checkpoints/` folder as part of checkpoint filenames. it will look something like `chkpt-ID_1726265127922990`, but with a different number attached to the end.
+The checkpoint ID of a model is always printed in the output of TWIG-I while training -- you can find it right above the evaluation results in TWIG's printed output. It can also be found in the `checkpoints/` folder as part of checkpoint filenames. it will look something like `chkpt-ID_1726265127922990`, but with a different number attached to the end.
 
 A simple example of this follows. Please note that you will have to replace the checkpoint ID below with the ID of the checkpoint saved locally to your computer.
 ```

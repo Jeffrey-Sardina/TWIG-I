@@ -8,7 +8,7 @@ setuptools.setup(
     name="twigi", 
   
     # version of the module 
-    version="1.0.7",
+    version="1.0.8",
   
     # Name of Author 
     author="Jeffrey Seathrún Sardina", 
@@ -31,7 +31,7 @@ setuptools.setup(
     # if module has dependencies i.e. if your package rely on other package at pypi.org 
     # then you must add there, in order to download every requirement of package 
     install_requires=[ 
-        "numpy", 
+        "numpy==2.0.0", 
         "torch", 
         "torchvision", 
         "torchaudio", 

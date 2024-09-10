@@ -1,0 +1,5 @@
+Aragorn	Ally-Of	Frodo
+Aragorn	Enemy-Of	Saruman
+Aragorn	Enemy-Of	Sauron
+Frodo	Ally-Of	Aragorn
+Frodo	Enemy-Of	Sauron

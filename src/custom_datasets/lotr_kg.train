@@ -1,0 +1,24 @@
+Aragorn	Ally-Of	Gandalf
+Aragorn	Is-From	Gondor
+Edoras	Capital-Of	Rohan
+Edoras	Located-In	Rohan
+Frodo	Ally-Of	Gandalf
+Frodo	Enemy-Of	Saruman
+Gandalf	Ally-Of	Frodo
+Gondor	At-War-With	Isengard
+Gondor	Has-Alliance-With	Rohan
+Isengard	Has-Alliance-With	Mordor
+Minas Tirith	Capital-Of	Gondor
+Minas Tirith	Located-In	Gondor
+Mordor	Has-Alliance-With	Isengard
+Mount Doom	Located-In	Mordor
+Osgiliath	Located-In	Gondor
+Rohan	At-War-With	Isengard
+Rohan	Contains	Underharrow
+Rohan	Has-Alliance-With	Gondor
+Saruman	Ally-Of	Sauron
+Saruman	Enemy-Of	Frodo
+Saruman	Is-From	Isengard
+Sauron	Ally-Of	Saruman
+Sauron	Is-From	Mordor
+Underharrow	Located-In	Rohan

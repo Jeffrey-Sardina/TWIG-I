@@ -1,12 +1,12 @@
 from twigi import *
 
-
+# pretrain
 dataset = 'CoDExSmall'
 npp = 100
 lr = 5e-3
 batch_size = 64
 do_job(
-    "Wn18RR",
+    dataset,
     model='base',
     negative_sampler="simple",
     loss_function="margin-ranking(0.1)",
@@ -30,12 +30,12 @@ do_job(
     tag=f"{dataset}-pretrain"
 )
 
-dataset = 'DBpedai50'
+dataset = 'DBpedia50'
 npp = 30
 lr = 5e-3
 batch_size = 128
 do_job(
-    "Wn18RR",
+    dataset,
     model='base',
     negative_sampler="simple",
     loss_function="margin-ranking(0.1)",
@@ -64,7 +64,7 @@ npp = 500
 lr = 5e-3
 batch_size = 128
 do_job(
-    "Wn18RR",
+    dataset,
     model='base',
     negative_sampler="simple",
     loss_function="margin-ranking(0.1)",
@@ -93,7 +93,7 @@ npp = 100
 lr = 5e-4
 batch_size = 128
 do_job(
-    "Wn18RR",
+    dataset,
     model='base',
     negative_sampler="simple",
     loss_function="margin-ranking(0.1)",
@@ -115,4 +115,88 @@ do_job(
         "valid_every_n": -1
     },
     tag=f"{dataset}-pretrain"
+)
+
+# finetune 10 -- from FB15k237
+checkpoint_id = "chkpt-ID_6385341367018417"
+
+dataset = 'CoDExSmall'
+npp = 100
+lr = 5e-3
+batch_size = 64
+finetune_job(
+    dataset,
+    checkpoint_id,
+    epoch_state=10,
+    negative_sampler=None,
+    loss_function=None,
+    early_stopper=None,
+    optimizer=None,
+    optimizer_args={
+        "lr": lr
+    },
+    data_args={
+        "batch_size": batch_size
+    },
+    training_args={
+        "epochs": 10,
+        "npp": npp,
+        "hyp_validation_mode": False,
+        "valid_every_n": -1
+    },
+    tag=f"FB15k237-to-{dataset}"
+)
+
+dataset = 'DBpedia50'
+npp = 30
+lr = 5e-3
+batch_size = 128
+finetune_job(
+    dataset,
+    checkpoint_id,
+    epoch_state=10,
+    negative_sampler=None,
+    loss_function=None,
+    early_stopper=None,
+    optimizer=None,
+    optimizer_args={
+        "lr": lr
+    },
+    data_args={
+        "batch_size": batch_size
+    },
+    training_args={
+        "epochs": 10,
+        "npp": npp,
+        "hyp_validation_mode": False,
+        "valid_every_n": -1
+    },
+    tag=f"FB15k237-to-{dataset}"
+)
+
+dataset = 'WN18RR'
+npp = 500
+lr = 5e-3
+batch_size = 128
+finetune_job(
+    dataset,
+    checkpoint_id,
+    epoch_state=10,
+    negative_sampler=None,
+    loss_function=None,
+    early_stopper=None,
+    optimizer=None,
+    optimizer_args={
+        "lr": lr
+    },
+    data_args={
+        "batch_size": batch_size
+    },
+    training_args={
+        "epochs": 10,
+        "npp": npp,
+        "hyp_validation_mode": False,
+        "valid_every_n": -1
+    },
+    tag=f"FB15k237-to-{dataset}"
 )

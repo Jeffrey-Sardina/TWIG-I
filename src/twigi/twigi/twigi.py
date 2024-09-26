@@ -82,13 +82,13 @@ def manage_job_inputs(
         if model.lower() == "TWIGI_Linear".lower():
             model = "linear"
         model = load_nn(model, n_local=n_local)
-    elif inspect.isclass(negative_sampler):
+    elif inspect.isclass(model):
         if model == TWIGI_Base:
             model = "base"
         elif model == TWIGI_Linear:
             model = "linear"
         else:
-            assert False, f"Invalid TWIG-I NN class given: {negative_sampler}"
+            model = model(n_local=n_local) # user defined class
     else:
         pass #user-defined model (already instantiated)
 
@@ -100,7 +100,7 @@ def manage_job_inputs(
     elif inspect.isclass(optimizer):
         optimizer = optimizer(model.parameters(), **optimizer_args)
     else:
-        pass #user-defined negative sampler (already instantiated)
+        pass #user-defined optimiser class(already instantiated)
 
     # now we need to set up the negative sampler
     if type(negative_sampler) == str:
@@ -400,7 +400,6 @@ def ablation_job(
         assert False, f"Invalid ablation type: {ablation_type}. Must bbe either 'full' or 'rand'"  
 
     # run ablations on the grid
-    ablation_results = {}
     best_metric = 0.0
     best_results = None
     best_settings = None
@@ -450,8 +449,7 @@ def ablation_job(
             tag=tag
         )
 
-        # process results (and record them!)
-        ablation_results[settings] = results
+        # process results
         metrics = []
         for dataset_name in dataset_names:
             metrics.append(results[dataset_name][ablation_metric])
@@ -468,6 +466,7 @@ def ablation_job(
             break
 
     print('Ablation done!')
+    print(f'the best results were: {best_results}')
     print('The best settings found were:')
     (
         mod,
@@ -506,6 +505,11 @@ def ablation_job(
     print()
 
     if train_and_eval_after:
+        if len(training_args['epochs']) == 1:
+            epochs_to_run = train_and_eval_args["epochs"]
+        else:
+            epochs_to_run = n_epochs
+
         print('Now training your final model!')
         do_job(
             dataset_names=dataset_names,
@@ -524,7 +528,7 @@ def ablation_job(
                 "fts_blacklist": ft_blacklist,
             },
             training_args={
-                "epochs": train_and_eval_args["epochs"],
+                "epochs": epochs_to_run,
                 "npp": npp_val,
                 "hyp_validation_mode": train_and_eval_args["hyp_validation_mode"]
             },
@@ -673,7 +677,7 @@ def finetune_ablation_job(
             "npp": [30, 100, 250],
             "hyp_validation_mode": [True]
         },
-        tag="Ablation-Job",
+        tag="Finetune-Ablation-Job",
         ablation_metric='mrr',
         ablation_type=None, 
         timeout=-1,

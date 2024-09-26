@@ -31,7 +31,7 @@ setuptools.setup(
     # if module has dependencies i.e. if your package rely on other package at pypi.org 
     # then you must add there, in order to download every requirement of package 
     install_requires=[ 
-        "numpy", 
+        "numpy==2.0.0", 
         "torch", 
         "torchvision", 
         "torchaudio", 

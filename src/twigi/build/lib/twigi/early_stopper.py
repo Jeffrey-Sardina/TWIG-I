@@ -23,7 +23,6 @@ class Early_Stopper:
         self.validation_results = []
         self.valid_modes = ("on-falter", "never")
 
-
         # input validation
         assert type(start_epoch) == int and start_epoch >= 0
         assert type(patience) == int

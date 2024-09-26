@@ -12,8 +12,10 @@ TWIG-I is meant as an alternative to other link predictors such as Knowledge Gra
 
 Finally, **TWIG-I is completely GenAI free**. No GenAI tools were used to create TWIG-I, its documentation, or to help in the communication of it. Under no circumstances are we willing for TWIG-I to be used as input to training a GenAI algorithm --  we as authors retain copyright on TWIG-I and are unwilling for it, its paper, or its documentation to be used for this purpose.
 
-## Using TWIG-I from Pypi
-TWIG-I can now be installed from pypi! It works with Python 3.9 (and likely most other recent versions). You can install it with:
+## TWIG-I Quickstart
+*This section gives you a quick view of how to use TWIG-I, but won't tell you how to extend it with new features. To see how to extend TWIG-I with your own, custom-coded components, see the following section.*
+
+TWIG-I can be installed from pypi! It works with Python 3.9 (and likely most other recent versions). You can install it with:
 ```
 pip install twigi
 ```
@@ -215,7 +217,7 @@ Funetuning pretrained models can be done with the `finetune_job` function. At a 
 
 Aside from this, the API is almost identical to that of the `do_job` function. Note that you *cannot* specify a different model (as you are loading an existing one!) nor a feature blacklist (as the model was pretrained to expect a fixed set of features). By default, TWIG-I will keep all settings from the original training round (these are saved with the checkpoint). As a result, **you can use this to resume training after a crash, or to add more epochs of training to a previously trained model.**
 
-The checkpoint ID of a model is always printed in the output of TWIG-I while training. It can also be found in the `checkpoints/` folder as part of checkpoint filenames. it will look something like `chkpt-ID_1726265127922990`, but with a different number attached to the end.
+The checkpoint ID of a model is always printed in the output of TWIG-I while training -- you can find it right above the evaluation results in TWIG's printed output. It can also be found in the `checkpoints/` folder as part of checkpoint filenames. it will look something like `chkpt-ID_1726265127922990`, but with a different number attached to the end.
 
 A simple example of this follows. Please note that you will have to replace the checkpoint ID below with the ID of the checkpoint saved locally to your computer.
 ```
@@ -325,52 +327,121 @@ finetune_ablation_job(
 )
 ```
 
-## Architecture of the Library
-TWIG-I itself is a sort of library for learning to solve the LP task without embeddings. It does this using pre-defined structural features (a total of 22) that describe the local degrees and predicate frequencies in and around around a triple.
-
-As much as is possible, all functionality is placed into its own module files. These are all in the `src/` folder, and are as follows:
-- **early_stopper.py** -- contains the logic for early stopping during training. Early stopping, by default, not used during hyperparameter validation, only during final eval on the test set.
-- **load_data.py** -- contains all logic for loading, pre-processing, and normalising data used for training, testing, and validation.
-- **loss.py** -- contains implementations of all loss functions
-- **negative_sampler.py** -- contains all implementations of negative samplers; i.e. the part of TWIG that creates randomly corrupted triples to uses as negative examples during training.
-- **run_exp.py** -- contains all code needed to run TWIG from the command line, including accepting command line arguments, and orchestrating all other modules to make TWIG work.
-- **run_from_checkpoint.py** - contains all code needed to re-run TWIG-I from a checkpoint made during training.
-- **trainer.py** -- contains implementations for processing batches, generating negatives, and calculating losses during training and testing. It also reports all test statistics and reports on validation data during training.
-- **twig_nn.py** -- contains the TWIG neural network implementation.
-- **utils.py** -- contains implementations of various utility functions, mostly for for loading and processing graph data and putting it into a form TWIG can recognise.
-
-All of these files are fully documented, so if you are curious about how anything works see the function comments in those files. If you don't know where to start, the answer is simple: **run_exp.py**. It calls all o the other files as sub-routines to coordinate the entire learning process from data loading to writing the results. From there, you can look at any specific module that you want.
-
-## Running Basic Experiments with TWIG-I
-The folder `jobs/examples/` contains preset example experiments that you can modify and run very quickly and easily. These are:
-- **jobs/examples/ft-ablations.sh** -- for feature ablations of the TWIG-I model
-- **jobs/examples/finetune.sh** -- to load a pre-trained TWIG-I model and fine-tune it onto a new KG. Note that **you will have to edit the checkpoint IDs** to use your own based on the random IDs generated while running TWIG on its optimal hyperparameters
-- **jobs/examples/hypsearch.sh** -- for running a hyperparameter search over some TWIG-I hyperparameters
-- **jobs/examples/standard-run.sh** -- for running a training and evaluation on a given set of hyperparameters
-
-## Using TWIG-I on New Datasets (Standard or Finetuning)
+### Using TWIG-I on New Datasets (Standard or Finetuning)
 There are 2 ways to use TWIG-I on a new dataset. If you dataset is given in PyKEEN's default list (https://github.com/pykeen/pykeen#datasets), you can simply pass it by name to TWIG-I and all will work out-of-the-box since TWIG-I uses PyKEEN as a backend data loader.
 
-If you have a custom dataset (such as a KG you made yourself), you need to add them into `custom_datasets/`. To be specific, you your new KG is named MyKG, you need to create the following files:
-- custom_datasets/MyKG.train
-- custom_datasets/MyKG.test
-- custom_datasets/MyKG.valid
+If you have a custom dataset (such as a KG you made yourself), you need to add them into a folder called `custom_datasets/` in your working directory. To be specific, you your new KG is named MyKG, you need to create the following files:
+- ./custom_datasets/MyKG.train
+- ./custom_datasets/MyKG.test
+- ./custom_datasets/MyKG.valid
 
-Each file must be a tab-separated values file where each row represents a triple in the order subject, predicate, object. Once you have done this, you can have TWIG-I use your dataset by passing "MyKG" to it as the datasets parameter, exactly as you would with a PyKEEN dataset.
-
-Note: I **highly** recommend that you use the `jobs/train-eval.sh` and `jobs/from-checkpoint.sh` for your training / finetuning as these files abstract away much of the complexity that you do not need to deal with directly. They also take care of automatic logging and the such.
+Each file must be a tab-separated values file where each row represents a triple in the order subject, predicate, object. Once you have done this, you can have TWIG-I use your dataset by passing "MyKG" to it as the datasets parameter.
 
 Finally, TWIG-I supports training on multiple KGs at the same time. I have, in my experiments, yet to see a case where this leads to increased performance, but have also done very little testing of it. That should work out of the box (regardless of whatever other changes you do or do not make), so if you do wish to try it, go ahead!
 
 ## Extending TWIG-I
-We're all researchers, right? So you are probably here thinking: "This is super cool (well, I hope you are thinking that at least!). I have a super awesome idea that uses TWIG-I how do I implement it?"
+We're all researchers, right? So you are probably here thinking: "This is super cool (well, I hope you are thinking that at least!). I have a super awesome idea that uses TWIG-I, how do I implement it?"
 
 This section will teach you how to do that. A word, however -- while I have made every effort to make this code interoperable, modular, and extensible, it is still research code and is not as well-built as other systems (say PyKEEN) which have large development teams. If you have any issues, please raise an issue on GitHub and I'd be happy to help out!
 
-### Making a New Triple Scoring Model
-TWIG-I scores triples given a single triple feature vector, and outputting a single score (higher scores represent that a triple is more plausibly true). If you want to add a new model, you can do this in `twig_nn.py`. Just copy on of the existing models and edit however you would like.
+### Creating a new Neural Network for TWIG-I
+You can change the `model` parameter of `do_job` (or any other API function) to use a custom model that you have created. It will accept any custom class that inherits from nn.Module and has an `n_local` parameter that tells it how many input features it expects. For example, support you wanted to make TWIG-I a one-layer NN. You could do this as so:
 
-As long as you accept `n_local` many features as input in your first layer and output (for each for in the input) a single scalar-valued score, it does not matter what operations you perform, and all of your changes can be made in (and only in) that one file.
+```
+class One_Layer_TWIGI(nn.Module):
+    def __init__(self, n_local):
+        # n_local is the number of features in the input vector
+        super().__init__()
+        self.n_local = n_local
+        self.linear_final = nn.Linear(
+            in_features=n_local,
+            out_features=1
+        )
+        self.sigmoid_final = nn.Sigmoid()
+
+    def forward(self, X):
+        '''
+        forward() defines the forward pass of the NN and the neural architecture.
+
+        The arguments it accepts are:
+            - X (Tensor): a tensor with feature vectors as rows, and as many rows as the batch size that is in use.
+
+        The values it returns are:
+            - X (Tensor): tensor with the same number of rows as the input, but only one value in each row, wich represents the score of the triple that was described by that row's feature vector.
+        '''
+        X = self.linear_final(X)
+        X = self.sigmoid_final(X)
+        return X
+```
+
+You can then use this model in TWIG-I as so:
+```
+from twigi.twigi import do_job
+do_job('UMLS', model=One_Layer_TWIGI)
+```
+
+### Adding a new Optimiser
+To add an optimiser (or to make an optimiser with new hyperparameters), all you have to do is import the optimiser of your choice from PyTorch and define its hyperparameters. Then you pass that to the `optimizer` and `optimizer_args` parameters of any TWIG-I function call. For example, to use TWIG-I with SDG, you would do:
+```
+import torch
+from twigi.twigi import do_job
+
+optimizer = torch.optim.SGD
+optimizer_args = {'lr': 5e-3}
+do_job('UMLS', model='base', optimizer=optimizer, optimizer_args=optimizer_args)
+```
+
+### Adding or Editing an Early Stopping
+Editing the default configurations of an early stopper is quite easy -- all you have to is is pass in a new Early_Stopper object, instantiated with different values, to the early_stopper parameter of any TWIG-I function call.
+
+For example, you could do:
+```
+from twigi.twigi import do_job, Early_Stopper
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    early_stopper=Early_Stopper(
+        start_epoch=5,
+        patience=15,
+        mode="on-falter",
+        precision=3
+    ),
+)
+```
+
+For reference, the parameter values to the early stopper have the following meanings:
+- start_epoch (int): the number of epochs to wait before early stopping metrics will be considered. This means that prevous MRR values are not collected before this value, and as such at they cannot contribute to early stopping.
+- patience (int): the number of epochs to wait after seeing what would otherwise be a stop-condition before the early stopping is actually applied. This is inclusive: so if it is 10, and early stopping is done very 5 epochs, it will make a choice based on the current eval and the one previous validation cycle. If it is 15, in the above sample, it will make a choice based on the last 2 validation cycles, etc.
+- mode (str): the mode of early stopping to use. Options are as follows:
+    - "on-falter" -- trigger early stopping the first time a validation result does not get better than a previous result
+    - "never" -- never do early stopping
+- precision (int): the number of decimal points to consider when testing to change in MRR.
+
+
+To create your own early stopper, you must create your own class that implements the `assess_validation_result()` function. As long as you do not change that function's API, your new early stopper will work out-of-the-box with TWIG-I. Here's a dummy Early Stopper you could write:
+
+```
+class No_Stop:
+    def __init__(self):
+        pass
+
+    def assess_validation_result(self, curr_epoch, curr_mrr):
+        should_stop = False
+        return should_stop
+```
+
+This early stopper will never trigger early stopping.
+
+You could then use it as so:
+```
+from twigi.twigi import do_job
+early_stopper=No_Stop()
+do_job(
+    dataset_names="UMLS",
+    model='base',
+    early_stopper=early_stopper
+)
+```
 
 ### Removing Features from the Default Feature Vector
 Want to do a feature ablation? We have you covered! It's quite easy -- just run `jobs/train-eval.sh` and pass the names of the features you **do not** want to use to its `$fts_blacklist` parameter on the command line. Easy as! As a quick note, all possible features (22 total) that are used by default are (in order):
@@ -405,19 +476,27 @@ Features describing the neighbourhood of the object node in the given triple (8)
 
 This approach is great for testing, but will lead to notably somewhat increased runtimes due to the way that features are removed. If you want to (permanently) delete a feature, this is a more involved process. Take a look at the section on adding a new feature to what needs to change -- and then just do that in reverse :D
 
+## Editing TWIG-I from Source
+### Architecture of the Library
+As much as is possible, all functionality is placed into its own module files. These are all in the `src/` folder, and are as follows:
+- **early_stopper.py** -- contains the logic for early stopping during training. Early stopping, by default, not used during hyperparameter validation, only during final eval on the test set.
+- **load_data.py** -- contains all logic for loading, pre-processing, and normalising data used for training, testing, and validation.
+- **loss.py** -- contains implementations of all loss functions
+- **negative_sampler.py** -- contains all implementations of negative samplers; i.e. the part of TWIG that creates randomly corrupted triples to uses as negative examples during training.
+- **run_exp.py** -- contains all code needed to run TWIG from the command line, including accepting command line arguments, and orchestrating all other modules to make TWIG work.
+- **run_from_checkpoint.py** - contains all code needed to re-run TWIG-I from a checkpoint made during training.
+- **trainer.py** -- contains implementations for processing batches, generating negatives, and calculating losses during training and testing. It also reports all test statistics and reports on validation data during training.
+- **twig_nn.py** -- contains the TWIG neural network implementation.
+- **utils.py** -- contains implementations of various utility functions, mostly for for loading and processing graph data and putting it into a form TWIG can recognise.
+
+All of these files are fully documented, so if you are curious about how anything works see the function comments in those files. If you don't know where to start, the answer is simple: **run_exp.py**. It calls all of the other files as sub-routines to coordinate the entire learning process from data loading to writing the results. From there, you can look at any specific module that you want.
+
 ### Adding new Features to TWIG-I
-Adding new features is (somewhat) straightforward, although it has been made somewhat more involved due to several runtime optimisations I have made to how data is loaded. If you want to do this you need to modify the data loader.
+Adding new features is (somewhat) straightforward, although it has been made somewhat more involved due to several runtime optimisations I have made to how data is loaded. If you want to do this you need to modify the data loader in code -- sadly you cannot do this without editing source code yet.
 
 **load_data.py** -- Modify the `Structure_Loader` class to add you feature to the feature vector it outputs from `__call__`. You may want to modify `build_neighbour_cache` if you want to precalculate some features to a cache as an optimisation strategy, but this is not necessary. You will also need to modify `create_negative_prefab_ocorr`, `vec_from_prefab_ocorr`, `create_negative_prefab_scorr`, and `vec_from_prefab_scorr` -- these are functions used in negative sampling -- to load your feature there. Finally, you will need to index your feature by adding it to the feature index maps under the constants heading at the top of the file.
 
 As long as you keep the general structure of the TWIG-I code and add your new feature into the `ft_to_idx` registry, you should be able to do feature ablation (see above) on your custom features just as well as on the default features!
-
-### Adding a New Negative Sampling Strategy
-To add a new negative sampling strategy, you need to modify `negative_sampler.py`. Specifically, you must extend the `Negative_Sampler` class and implement the `get_negatives` function. You should always define a training mode for your negative sampler (where the sampler generates some number of negatives per positive). While you can define a testing mode (that generates all possible negatives, with or without filtering), there is no need to do so as the `Optimised_Negative_Sampler` already does this.
-
-As such, we recommend that you create an `Optimised_Negative_Sampler` object as an attribute of your custom negative sampler, and use it for the testing case. This way, you only need to think about how you want to generate negatives for training, and you can simply defer the call to the `Optimised_Negative_Sampler`during th testing phase in your negative sampler. For examples of how to write a negative sampler, feel free to take a look at `Optimised_Negative_Sampler`.
-
-If your negative sampler needs more arguments to its init function that are normally given, you cna add those to it in `run_exp.py`.
 
 ### Adding a New Loss Function
 To add a new loss function, you need to edit the `loss.py` file. All losses right now are assumed to be pairwise losses -- i.e. comparing the score of each negative to its positive in 1:1 pairs and penalising cases where the negative outscores the positive. If you want to implement a new pairwise loss function, it will be super easy: just copy one of the losses in the file and write your own equation inside!
@@ -426,16 +505,12 @@ Once you have your loss, edit `load_loss_function` in `run_exp.py` to allow TWIG
 
 If you want to implement something that is ot a pairwise loss (i.e. pointwise or setwise losses, or other losses), you will need to not only modify `loss.py` as above, but may also need to modify how scores are calculated and send to the loss function in `do_batch` in `trainer.py`. This depends heavily on hte loss you are implementing, so I will leave it there for now.
 
-### Adding a new Optimiser
-To add an optimiser (or to make an optimiser with new hyperparameters), just edit `load_optimiser` in `run_exp.py` with whatever configuration you want. Currently the only hyperparameter to the optimiser that we expose for TWIG-I is learning rate -- if you want to change others, you'll have to manually implement them there.
+### Adding a New Negative Sampling Strategy
+To add a new negative sampling strategy, you need to edit `negative_sampler.py`. In that file, you must extend the `Negative_Sampler` class and implement the `get_negatives` function. You should always define a training mode for your negative sampler (where the sampler generates some number of negatives per positive). While you can define a testing mode (that generates all possible negatives, with or without filtering), there is no need to do so as the `Optimised_Negative_Sampler` already does this.
 
-### Adding or Editing an Early Stopping
-If you want to keep the same general method (burn in + patience, stopping if MRR does not improve on the validation set) than you can edit the values for burn in and patience in `main` in `run_exp.py`. If you want to add an entirely new early stopping method, you will need to code that in `early_stopper.py` in a new class with the same API as the existing one.
+As such, we recommend that you create an `Optimised_Negative_Sampler` object as an attribute of your custom negative sampler, and use it for the testing case. This way, you only need to think about how you want to generate negatives for training, and you can simply defer the call to the `Optimised_Negative_Sampler`during th testing phase in your negative sampler. For examples of how to write a negative sampler, feel free to take a look at `Optimised_Negative_Sampler`.
 
-If your new early stopper has a new API, then you will need to change:
-- how it is created in `load_early_stopper` in `run_exp.py`
-- how it is initialised in `main` in `run_exp.py`
-- how it is used in `run_training` in `trainer.py`
+If your negative sampler needs more arguments to its init function that are normally given, you can add those to it in `run_exp.py`. Otherwise, you can just import and instantiate it, and pass that as the `negative_sampler` to any of TWIG-I's functions.
 
 ## Understanding TWIG-I at Scale
 ### Memory Scaling
@@ -491,13 +566,14 @@ I'm not sure what other ideas you may have -- and that's awesome! But it also me
 
 ## FAQs
 What versions of Python / PyTorch / etc does thi work on? Short answer -- anything "recent" (as of 2022 - 2024) *should* work. I've done a few on  a few different computers (meaning slightly different graphics cards, etc) and installing the latest libraries, so far, has always worked. I *highly* suggest making a conda env just for TWIG-I to avoid potential conflicts with other packages or projects, btu that's up to you. To be specific, what I use (and what works for me) is a conda environment with:
+- Ubuntu 20.04+ (or WSL)
 - Python 3.9
 - torch 2.0.1 with Cuda cu11
 - pykeen 1.10.1
 
 Will TWIG-I be maintained? Yes! At least for a time, as this is under active development as a part of Jeffrey's PhD thesis.
 
-Are future TWIG-I releases planned? Sort of. I do plan to keep developing TWIG-I, but am unsure what for that will take, what opportunities will open up as a result, etc. Future releases will likely have increased research tooling, such as graph structure analysers and enhanced ablation study capacity.
+Are future TWIG-I releases planned? Absolutely! This repo will be updated as new features are made available, as well as to fix any bugs that are found.
 
 Can I help contribute to TWIG-I? Definitely -- that's why it's open source! We don't have a contributor policy, however -- at least, no more than "try to match the style of the existing code". I also don't have automated testing, which means merging will be slow to make sure everything still works manually. If you have an idea you have implemented, raise a PR and we can take it from there!
 
@@ -507,9 +583,9 @@ Can I use TWIG-I for commercial purposes? Currently TWIG-I is made available und
 
 Do you have any other TWIG-I adjacent work? Yep -- It's called TWIG ;)). TWIG-I is actually a re-imagining of TWIG. You can find TWIG here: https://github.com/Jeffrey-Sardina/TWIG-release-1.0. The difference is that TWIG learns to **simulate and predict the output of KGEs**, where as **TWIG-I does link prediction itself**. They are based on a very similar codebase.
 
-Can I pip / apt-get / conda / etc install TWIG-I? Not yet, sorry! I'll try for pip at some point, but I have never messed with such dark magics before.
+Can I pip / apt-get / conda / etc install TWIG-I? Yep, TWIG-I is on pip! just run `pip install twigi` and you'll be good to go!
 
-What are your plans for the future of TWIG-I? The first thing I want to do is to add all the expected ML features -- a few more loss functions, more optimiser options, schedulers, early stoppers, etc. I'm also looking into standardising TWIG-I configurations with JSON / YML configuration files, to allow more control using those over the learning process, After that I will look at taking this from "reference implementation" level to be an actual library -- allowing much easier extension of TWIG-I, pip compatibility, etc.
+What are your plans for the future of TWIG-I? Right now, it's about opimising API (for ease of use) and adding new options (such as new negative samplers and new loss functions). If there is anything else you think TWIG-I needs, raise a PR / feature request on GitHub!
 
 ## Citation
 If you have found this helpful, or used TWIG-I in your work, please drop us a citation at:

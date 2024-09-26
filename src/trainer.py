@@ -460,7 +460,7 @@ def run_training(
             do_stop = True
             for dataset_name in results:
                 valid_mrr = results[dataset_name]['mrr']
-                if not early_stopper.assess_validation_result(epoch_num, valid_mrr):
+                if not early_stopper or not early_stopper.assess_validation_result(epoch_num, valid_mrr):
                     do_stop = False
             if do_stop:
                 print(f'Early stopping triggered at epoch {epoch_num}')

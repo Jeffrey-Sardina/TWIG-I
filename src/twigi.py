@@ -31,7 +31,7 @@ def manage_job_inputs(
         optimizer,
         optimizer_args,
         data_args,
-        training_args
+        training_args,
     ):
     # assign defaults if needed
     if not "lr" in optimizer_args:
@@ -67,7 +67,10 @@ def manage_job_inputs(
         valid_every_n = -1
         data_to_test_on = dataloaders['valid']
     else:
-        valid_every_n = 5
+        if "valid_every_n" in training_args:
+            valid_every_n = training_args["valid_every_n"]
+        else:
+            valid_every_n = 5
         data_to_test_on = dataloaders['test']
     filters = load_filters(
         dataset_names=dataset_names,
@@ -175,7 +178,8 @@ def do_job(
         training_args={
             "epochs": 20,
             "npp": 30,
-            "hyp_validation_mode": False
+            "hyp_validation_mode": False,
+            "valid_every_n": 5
         },
         tag="super-cool-model"
 ):
@@ -280,7 +284,8 @@ def ablation_job(
         training_args={
             "epochs": [10],
             "npp": [30, 100, 250],
-            "hyp_validation_mode": [True]
+            "hyp_validation_mode": [True],
+            "valid_every_n": -1
         },
         tag="Ablation-Job",
         ablation_metric='mrr',
@@ -304,7 +309,6 @@ def ablation_job(
     if ablation_type == 'full':
         assert timeout <= 0 or timeout == None, "If 'full' ablations are done, timeout cannot be set"
         assert max_iterations <= 0 or max_iterations == None, "If 'full' ablations are done, max_iterations cannot be set"
-
     # assign defaults if needed
     if not "lr" in optimizer_args:
         optimizer_args["lr"] =  [5e-3, 5e-4]
@@ -444,7 +448,8 @@ def ablation_job(
             training_args={
                 "epochs": n_epochs,
                 "npp": npp_val,
-                "hyp_validation_mode": hyp_val_mode
+                "hyp_validation_mode": hyp_val_mode,
+                "valid_every_n": training_args["valid_every_n"]
             },
             tag=tag
         )
@@ -675,7 +680,8 @@ def finetune_ablation_job(
         training_args={
             "epochs": [10],
             "npp": [30, 100, 250],
-            "hyp_validation_mode": [True]
+            "hyp_validation_mode": [True],
+            "valid_every_n": -1
         },
         tag="Finetune-Ablation-Job",
         ablation_metric='mrr',

@@ -64,7 +64,8 @@ do_job(
     training_args={
         "epochs": 20,
         "npp": 30,
-        "hyp_validation_mode": False
+        "hyp_validation_mode": False,
+        "valid_every_n": 5
     },
     tag="super-cool-model"
 )
@@ -187,7 +188,8 @@ ablation_job(
     training_args={
         "epochs": [10],
         "npp": [30, 100, 250],
-        "hyp_validation_mode": [True]
+        "hyp_validation_mode": [True],
+        "valid_every_n": 5
     },
     tag="Ablation-Job",
     ablation_metric='mrr',
@@ -305,7 +307,8 @@ finetune_ablation_job(
     training_args={
         "epochs": [10],
         "npp": [30, 100, 250],
-        "hyp_validation_mode": [True]
+        "hyp_validation_mode": [True],
+        "valid_every_n": -1
     },
     tag="Ablation-Job",
     ablation_metric='mrr',

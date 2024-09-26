@@ -332,12 +332,14 @@ class Optimised_Negative_Sampler(Negative_Sampler):
                     # vec_old = self.struct_loader(s_corr, p, o)
                     # vec = self.struct_loader.vec_from_prefab_scorr(prefab, s_corr, p, o)
                     # assert vec == vec_old, (vec_old, vec)
+                    prefab_local = [x for x in prefab] # copy to avoid modifying the original
                     negs.append(
-                        self.struct_loader.vec_from_prefab_scorr(prefab, s_corr, p, o)
+                        self.struct_loader.vec_from_prefab_scorr(prefab_local, s_corr, p, o)
                     )
                 elif not (s_corr, p, o) in self.filters[purpose]:
+                    prefab_local = [x for x in prefab] # copy to avoid modifying the original
                     negs.append(
-                        self.struct_loader.vec_from_prefab_scorr(prefab, s_corr, p, o)
+                        self.struct_loader.vec_from_prefab_scorr(prefab_local, s_corr, p, o)
                     )
         if side == 'o' or side == 'both':
             prefab = self.struct_loader.create_negative_prefab_ocorr(s, p)
@@ -346,12 +348,15 @@ class Optimised_Negative_Sampler(Negative_Sampler):
                     # vec_old = self.struct_loader(s, p, o_corr)
                     # vec = self.struct_loader.vec_from_prefab_ocorr(prefab, s, p, o_corr)
                     # assert vec == vec_old, (vec_old, vec)
+                    prefab_local = [x for x in prefab] # copy to avoid modifying the original
                     negs.append(
-                        self.struct_loader.vec_from_prefab_ocorr(prefab, s, p, o_corr)
+                        self.struct_loader.vec_from_prefab_ocorr(prefab_local, s, p, o_corr)
                     )
                 elif not (s, p, o_corr) in self.filters[purpose]:
+                    prefab_local = [x for x in prefab] # copy to avoid modifying the original
                     negs.append(
-                        self.struct_loader(s, p, o_corr)
+                        # self.struct_loader(s, p, o_corr)
+                        self.struct_loader.vec_from_prefab_ocorr(prefab_local, s, p, o_corr)
                     )
 
         # common-sense validation before we return everything!

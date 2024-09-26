@@ -252,9 +252,6 @@ class Structure_Loader():
         prefab[S_NUM_RELS_IDX] = self.neighbour_preds[s][NUM_VALUE_IDX]
 
         if self.fts_blacklist:
-            print(ft_to_idx.keys())
-            print(len(ft_to_idx.keys()))
-            exit()
             idxs_to_delete = [ft_to_idx[ft] for ft in self.fts_blacklist]
             for idx in reversed(sorted(idxs_to_delete)):
                 del prefab[idx]

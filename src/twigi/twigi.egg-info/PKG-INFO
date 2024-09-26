@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: twigi
-Version: 1.0.7
+Version: 1.0.9
 Summary: TWIG-I: Embedding-free, treansfer-learning, enabled link prediction using graph topology :D
 Home-page: https://github.com/Jeffrey-Sardina
 Author: Jeffrey Seathrún Sardina
@@ -9,13 +9,6 @@ License: CC BY-NC-SA 4.0
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
-Requires-Dist: numpy
-Requires-Dist: torch
-Requires-Dist: torchvision
-Requires-Dist: torchaudio
-Requires-Dist: torcheval
-Requires-Dist: pykeen
-Requires-Dist: frozendict
 
 # TWIG-I
 Jeffrey Seathrún Sardina and Alok Debnath
@@ -115,6 +108,7 @@ do_job(
 ```
 
 For reference, the full funciton API and its defaults are given below:
+```
 do_job(
     dataset_names="UMLS",
     model='base',
@@ -143,6 +137,7 @@ do_job(
     },
     tag="super-cool-model"
 )
+```
 
 ### To Run a Hyperparameter Search or Ablation Study
 Running a hyperparameter search is done with `ablation_job`. Similar to running a TWIG model, it has a default hyperparameter grid (of 144 hyperparameter combinations in total). This is not exhaustive, so in pracactive you may want to add more.

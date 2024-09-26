@@ -1,0 +1,44 @@
+Running job! The arguemnts recieved are:
+	 dataset_names: Wn18RR
+	 model: base
+	 negative_sampler: simple
+	 loss_function: margin-ranking(0.1)
+	 early_stopper: None
+	 optimizer: Adam
+	 optimizer_args: {'lr': 0.005}
+	 data_args: {'normalisation': 'zscore', 'batch_size': 128, 'batch_size_test': 64, 'fts_blacklist': {'s_o_cofreq'}}
+	 training_args: {'epochs': 20, 'npp': 500, 'hyp_validation_mode': False}
+	 tag: WN18RR-pretrain
+
+loading dataset
+Wn18RR
+X_p: torch.Size([86835, 22])
+n_local: 21
+X_p: torch.Size([2924, 22])
+n_local: 21
+X_p: torch.Size([2824, 22])
+n_local: 21
+Using a total of 21 features
+done loading dataset
+loading filters
+done loading filters
+loading NN
+done loading NN
+loading negative samplers
+init negative sampler with args
+	fts_blacklist: {'s_o_cofreq'}
+done loading negative samplers
+running training and eval
+TWIGI_Base(
+  (linear_struct_1): Linear(in_features=21, out_features=10, bias=True)
+  (relu_1): ReLU()
+  (dropout_1): Dropout(p=0.01, inplace=False)
+  (linear_struct_2): Linear(in_features=10, out_features=10, bias=True)
+  (relu_2): ReLU()
+  (dropout_2): Dropout(p=0.01, inplace=False)
+  (linear_final): Linear(in_features=10, out_features=1, bias=True)
+  (sigmoid_final): Sigmoid()
+)
+REC: Training with epochs = 20
+Epoch 1 -- dict_keys(['s_deg', 'o_deg', 'p_freq', 's_p_cofreq', 'o_p_cofreq', 's_o_cofreq', 's_min_deg_neighbour', 's_max_deg_neighbour', 's_mean_deg_neighbour', 's_num_neighbours', 's_min_freq_rel', 's_max_freq_rel', 's_mean_freq_rel', 's_num_rels', 'o_min_deg_neighbour', 'o_max_deg_neighbour', 'o_mean_deg_neighbour', 'o_num_neighbours', 'o_min_freq_rel', 'o_max_freq_rel:', 'o_mean_freq_rel', 'o_num_rels'])
+22

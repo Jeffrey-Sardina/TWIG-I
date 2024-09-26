@@ -44,12 +44,12 @@ O_NUM_RELS_IDX = 21
 # note that this dict will underpeform the map above and so should be used minimally
 ft_to_idx = {
     "s_deg": S_DEG_IDX,
-    "s_deg": O_DEG_IDX,
-    "s_deg": P_FREQ_IDX,
+    "o_deg": O_DEG_IDX,
+    "p_freq": P_FREQ_IDX,
 
-    "s_deg": S_P_COFREQ_IDX,
-    "s_deg": O_P_COFREQ_IDX,
-    "s_deg": S_O_COFREQ_IDX,
+    "s_p_cofreq": S_P_COFREQ_IDX,
+    "o_p_cofreq": O_P_COFREQ_IDX,
+    "s_o_cofreq": S_O_COFREQ_IDX,
 
     "s_min_deg_neighbour": S_MIN_DEG_NEIGHBOUR_IDX,
     "s_max_deg_neighbour": S_MAX_DEG_NEIGHBOUR_IDX,
@@ -252,6 +252,9 @@ class Structure_Loader():
         prefab[S_NUM_RELS_IDX] = self.neighbour_preds[s][NUM_VALUE_IDX]
 
         if self.fts_blacklist:
+            print(ft_to_idx.keys())
+            print(len(ft_to_idx.keys()))
+            exit()
             idxs_to_delete = [ft_to_idx[ft] for ft in self.fts_blacklist]
             for idx in reversed(sorted(idxs_to_delete)):
                 del prefab[idx]

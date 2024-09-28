@@ -2,3 +2,4 @@
 *.pkl
 *.pyc
 .vscode/
+results_save/

@@ -589,6 +589,8 @@ def apply_user_override(
         model_config['npp'] = training_args['npp']
     if 'hyp_validation_mode' in training_args:
         model_config['hyp_validation_mode'] = training_args['hyp_validation_mode']
+    if 'valid_every_n' in training_args:
+        model_config['valid_every_n'] = training_args['valid_every_n']
     return model_config
 
 def finetune_job(
@@ -656,7 +658,8 @@ def finetune_job(
         training_args={
             "epochs": model_config['epochs'],
             "npp": model_config['npp'],
-            "hyp_validation_mode": model_config['hyp_validation_mode']
+            "hyp_validation_mode": model_config['hyp_validation_mode'],
+            "valid_every_n": model_config['valid_every_n']
         },
         tag=tag
     )

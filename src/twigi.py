@@ -328,10 +328,10 @@ def ablation_job(
         training_args["hyp_validation_mode"] = [True]
     if not ablation_type:
         # do random if the user request a stopping metric
-        if timeout or timeout > 0 or max_iterations or max_iterations > 0:
+        if (timeout and timeout > 0) or (max_iterations and max_iterations) > 0:
             ablation_type = 'rand'
         else:
-            # if no stopping metic is chosen for ablations, assume the user wants them all
+            # if no stopping metric is chosen for ablations, assume the user wants them all
             ablation_type = 'full'
     if train_and_eval_after:
         if not "epochs" in train_and_eval_args:
@@ -716,6 +716,24 @@ def finetune_ablation_job(
     assert len(torch_checkpont_path) == 1, f"expected to find exactly one file but found: {torch_checkpont_path} for query {os.path.join(checkpoint_dir, f'*{checkpoint_id}_e{epoch_state}.pt')}"
     torch_checkpont_path = torch_checkpont_path[0]
     pretrained_model = torch.load(torch_checkpont_path)
+
+    # load the config (make sure we keep the same fts blacklisted!)
+    model_config_path = glob(os.path.join(checkpoint_dir, f"*{checkpoint_id}.pkl"))
+    assert len(model_config_path) == 1
+    model_config_path = model_config_path[0]
+    model_config = apply_user_override(
+        model_config=load_model_config(model_config_path),
+        negative_sampler=negative_sampler,
+        loss_function=loss_function,
+        early_stopper=early_stopper,
+        optimizer=optimizer,
+        optimizer_args=optimizer_args,
+        data_args=data_args,
+        training_args=training_args
+    )
+    data_args["fts_blacklist"] = [
+        frozenset(model_config['fts_blacklist'])
+    ]
 
     # run the ablation
     results = ablation_job(

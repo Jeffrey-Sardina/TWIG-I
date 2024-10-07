@@ -515,60 +515,60 @@ from twigi import *
 #     tag=f"{dataset}-e10-eval"
 # )
 
-# eval after 10 -- from DBpedia50
-checkpoint_id = "chkpt-ID_2429873403687784"
-dataset = 'DBpedia50'
-npp = 30
-lr = 5e-3
-batch_size = 128
-finetune_job(
-    dataset,
-    checkpoint_id,
-    epoch_state=10,
-    negative_sampler=None,
-    loss_function=None,
-    early_stopper=None,
-    optimizer=None,
-    optimizer_args={
-        "lr": lr
-    },
-    data_args={
-        "batch_size": batch_size
-    },
-    training_args={
-        "epochs": 0,
-        "npp": npp,
-        "hyp_validation_mode": False,
-        "valid_every_n": -1
-    },
-    tag=f"{dataset}-e10-eval"
-)
+# # eval after 10 -- from DBpedia50
+# checkpoint_id = "chkpt-ID_2429873403687784"
+# dataset = 'DBpedia50'
+# npp = 30
+# lr = 5e-3
+# batch_size = 128
+# finetune_job(
+#     dataset,
+#     checkpoint_id,
+#     epoch_state=10,
+#     negative_sampler=None,
+#     loss_function=None,
+#     early_stopper=None,
+#     optimizer=None,
+#     optimizer_args={
+#         "lr": lr
+#     },
+#     data_args={
+#         "batch_size": batch_size
+#     },
+#     training_args={
+#         "epochs": 0,
+#         "npp": npp,
+#         "hyp_validation_mode": False,
+#         "valid_every_n": -1
+#     },
+#     tag=f"{dataset}-e10-eval"
+# )
 
-# eval after 10 -- from CoDExSmall
-checkpoint_id = "chkpt-ID_8182621431323017"
-dataset = 'CoDExSmall'
-npp = 100
-lr = 5e-3
-batch_size = 64
-finetune_job(
-    dataset,
-    checkpoint_id,
-    epoch_state=10,
-    negative_sampler=None,
-    loss_function=None,
-    early_stopper=None,
-    optimizer=None,
-    optimizer_args={
-        "lr": lr
-    },
-    data_args={
-        "batch_size": batch_size
-    },
-    training_args={
-        "epochs": 0,
-        "npp": npp,
-        "hyp_validation_mode": False,
-        "valid_every_n": -1
-    },
-    tag=f"{dataset}-e10-eval"
-)
+# # eval after 10 -- from CoDExSmall
+# checkpoint_id = "chkpt-ID_8182621431323017"
+# dataset = 'CoDExSmall'
+# npp = 100
+# lr = 5e-3
+# batch_size = 64
+# finetune_job(
+#     dataset,
+#     checkpoint_id,
+#     epoch_state=10,
+#     negative_sampler=None,
+#     loss_function=None,
+#     early_stopper=None,
+#     optimizer=None,
+#     optimizer_args={
+#         "lr": lr
+#     },
+#     data_args={
+#         "batch_size": batch_size
+#     },
+#     training_args={
+#         "epochs": 0,
+#         "npp": npp,
+#         "hyp_validation_mode": False,
+#         "valid_every_n": -1
+#     },
+#     tag=f"{dataset}-e10-eval"
+# )

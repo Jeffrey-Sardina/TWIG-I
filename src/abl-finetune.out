@@ -52,3 +52,5 @@ REC: Training with epochs = 10
 Epoch 1 -- batch 0 / 514 loss: 0.004906859248876572
 batch 500 / 514 loss: 0.0007397911977022886
 Epoch 2 -- batch 0 / 514 loss: 0.0007001569611020386
+batch 500 / 514 loss: 0.0011615552939474583
+Epoch 3 -- batch 0 / 514 loss: 0.0009668466518633068

@@ -593,5 +593,12 @@ What are your plans for the future of TWIG-I? Right now, it's about opimising AP
 ## Citation
 If you have found this helpful, or used TWIG-I in your work, please drop us a citation at:
 ```
-Citation bibtex pending
+@incollection{sardina2024twig,
+  title={TWIG-I: Embedding-Free Link Prediction and Cross-KG Transfer Learning Using a Small Neural Architecture},
+  author={Sardina, Jeffrey and Debnath, Alok and Kelleher, John D and O’Sullivan, Declan},
+  booktitle={Knowledge Graphs in the Age of Language Models and Neuro-Symbolic AI},
+  pages={106--122},
+  year={2024},
+  publisher={IOS Press}
+}
 ```

@@ -5,6 +5,8 @@ Jeffrey Seathrún Sardina and Alok Debnath
 > Older releases used in publications are contained **in their own repos** for ease of access -- and this is **not necessarily the same code** as would be found there. More recent publications, however, typically draw from this repo directly.
 > 
 > This is the development repo for TWIG-I. This version tends to be substantially more optimise in terms of speed and performance, and it is this branch (only) that is under active development.
+> 
+> Further please note that you **must use the argument data_args = {"fts_blacklist": {'s_o_cofreq'}} in order to obtain the best results. As TWIG-I was originally published with that feature included, it is retained as a default; however, performance substantially increases when it is removed.
 
 ## What is TWIG-I?
 Topologically-Weighted Intelligence Generation for Inference (TWIG-I) is an embedding-free, graph-structure-based link predictor build to work on knowledge graphs. To put it simply, **TWIG-I models the link prediction task as a regression task**. The input features are hand-crafted graph structure features, and the output value is a plausibility score for each triple.
